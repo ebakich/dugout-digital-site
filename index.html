@@ -61,6 +61,30 @@ svg.chart{width:100%;height:auto;display:block}
 .chart .grid{stroke:var(--line);stroke-width:1;stroke-dasharray:2 4}
 .chart .barrel{fill:rgba(255,106,69,.12);stroke:var(--coral);stroke-width:1.5;stroke-dasharray:5 4}
 .chart .lbl{fill:var(--coral);font-weight:500}
+/* app showcase */
+.wide{display:grid;grid-template-columns:1.35fr .65fr;gap:22px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:16px}
+.wide.flip{grid-template-columns:.65fr 1.35fr}
+.wide.flip img{order:2}
+@media (max-width:860px){.wide,.wide.flip{grid-template-columns:1fr}.wide.flip img{order:0}}
+.wide img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);display:block}
+.wide h3{font-size:22px;margin-bottom:8px}
+.wide p{font-size:15.5px;color:var(--muted)}
+.wide .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);margin-bottom:8px}
+.phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:18px;align-items:start}
+.phone{display:grid;grid-template-rows:auto 1fr;gap:12px}
+.phone .scr{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#0a0c10;max-height:440px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.phone .scr img{width:100%;height:auto;display:block}
+.phone h3{font-size:17px}
+.phone p{font-size:14px;color:var(--muted)}
+.phone .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral)}
+.fte{border:1px solid var(--line);border-radius:22px;background:var(--panel);min-height:380px;padding:22px;display:grid;align-content:start;gap:10px}
+.fte .t{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.02em}
+.fte ol{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14px;color:var(--muted)}
+.fte ol b{color:var(--ink);font-weight:600}
+.roster{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:28px}
+.roster div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:14.5px;color:var(--muted)}
+.roster b{display:block;font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink);letter-spacing:-.01em;margin-bottom:4px}
+.prop{margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint)}
 /* sections */
 section{padding-block:76px;border-top:1px solid var(--line)}
 .head{display:grid;gap:12px;margin-bottom:34px;max-width:64ch}
@@ -136,7 +160,7 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
       <svg viewBox="0 0 150 150" aria-hidden="true"><rect x="25" y="25" width="100" height="100" rx="18" transform="rotate(45 75 75)" fill="#B9F0CF"/><g transform="translate(39,33) scale(0.6)"><path fill-rule="evenodd" d="M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z" fill="#0E1A2B"/><path d="M38 50H54A20 20 0 0 1 54 90H38Z" fill="#FF6A45"/></g></svg>
       Dugout Digital
     </a>
-    <div class="links"><a href="#story">The story</a><a href="#read">What we read</a><a href="#get">What you get</a><a href="#who">Who it's for</a><a href="#contact">Contact</a></div>
+    <div class="links"><a href="#story">The story</a><a href="#app">Inside the app</a><a href="#read">What we read</a><a href="#get">What you get</a><a href="#who">Who it's for</a><a href="#contact">Contact</a></div>
   </nav>
 
   <header class="hero" id="top">
@@ -280,6 +304,34 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
     <p class="reveal" style="margin-top:24px;color:var(--muted);max-width:70ch">Add direction and the fly out becomes a double down the line. Add contact depth and you learn why the ground ball happened. Add bat speed, attack angle, pitch location and the count, and you have a hitter's profile instead of a spreadsheet. We read all of it at once, write it in plain English, and show every number next to the conditions it was measured in.</p>
   </section>
 
+  <section id="app">
+    <div class="head reveal"><div class="eyebrow">What we build for our players</div><h2>The evaluation is the start. The app is the system.</h2><p>A camper leaves with a custom evaluation that reads like a scouting report written for his family. Then the same numbers build his app: what to work on, how, and who swings like him. Our college hitters train in this system every week. Everything below is real, built in-house, and shown on our sample camper.</p></div>
+
+    <div class="wide reveal"><img src="img/eval_grid.jpg" alt="Sample custom evaluation: hitting and swing-decision metrics graded against the goal for the player's graduating class"><div><div class="k">Custom evaluation</div><h3>Every number graded against his class goal.</h3><p>Field radar, cage sensor and combine, side by side, each metric graded against the goal for his graduating class and labeled with the instrument it came from. Tap any metric and it explains itself in plain English. Data we did not capture is shown as pending, never guessed.</p></div></div>
+    <div class="wide flip reveal"><div><div class="k">Development plan</div><h3>Then the numbers become sentences.</h3><p>Strengths first, the opportunity for growth second, written by a coach in the voice a 13-year-old and his parents will actually read. The evaluation says what to keep, what to build, and where the next five miles an hour live.</p></div><img src="img/eval_plan.jpg" alt="Sample development plan: a strengths paragraph and an opportunity-for-growth paragraph written in plain English"></div>
+
+    <div class="phones">
+      <div class="phone reveal"><div class="scr"><img src="img/app_win.jpg" alt="W.I.N. screen: strength, growth and this block's plan"></div><div class="k">W.I.N.</div><h3>What's Important Now</h3><p>One strength, one growth target and one hunt for the block. The whole plan in a read a player can repeat.</p></div>
+      <div class="phone reveal"><div class="scr"><img src="img/app_kzone.jpg" alt="K-Zone screen: three pitches plotted on the strike zone with the heart marked and decisions graded"></div><div class="k">K-Zone</div><h3>Every pitch, graded</h3><p>Each pitch of each at-bat plotted on the zone, green or red against his own damage zone, played over the real video.</p></div>
+      <div class="phone reveal"><div class="scr"><img src="img/app_abs.jpg" alt="Game at-bats list with result, exit velocity, launch angle, K-Zone and contact-depth buttons"></div><div class="k">Game at-bats</div><h3>A video library of his at-bats</h3><p>Every plate appearance with its numbers, the K-Zone, and whether contact came in the window, too deep or too far out front.</p></div>
+      <div class="phone reveal"><div class="scr"><img src="img/app_spray.jpg" alt="Spray chart of balls in play colored by exit velocity"></div><div class="k">Spray chart</div><h3>Where it went, how hard</h3><p>Every ball in play on the field, colored by exit velocity, with the read a coach would give him.</p></div>
+      <div class="phone reveal"><div class="scr"><img src="img/app_ipdp.jpg" alt="Individual player development plan: activation exercises and a drill series, each with a video button"></div><div class="k">iPDP</div><h3>Activation and drills, on video</h3><p>Mobility and explosive work to build the body, then a drill series matched to the growth target. Every drill plays on tap.</p></div>
+      <div class="phone reveal"><div class="scr"><img src="img/app_progress.jpg" alt="Progress chart: exit velocity across camp and training blocks"></div><div class="k">Progress</div><h3>Him against him</h3><p>Every retest adds a point. Trend lines over blocks and seasons, never a ranking against anyone else.</p></div>
+      <div class="phone reveal"><div class="scr"><img src="img/app_comp.jpg" alt="MLB comparison card with the comp's exit velocity, sweet-spot and bat-speed numbers"></div><div class="k">MLB comp</div><h3>Who swings like him</h3><p>Matched on bat path before body type, with a link to the comp's damage video on Baseball Savant.</p></div>
+      <div class="phone reveal"><div class="fte"><div class="k">5 Tool Email</div><div class="t">The recruiting email, built from verified numbers</div><ol><li><b>Subject</b> leads with his best verified tool</li><li><b>Intro</b> grad year, position, school</li><li><b>Body</b> the numbers, with the instrument named</li><li><b>Video</b> one link, the right clip</li><li><b>Contacts</b> the coaches, by program and level</li></ol><p style="font-size:13.5px;color:var(--muted)">The family sends it. We never do.</p></div></div>
+    </div>
+
+    <div class="roster reveal">
+      <div><b>Damage windows</b>Loft and tilt by pitch height, read against the window where he actually does damage.</div>
+      <div><b>Contact depth</b>Inches from the front of the plate on every ball, with the verdict drawn on the open-side video.</div>
+      <div><b>Spotlight</b>Coach-posted video on his page: MLB comparison overlays, a swing to keep, a swing to fix.</div>
+      <div><b>Every-pitch playback</b>Each at-bat from the center-field, open-side and K-Zone angles, pitch by pitch.</div>
+      <div><b>Mental game</b>A pre-pitch routine, a game-day journal and a review after every at-bat, in his own words.</div>
+      <div><b>Retest and trend</b>Multiple captures a season, each one labeled, each one a point on his line.</div>
+    </div>
+    <div class="prop">Proprietary system · built in-house · running on a Division I roster today</div>
+  </section>
+
   <section id="read">
     <div class="head reveal"><div class="eyebrow">What we read</div><h2>From the stadium radar to the bat sensor.</h2><p>Every instrument measures something a little differently. We know what each one is good at, where it is unreliable, and how to put them side by side without mixing them up.</p></div>
     <div class="table reveal">
@@ -292,7 +344,7 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
   </section>
 
   <section id="film">
-    <div class="head reveal"><div class="eyebrow">On real film</div><h2>Built for a college program first.</h2><p>These tools run every week on a Division I roster. The numbers are drawn on the actual video, so a player sees the strike zone, the contact point and the swing the way the staff sees it.</p></div>
+    <div class="head reveal"><div class="eyebrow">On real film</div><h2>The college version, on real film.</h2><p>The same system, with the stadium cameras and radar added. These tools run every week on a Division I roster. The numbers are drawn on the actual video, so a player sees the strike zone, the contact point and the swing the way the staff sees it.</p></div>
     <div class="film">
       <div class="shot reveal"><img src="img/kzone.jpg" alt="Center-field video frame of a hitter swinging, with the strike zone drawn and the pitch location marked"><div><h3>K-Zone</h3><p>Every pitch of every at-bat with the zone drawn at the plate and the swing decision graded against the hitter's own damage zone.</p></div></div>
       <div class="shot reveal"><img src="img/depth.jpg" alt="Open-side video frame of a hitter at contact, with the damage window and the contact point drawn in front of the plate"><div><h3>Contact depth</h3><p>Where the bat met the ball, measured in inches from the front of the plate, against the window where this hitter does damage.</p></div></div>
