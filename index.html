@@ -4,285 +4,372 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dugout Digital</title>
-<meta name="description" content="Dugout Digital translates baseball data. Any file from any device becomes a plain-English read: strengths, growth, benchmarks by age, a plan, leaderboards and an opt-in player database.">
+<meta name="description" content="Dugout Digital translates baseball data. Any file from any device, read together, becomes a plain-English evaluation: strengths, growth, benchmarks by age and level, a training plan, leaderboards and an opt-in player database.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3Crect width='150' height='150' rx='34' fill='%230E1A2B'/%3E%3Crect x='25' y='25' width='100' height='100' rx='18' transform='rotate(45 75 75)' fill='%23B9F0CF'/%3E%3Cg transform='translate(39,33) scale(0.6)'%3E%3Cpath fill-rule='evenodd' d='M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z' fill='%230E1A2B'/%3E%3Cpath d='M38 50H54A20 20 0 0 1 54 90H38Z' fill='%23FF6A45'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 :root{
-  --paper:#F5F4EF; --white:#FFFFFF; --ink:#14171C; --slate:#5B6470; --line:#E3E4DF;
-  --electric:#2F5BFF; --electric-deep:#1C3FD1; --mint:#B9F0CF; --mint-deep:#1F6B45; --coral:#FF6A45; --coral-soft:#FFD9CE; --midnight:#0E1A2B; --bone:#F1EEE6; --sky:#7FB5FF;
+  --bg:#0B1522; --bg2:#0E1A2B; --panel:#13233A; --panel2:#182B45; --line:#22364F; --ink:#F1EEE6; --muted:#9AA7B8;
+  --electric:#2F5BFF; --sky:#7FB5FF; --mint:#B9F0CF; --coral:#FF6A45; --slate:#5B6470;
   --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif; --body:"Inter","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
-  color-scheme:light;
+  color-scheme:dark;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0E1A2B;--white:#152638;--ink:#F1EEE6;--slate:#9AA7B8;--line:#243448;--electric-deep:#7FB5FF;color-scheme:dark}}
-:root[data-theme="dark"]{--paper:#0E1A2B;--white:#152638;--ink:#F1EEE6;--slate:#9AA7B8;--line:#243448;--electric-deep:#7FB5FF;color-scheme:dark}
+:root:not([data-theme="light"]){}
+:root[data-theme="dark"]{}
 *{box-sizing:border-box}
 html,body{margin:0}
 html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;overflow-x:hidden}
-a{color:var(--electric)}
-.wrap{max-width:1160px;margin:0 auto;padding-inline:16px}
-nav{display:flex;justify-content:space-between;align-items:center;padding-block:20px;gap:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:hidden}
+a{color:var(--sky)}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px}
+nav{display:flex;justify-content:space-between;align-items:center;padding-block:22px;gap:16px}
 .mark{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02em;white-space:nowrap}
 .mark svg{width:40px;height:40px;flex:none}
-nav .links{display:flex;gap:20px;font-size:15px;font-weight:600}
-nav .links a{text-decoration:none;color:var(--slate)}
+nav .links{display:flex;gap:22px;font-size:15px;font-weight:500}
+nav .links a{text-decoration:none;color:var(--muted);white-space:nowrap}
 nav .links a:hover{color:var(--ink)}
-@media (max-width:640px){nav .links a:not(:last-child){display:none}}
-h1,h2,h3{font-family:var(--display);line-height:1;margin:0;letter-spacing:-.03em;text-wrap:balance}
-h1{font-size:clamp(50px,9vw,116px);font-weight:700}
-h2{font-size:clamp(34px,5vw,60px);font-weight:700}
-h3{font-size:19px;font-weight:700;letter-spacing:-.01em}
+@media (max-width:700px){nav .links a:not(:last-child){display:none}}
+h1,h2,h3{font-family:var(--display);line-height:1.02;margin:0;letter-spacing:-.03em;text-wrap:balance}
+h1{font-size:clamp(46px,8vw,100px);font-weight:700}
+h2{font-size:clamp(30px,4.4vw,52px);font-weight:700}
+h3{font-size:20px;font-weight:700;letter-spacing:-.01em}
 p{margin:0}
-.eyebrow{font-family:var(--mono);text-transform:uppercase;letter-spacing:.18em;font-size:12px}
-.btn{font-family:var(--display);font-weight:700;font-size:16px;padding:14px 22px;border-radius:12px;text-decoration:none;display:inline-block;transition:transform .15s,background .15s}
+.eyebrow{font-family:var(--mono);text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--mint)}
+.btn{font-family:var(--display);font-weight:700;font-size:16px;padding:14px 22px;border-radius:10px;text-decoration:none;display:inline-block;transition:transform .15s,background .15s;border:2px solid transparent}
 .btn:hover{transform:translateY(-2px)}
 .btn:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
 .b-electric{background:var(--electric);color:#fff}
-.b-coral{background:var(--coral);color:#14171C}
-.b-ink{background:#14171C;color:#fff}
-.b-mint{background:var(--mint);color:#14171C}
-.b-bone{background:var(--bone);color:#14171C}
-
-/* HERO */
-.hero{padding-block:28px 70px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;position:relative}
-@media (max-width:900px){.hero{grid-template-columns:1fr}}
-.hero .copy{display:grid;gap:18px}
-.hero .sub{font-family:var(--display);font-weight:500;font-size:clamp(20px,2.6vw,28px);letter-spacing:-.01em}
-.hero .sub b{color:var(--electric);font-weight:700}.hero .sub i{color:var(--coral);font-style:normal;font-weight:700}.hero .sub u{color:var(--mint-deep);text-decoration:none;font-weight:700}
+.b-ghost{border-color:var(--line);color:var(--ink)}
+.b-ghost:hover{border-color:var(--mint)}
+/* hero */
+.hero{padding-block:30px 70px;display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center}
+@media (max-width:960px){.hero{grid-template-columns:1fr}}
+.hero .copy{display:grid;gap:20px}
+.sub{font-family:var(--display);font-weight:500;font-size:clamp(20px,2.4vw,26px);letter-spacing:-.01em}
+.sub b{color:var(--sky);font-weight:700}.sub i{color:var(--coral);font-style:normal;font-weight:700}.sub u{color:var(--mint);text-decoration:none;font-weight:700}
+.lede{color:var(--muted);font-size:17.5px;max-width:54ch}
 .cta{display:flex;gap:12px;flex-wrap:wrap}
-.stage{position:relative;background:var(--midnight);border-radius:24px;padding:22px 22px 18px;display:grid;gap:14px;overflow:hidden;color:var(--bone)}
-.stage .raw{font-family:var(--mono);font-size:12.5px;color:#9AA7B8;white-space:nowrap;overflow:hidden}
-.stage .raw span{display:inline-block;animation:slide 14s linear infinite}
-@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.stage svg{width:100%;height:auto;display:block}
-.chips{display:flex;gap:10px;flex-wrap:wrap}
-.chip{font-family:var(--display);font-weight:700;font-size:clamp(18px,2.4vw,26px);padding:10px 14px;border-radius:12px;letter-spacing:-.02em;opacity:0;transform:translateY(8px);animation:pop .5s forwards}
-.chip small{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;font-weight:500;margin-top:2px;opacity:.85}
-.chip.c1{background:var(--electric);color:#fff;animation-delay:1.4s}.chip.c2{background:var(--mint);color:#14171C;animation-delay:1.9s}.chip.c3{background:var(--coral);color:#14171C;animation-delay:2.4s}
-.verdict{font-family:var(--display);font-weight:700;font-size:clamp(20px,2.6vw,30px);letter-spacing:-.02em;opacity:0;animation:pop .6s 3s forwards}
-.verdict em{font-style:normal;color:var(--mint)}
-@keyframes pop{to{opacity:1;transform:none}}
-.flight{fill:none;stroke:var(--coral);stroke-width:3;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2.2s cubic-bezier(.3,.7,.2,1) .5s forwards}
-.flight-glow{fill:none;stroke:var(--coral);stroke-width:12;opacity:.18;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2.2s cubic-bezier(.3,.7,.2,1) .5s forwards}
-@keyframes draw{to{stroke-dashoffset:0}}
-.ball{fill:#fff;offset-path:path("M 70 300 C 200 60, 420 20, 700 170");offset-rotate:0deg;animation:fly 2.2s cubic-bezier(.3,.7,.2,1) .5s forwards;opacity:0}
-@keyframes fly{0%{opacity:1;offset-distance:0%}100%{opacity:1;offset-distance:100%}}
-.bat{transform-origin:84px 300px;animation:swing .5s ease-out .15s both}
-@keyframes swing{from{transform:rotate(-70deg)}to{transform:rotate(0)}}
-
-/* BANDS */
-.band{padding-block:72px}
-.band .head{display:grid;gap:12px;margin-bottom:34px;max-width:40ch}
-.band .head p{font-size:18px}
-.mintband{background:var(--mint);color:#14171C}
-.mintband .eyebrow{color:var(--mint-deep)}
-.blueband{background:var(--electric);color:#fff}
-.blueband .eyebrow{color:#CFE0FF}
-.coralband{background:var(--coral);color:#14171C}
-.coralband .eyebrow{color:#7A2A12}
-.nightband{background:var(--midnight);color:var(--bone)}
-.nightband .eyebrow{color:var(--mint)}
-.paperband .eyebrow{color:var(--electric)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;gap:12px}
+.panel .cap{font-size:13.5px;color:var(--muted);line-height:1.5}
+.panel .cap b{color:var(--ink);font-weight:600}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+svg.chart{width:100%;height:auto;display:block}
+.chart text{font-family:var(--mono);font-size:11px;fill:var(--muted);letter-spacing:.06em}
+.chart .ax{stroke:var(--line);stroke-width:1}
+.chart .grid{stroke:var(--line);stroke-width:1;stroke-dasharray:2 4}
+.chart .barrel{fill:rgba(255,106,69,.12);stroke:var(--coral);stroke-width:1.5;stroke-dasharray:5 4}
+.chart .lbl{fill:var(--coral);font-weight:500}
+/* sections */
+section{padding-block:76px;border-top:1px solid var(--line)}
+.head{display:grid;gap:12px;margin-bottom:34px;max-width:64ch}
+.head p{color:var(--muted);font-size:17px}
 .grid{display:grid;gap:16px}
-.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
-.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
-.g6{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
-.tile{border-radius:18px;padding:22px;display:grid;gap:10px;align-content:start;background:var(--white);color:var(--ink)}
-.tile svg{width:100%;height:auto;display:block}
-.tile h3{font-size:20px}
-.tile p{font-size:15px;color:var(--slate)}
-.tile .big{font-family:var(--display);font-weight:700;font-size:40px;letter-spacing:-.03em;line-height:1}
-.tile.t-mint{background:#DDF7E8}.tile.t-blue{background:#E4ECFF}.tile.t-coral{background:var(--coral-soft)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tile.t-mint,:root:not([data-theme="light"]) .tile.t-blue,:root:not([data-theme="light"]) .tile.t-coral{background:var(--white)}}
-.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
-.reveal.in{opacity:1;transform:none}
-/* explainer animations run when .in */
-.needle{transform-origin:110px 110px;transform:rotate(-100deg);transition:transform 1.6s cubic-bezier(.3,.8,.2,1)}
-.in .needle{transform:rotate(38deg)}
-.ray{transform-origin:30px 120px;transform:rotate(0deg);transition:transform 1.4s cubic-bezier(.3,.8,.2,1) .2s}
-.in .ray{transform:rotate(-26deg)}
-.spin{transform-origin:80px 80px;animation:rot 1.2s linear infinite;animation-play-state:paused}
-.in .spin{animation-play-state:running}
-@keyframes rot{to{transform:rotate(360deg)}}
-.hand{transform-origin:100px 100px;transform:rotate(0);transition:transform 1.8s linear}
-.in .hand{transform:rotate(252deg)}
-.batsw{transform-origin:40px 150px;transform:rotate(-80deg);transition:transform .45s cubic-bezier(.2,.9,.3,1) .3s}
-.in .batsw{transform:rotate(10deg)}
-.speedl{opacity:0;transition:opacity .3s .7s}.in .speedl{opacity:1}
-.beam{transform-origin:70px 70px;animation:rot 3s linear infinite}
-.pulse{animation:pulse 1.4s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:.25;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
-.joint{animation:blink 1.6s ease-in-out infinite}
-.joint:nth-child(2n){animation-delay:.4s}.joint:nth-child(3n){animation-delay:.8s}
-@keyframes blink{0%,100%{opacity:.35}50%{opacity:1}}
-.count{font-variant-numeric:tabular-nums}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;display:grid;gap:10px;align-content:start;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;height:4px;width:100%;background:var(--c,var(--sky))}
+.card.mint{--c:var(--mint)}.card.coral{--c:var(--coral)}.card.sky{--c:var(--sky)}
+.card p{font-size:15.5px;color:var(--muted)}
+.card .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--c,var(--sky))}
+.card .to{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint);margin-top:6px}
+/* same-ev strip */
+.same{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.ball{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:8px}
+.ball .ev{font-family:var(--display);font-weight:700;font-size:40px;letter-spacing:-.03em;line-height:1}
+.ball .ev small{font-family:var(--mono);font-size:11px;letter-spacing:.14em;font-weight:500;color:var(--muted);margin-left:6px}
+.ball .la{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ball .bar{height:8px;border-radius:4px;background:var(--line);position:relative;overflow:hidden}
+.ball .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--c)}
+.ball .res{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.02em;color:var(--c)}
+.ball .d{font-size:14px;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:28px}
+.kpis div{background:var(--panel);padding:18px 20px}
+.kpis b{display:block;font-family:var(--display);font-weight:700;font-size:34px;letter-spacing:-.03em;line-height:1}
+.kpis span{display:block;font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+/* instruments table */
+.table{display:grid;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.row{display:grid;grid-template-columns:260px 1fr;gap:20px;padding:20px 24px;background:var(--panel);border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row .n{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.01em}
+.row .n small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint);margin-top:6px;font-weight:500}
+.row p{font-size:15.5px;color:var(--muted)}
+@media (max-width:700px){.row{grid-template-columns:1fr;gap:8px}}
+.formats{margin-top:14px;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--muted)}
+/* film */
+.film{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.shot{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.shot img{width:100%;height:220px;object-fit:cover;display:block}
+.shot div{padding:18px 20px;display:grid;gap:6px}
+.shot p{font-size:15px;color:var(--muted)}
 /* flow */
-.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;position:relative}
-.step{display:grid;gap:10px;justify-items:center;text-align:center;padding:26px 18px;border-radius:18px;background:rgba(255,255,255,.12)}
-.step svg{width:84px;height:84px}
-.step h3{color:#fff;font-size:22px}
-.step p{color:#DCE6FF;font-size:14.5px;max-width:24ch}
-/* who */
-.who{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
-.pill{display:grid;gap:8px;justify-items:center;text-align:center;padding:22px 14px;border-radius:16px;background:#152638;color:var(--bone)}
-.pill svg{width:44px;height:44px}
-.pill b{font-family:var(--display);font-size:17px;letter-spacing:-.01em}
-.pill span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#9AA7B8}
-.never{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.no{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.6);border-radius:14px;padding:16px 18px;font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.01em;color:#14171C}
-.no svg{width:30px;height:30px;flex:none}
-footer{padding-block:56px 64px;display:grid;gap:14px;color:var(--slate);font-size:15px}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.step{padding:24px;border:1px solid var(--line);border-radius:16px;background:var(--panel);display:grid;gap:8px;align-content:start}
+.step .n{font-family:var(--display);font-weight:700;font-size:44px;line-height:1;letter-spacing:-.03em;color:var(--coral)}
+.step p{font-size:15.5px;color:var(--muted)}
+.never{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.no{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:grid;gap:6px}
+.no b{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.01em;color:var(--coral)}
+.no span{font-size:14.5px;color:var(--muted)}
+.two{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:start}
+@media (max-width:900px){.two{grid-template-columns:1fr}}
+.who p{color:var(--muted);font-size:16px}
+.soft{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:26px;font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.01em}
+.soft span{padding:8px 14px;border-radius:10px;color:#0B1522}
+footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-size:15px;border-top:1px solid var(--line)}
 .contact{font-family:var(--display);font-weight:700;font-size:clamp(26px,4vw,46px);color:var(--ink);letter-spacing:-.02em;text-decoration:none}
-.contact:hover{color:var(--coral)}
+.contact:hover{color:var(--mint)}
 .fine{font-size:12.5px;max-width:80ch;line-height:1.5}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.chip,.verdict,.ball,.reveal{opacity:1!important;transform:none!important}.flight,.flight-glow{stroke-dashoffset:0!important}.ball{offset-distance:100%}}
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.dot{opacity:0;animation:pop .4s forwards}
+@keyframes pop{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.dot{opacity:1;animation:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <nav>
     <a class="mark" href="#top" aria-label="Dugout Digital home">
-      <svg viewBox="0 0 150 150" aria-hidden="true"><rect x="25" y="25" width="100" height="100" rx="18" transform="rotate(45 75 75)" fill="currentColor"/><g transform="translate(39,33) scale(0.6)"><path fill-rule="evenodd" d="M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z" fill="#B9F0CF"/><path d="M38 50H54A20 20 0 0 1 54 90H38Z" fill="#2F5BFF"/></g></svg>
+      <svg viewBox="0 0 150 150" aria-hidden="true"><rect x="25" y="25" width="100" height="100" rx="18" transform="rotate(45 75 75)" fill="#B9F0CF"/><g transform="translate(39,33) scale(0.6)"><path fill-rule="evenodd" d="M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z" fill="#0E1A2B"/><path d="M38 50H54A20 20 0 0 1 54 90H38Z" fill="#FF6A45"/></g></svg>
       Dugout Digital
     </a>
-    <div class="links"><a href="#learn">Your numbers</a><a href="#devices">Any device</a><a href="#get">What you get</a><a href="#contact">Contact</a></div>
+    <div class="links"><a href="#story">The story</a><a href="#read">What we read</a><a href="#get">What you get</a><a href="#who">Who it's for</a><a href="#contact">Contact</a></div>
   </nav>
 
   <header class="hero" id="top">
     <div class="copy">
+      <div class="eyebrow">Baseball data, read together</div>
       <h1>We translate the numbers.</h1>
       <div class="sub"><b>Any data.</b> <i>Any device.</i> <u>Plain English.</u></div>
+      <p class="lede">A player comes home from a camp, a showcase or a lesson with a file full of exit velocities, launch angles, bat speeds and spin rates. Nobody tells the family what they mean, and no single number ever does. We read the whole file, every metric against every other, and hand back the story: the strength, the growth, where it sits against players the same age, and what to work on next.</p>
       <div class="cta">
         <a class="btn b-electric" href="mailto:hello@dugoutdigital.io?subject=Translate%20my%20file">Send us a file</a>
-        <a class="btn b-coral" href="#learn">Learn your numbers</a>
+        <a class="btn b-ghost" href="#story">See how we read it</a>
       </div>
     </div>
-    <div class="stage" aria-label="One ball in play, translated">
-      <div class="raw" aria-hidden="true"><span>ExitSpeed,91.2,Angle,26.3,Distance,319.8,Direction,-12.4,Bearing,oppo,HangTime,4.9,PitchSpeed,88.0 &nbsp;·&nbsp; ExitSpeed,91.2,Angle,26.3,Distance,319.8,Direction,-12.4,Bearing,oppo,HangTime,4.9,PitchSpeed,88.0 &nbsp;·&nbsp; </span></div>
-      <svg viewBox="0 0 760 340" role="img" aria-label="A ball flying 320 feet after leaving the bat at 91 miles per hour and 26 degrees">
-        <line x1="40" y1="300" x2="740" y2="300" stroke="#243448" stroke-width="2"/>
-        <g stroke="#243448" stroke-width="2"><line x1="215" y1="300" x2="215" y2="292"/><line x1="390" y1="300" x2="390" y2="292"/><line x1="565" y1="300" x2="565" y2="292"/></g>
-        <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#5B6470" letter-spacing="1"><text x="205" y="322">100 FT</text><text x="380" y="322">200 FT</text><text x="555" y="322">300 FT</text></g>
-        <path class="flight-glow" d="M 70 300 C 200 60, 420 20, 700 170"/>
-        <path class="flight" d="M 70 300 C 200 60, 420 20, 700 170"/>
-        <g class="bat"><rect x="78" y="196" width="12" height="108" rx="6" fill="#F1EEE6"/><rect x="74" y="190" width="20" height="46" rx="9" fill="#B9F0CF"/></g>
-        <circle class="ball" r="8"/>
-        <circle cx="700" cy="170" r="22" fill="none" stroke="#FF6A45" stroke-width="2" opacity=".5"/>
+    <div class="panel" aria-label="Exit velocity against launch angle for 122 balls in play">
+      <div class="eyebrow">Every ball in play · three fall games · one college roster</div>
+      <svg class="chart" viewBox="0 0 760 340" role="img" aria-label="Scatter chart: exit velocity on the vertical axis, launch angle on the horizontal axis, each ball colored by its result. The home runs sit above 92 miles per hour and between 19 and 30 degrees.">
+        <g class="grid"><line x1="60" y1="300" x2="740" y2="300"/><line x1="60" y1="220" x2="740" y2="220"/><line x1="60" y1="140" x2="740" y2="140"/><line x1="60" y1="60" x2="740" y2="60"/></g>
+        <g class="ax"><line x1="60" y1="20" x2="60" y2="300"/><line x1="60" y1="300" x2="740" y2="300"/></g>
+        <polygon class="barrel" points="287,120 513,120 513,100 664,20 287,20"/>
+        <text class="lbl" x="296" y="40">BARREL ZONE · 95+ MPH AT 0–30°</text>
+        <text x="14" y="304">50</text><text x="14" y="224">70</text><text x="14" y="144">90</text><text x="8" y="64">110</text>
+        <text x="40" y="326">-30°</text><text x="278" y="326">0°</text><text x="500" y="326">30°</text><text x="720" y="326">60°</text>
+        <text x="600" y="326" style="fill:#9AA7B8">LAUNCH ANGLE</text>
+        <text transform="translate(30 200) rotate(-90)" style="fill:#9AA7B8">EXIT VELOCITY · MPH</text>
+        <g id="pts"><circle cx="241" cy="208" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="418" cy="144" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="343" cy="85" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="102" cy="117" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="355" cy="183" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="417" cy="70" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="426" cy="145" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="204" cy="190" r="4" fill="#5B6470" opacity="0.95"/>
+<circle cx="120" cy="282" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="286" cy="64" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="99" cy="30" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="473" cy="160" r="4" fill="#5B6470" opacity="0.95"/>
+<circle cx="411" cy="144" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="383" cy="66" r="5" fill="#2F5BFF" opacity="0.95"/>
+<circle cx="529" cy="215" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="398" cy="82" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="396" cy="102" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="568" cy="120" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="735" cy="120" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="466" cy="102" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="327" cy="60" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="176" cy="110" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="407" cy="93" r="5" fill="#2F5BFF" opacity="0.95"/>
+<circle cx="328" cy="76" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="504" cy="106" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="490" cy="79" r="5" fill="#FF6A45" opacity="0.95"/>
+<circle cx="230" cy="135" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="279" cy="144" r="5" fill="#2F5BFF" opacity="0.95"/>
+<circle cx="249" cy="116" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="429" cy="203" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="589" cy="242" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="512" cy="162" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="374" cy="103" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="602" cy="161" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="321" cy="112" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="621" cy="135" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="524" cy="212" r="5" fill="#2F5BFF" opacity="0.95"/>
+<circle cx="402" cy="86" r="5" fill="#2F5BFF" opacity="0.95"/>
+<circle cx="339" cy="101" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="448" cy="108" r="5" fill="#2F5BFF" opacity="0.95"/>
+<circle cx="453" cy="135" r="4" fill="#5B6470" opacity="0.95"/>
+<circle cx="519" cy="162" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="249" cy="273" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="383" cy="171" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="138" cy="114" r="4" fill="#5B6470" opacity="0.95"/>
+<circle cx="602" cy="210" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="415" cy="100" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="374" cy="192" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="371" cy="64" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="250" cy="90" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="310" cy="72" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="401" cy="92" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="424" cy="104" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="671" cy="187" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="176" cy="169" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="225" cy="119" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="303" cy="163" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="544" cy="126" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="373" cy="96" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="344" cy="118" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="318" cy="97" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="337" cy="90" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="312" cy="89" r="5" fill="#2F5BFF" opacity="0.95"/>
+<circle cx="217" cy="108" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="308" cy="104" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="341" cy="105" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="312" cy="81" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="436" cy="81" r="5" fill="#FF6A45" opacity="0.95"/>
+<circle cx="190" cy="173" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="376" cy="173" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="296" cy="78" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="454" cy="104" r="5" fill="#2F5BFF" opacity="0.95"/>
+<circle cx="656" cy="138" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="346" cy="66" r="5" fill="#2F5BFF" opacity="0.95"/>
+<circle cx="203" cy="122" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="100" cy="206" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="410" cy="184" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="567" cy="124" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="166" cy="144" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="422" cy="191" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="292" cy="152" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="380" cy="233" r="4" fill="#5B6470" opacity="0.95"/>
+<circle cx="544" cy="123" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="461" cy="70" r="5" fill="#FF6A45" opacity="0.95"/>
+<circle cx="339" cy="115" r="5" fill="#2F5BFF" opacity="0.95"/>
+<circle cx="616" cy="152" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="409" cy="78" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="260" cy="212" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="504" cy="144" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="528" cy="105" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="421" cy="122" r="5" fill="#2F5BFF" opacity="0.95"/>
+<circle cx="145" cy="122" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="263" cy="90" r="4" fill="#B9F0CF" opacity="0.95"/>
+<circle cx="536" cy="181" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="577" cy="148" r="4" fill="#5B6470" opacity="0.6"/>
+<circle cx="507" cy="130" r="5" fill="#FF6A45" opacity="0.95"/></g>
       </svg>
-      <div class="chips">
-        <div class="chip c1"><span class="count" data-to="91.2" data-dec="1">0</span> mph<small>EXIT VELOCITY</small></div>
-        <div class="chip c2"><span class="count" data-to="26.3" data-dec="1">0</span>°<small>LAUNCH ANGLE</small></div>
-        <div class="chip c3"><span class="count" data-to="320" data-dec="0">0</span> ft<small>DISTANCE</small></div>
-      </div>
-      <div class="verdict">That's a <em>double</em>. Hard, high, the other way.</div>
+      <div class="legend"><span><i style="background:#FF6A45"></i>Home run</span><span><i style="background:#2F5BFF"></i>Double or triple</span><span><i style="background:#B9F0CF"></i>Single</span><span><i style="background:#5B6470"></i>Out</span></div>
+      <div class="cap"><b>Four home runs, all above 92 mph and between 19° and 30°.</b> Balls hit just as hard outside that window became ground outs and fly outs. Hard is not enough. Hard at the right angle is the story, and that is what we explain.</div>
     </div>
   </header>
-</div>
 
-<section class="band mintband" id="learn">
-  <div class="wrap">
-    <div class="head reveal"><div class="eyebrow">Your numbers</div><h2>Six numbers every parent should know.</h2></div>
-    <div class="grid g3">
-      <div class="tile reveal"><svg viewBox="0 0 220 130" aria-hidden="true"><path d="M20 110A90 90 0 0 1 200 110" fill="none" stroke="#E3E4DF" stroke-width="16" stroke-linecap="round"/><path d="M20 110A90 90 0 0 1 110 20" fill="none" stroke="#B9F0CF" stroke-width="16" stroke-linecap="round"/><path d="M110 20A90 90 0 0 1 174 46" fill="none" stroke="#2F5BFF" stroke-width="16"/><path d="M174 46A90 90 0 0 1 200 110" fill="none" stroke="#FF6A45" stroke-width="16" stroke-linecap="round"/><g class="needle"><line x1="110" y1="110" x2="110" y2="34" stroke="#14171C" stroke-width="6" stroke-linecap="round"/></g><circle cx="110" cy="110" r="9" fill="#14171C"/><g font-family="IBM Plex Mono, monospace" font-size="10" fill="#5B6470"><text x="8" y="128">60</text><text x="100" y="12">85</text><text x="196" y="128">110</text></g></svg><div class="big"><span class="count" data-to="91" data-dec="0">0</span> mph</div><h3>Exit velocity</h3><p>How hard the ball leaves the bat. Harder is better.</p></div>
-      <div class="tile reveal"><svg viewBox="0 0 220 130" aria-hidden="true"><path d="M30 120L210 120" stroke="#E3E4DF" stroke-width="3"/><path d="M30 120L200 36" stroke="#E3E4DF" stroke-width="2" stroke-dasharray="4 6"/><path d="M30 120L205 90" stroke="#E3E4DF" stroke-width="2" stroke-dasharray="4 6"/><path d="M140 120A110 110 0 0 0 128 71" fill="none" stroke="#B9F0CF" stroke-width="14"/><g class="ray"><line x1="30" y1="120" x2="200" y2="120" stroke="#FF6A45" stroke-width="6" stroke-linecap="round"/><circle cx="200" cy="120" r="9" fill="#fff" stroke="#FF6A45" stroke-width="4"/></g><g font-family="IBM Plex Mono, monospace" font-size="10" fill="#5B6470"><text x="208" y="94">10°</text><text x="203" y="36">30°</text></g><circle cx="30" cy="120" r="7" fill="#14171C"/></svg><div class="big"><span class="count" data-to="26" data-dec="0">0</span>°</div><h3>Launch angle</h3><p>How high it leaves. 10 to 30 is where doubles live.</p></div>
-      <div class="tile reveal"><svg viewBox="0 0 220 130" aria-hidden="true"><g class="speedl" stroke="#2F5BFF" stroke-width="4" stroke-linecap="round"><line x1="120" y1="40" x2="160" y2="30"/><line x1="128" y1="62" x2="178" y2="56"/><line x1="124" y1="86" x2="170" y2="90"/></g><g class="batsw"><rect x="34" y="40" width="12" height="112" rx="6" fill="#14171C"/><rect x="30" y="30" width="20" height="54" rx="9" fill="#FF6A45"/></g><circle cx="196" cy="60" r="10" fill="#fff" stroke="#14171C" stroke-width="3"/></svg><div class="big"><span class="count" data-to="72" data-dec="0">0</span> mph</div><h3>Bat speed</h3><p>How fast the barrel moves. More speed, more exit velo.</p></div>
-      <div class="tile reveal"><svg viewBox="0 0 220 130" aria-hidden="true"><g class="spin" transform="translate(30,-15)"><circle cx="80" cy="80" r="44" fill="#fff" stroke="#14171C" stroke-width="4"/><path d="M52 48C70 62 70 98 52 112" fill="none" stroke="#FF6A45" stroke-width="4" stroke-linecap="round"/><path d="M108 48C90 62 90 98 108 112" fill="none" stroke="#FF6A45" stroke-width="4" stroke-linecap="round"/></g><g stroke="#2F5BFF" stroke-width="4" stroke-linecap="round" opacity=".7"><path d="M170 40a40 40 0 0 1 0 50" fill="none"/><path d="M186 30a56 56 0 0 1 0 70" fill="none"/></g></svg><div class="big"><span class="count" data-to="2300" data-dec="0">0</span> rpm</div><h3>Spin rate</h3><p>How many times the pitch turns per minute. More spin, more ride.</p></div>
-      <div class="tile reveal"><svg viewBox="0 0 220 130" aria-hidden="true"><circle cx="100" cy="100" r="60" fill="#fff" stroke="#14171C" stroke-width="5" transform="translate(10,-35)"/><rect x="102" y="18" width="16" height="12" rx="3" fill="#14171C"/><g class="hand"><line x1="100" y1="100" x2="100" y2="54" stroke="#FF6A45" stroke-width="5" stroke-linecap="round" transform="translate(10,-35)"/></g><circle cx="110" cy="65" r="6" fill="#14171C"/><g stroke="#B9F0CF" stroke-width="5" stroke-linecap="round"><line x1="170" y1="60" x2="205" y2="60"/><line x1="176" y1="80" x2="205" y2="80"/><line x1="182" y1="100" x2="205" y2="100"/></g></svg><div class="big"><span class="count" data-to="6.8" data-dec="2">0</span> s</div><h3>Sixty-yard dash</h3><p>Speed, timed to the hundredth. Under 7.0 turns heads.</p></div>
-      <div class="tile reveal"><svg viewBox="0 0 220 130" aria-hidden="true"><rect x="40" y="26" width="140" height="78" rx="12" fill="#14171C"/><rect x="54" y="40" width="112" height="50" rx="6" fill="#0E1A2B"/><text x="110" y="78" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="40" fill="#B9F0CF"><tspan class="count" data-to="84" data-dec="0">0</tspan></text><rect x="96" y="104" width="28" height="18" rx="4" fill="#14171C"/><path d="M186 46a24 24 0 0 1 0 38" fill="none" stroke="#2F5BFF" stroke-width="4" stroke-linecap="round"/></svg><div class="big"><span class="count" data-to="84" data-dec="0">0</span> mph</div><h3>Arm strength</h3><p>How hard you throw, from the mound or across the infield.</p></div>
+  <section id="story">
+    <div class="head reveal"><div class="eyebrow">The story is the combination</div><h2>Same exit velocity. Four different outcomes.</h2><p>These are four real balls from our fall games. Every one left the bat at about 91 miles per hour. Exit velocity alone would call all four the same swing. Launch angle tells you which one went 374 feet.</p></div>
+    <div class="same">
+      <div class="ball reveal" style="--c:#5B6470"><div class="ev">91.2<small>MPH</small></div><div class="la">Launch angle −7.5°</div><div class="bar"><i style="width:4%"></i></div><div class="res">Ground out</div><div class="d">14 feet. A hard-hit ball into the dirt.</div></div>
+      <div class="ball reveal" style="--c:#B9F0CF"><div class="ev">91.2<small>MPH</small></div><div class="la">Launch angle 22.0°</div><div class="bar"><i style="width:80%"></i></div><div class="res">Sacrifice fly</div><div class="d">300 feet. Deep enough to score the run.</div></div>
+      <div class="ball reveal" style="--c:#FF6A45"><div class="ev">92.5<small>MPH</small></div><div class="la">Launch angle 29.1°</div><div class="bar"><i style="width:100%"></i></div><div class="res">Home run</div><div class="d">374 feet. The same contact, seven degrees higher.</div></div>
+      <div class="ball reveal" style="--c:#7FB5FF"><div class="ev">91.3<small>MPH</small></div><div class="la">Launch angle 44.2°</div><div class="bar"><i style="width:67%"></i></div><div class="res">Fly out</div><div class="d">252 feet. Too high. Hang time, not distance.</div></div>
     </div>
-  </div>
-</section>
-
-<section class="band blueband" id="devices">
-  <div class="wrap">
-    <div class="head reveal"><div class="eyebrow">Any device</div><h2 style="color:#fff">If it made a file, we read it.</h2></div>
-    <div class="grid g4">
-      <div class="tile reveal" style="background:rgba(255,255,255,.12);color:#fff"><svg viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="56" fill="none" stroke="#fff" stroke-width="2" opacity=".35"/><circle cx="70" cy="70" r="36" fill="none" stroke="#fff" stroke-width="2" opacity=".35"/><circle cx="70" cy="70" r="16" fill="none" stroke="#fff" stroke-width="2" opacity=".35"/><g class="beam"><path d="M70 70L70 12A58 58 0 0 1 120 42Z" fill="#B9F0CF" opacity=".75"/></g><circle cx="70" cy="70" r="5" fill="#fff"/><circle cx="96" cy="48" r="5" fill="#FF6A45"/><circle cx="48" cy="92" r="4" fill="#FF6A45"/></svg><h3 style="color:#fff">Stadium radar</h3><p style="color:#DCE6FF">TrackMan · Hawk-Eye</p></div>
-      <div class="tile reveal" style="background:rgba(255,255,255,.12);color:#fff"><svg viewBox="0 0 140 140" aria-hidden="true"><rect x="36" y="22" width="68" height="84" rx="10" fill="#fff"/><rect x="46" y="32" width="48" height="36" rx="5" fill="#0E1A2B"/><text x="70" y="58" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="22" fill="#B9F0CF">88</text><circle cx="70" cy="88" r="9" fill="#FF6A45"/><rect x="60" y="106" width="20" height="14" rx="3" fill="#fff"/></svg><h3 style="color:#fff">Portable radar</h3><p style="color:#DCE6FF">Rapsodo · Pocket Radar · Stalker</p></div>
-      <div class="tile reveal" style="background:rgba(255,255,255,.12);color:#fff"><svg viewBox="0 0 140 140" aria-hidden="true"><g transform="rotate(-35 70 70)"><rect x="62" y="14" width="16" height="112" rx="8" fill="#fff"/><rect x="58" y="10" width="24" height="52" rx="11" fill="#B9F0CF"/><circle cx="70" cy="122" r="13" fill="#FF6A45" class="pulse"/></g></svg><h3 style="color:#fff">Bat and ball sensors</h3><p style="color:#DCE6FF">Blast · Diamond Kinetics · HitTrax</p></div>
-      <div class="tile reveal" style="background:rgba(255,255,255,.12);color:#fff"><svg viewBox="0 0 140 140" aria-hidden="true"><g stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"><line x1="70" y1="34" x2="70" y2="72"/><line x1="70" y1="48" x2="40" y2="66"/><line x1="70" y1="48" x2="100" y2="66"/><line x1="70" y1="72" x2="48" y2="114"/><line x1="70" y1="72" x2="92" y2="114"/></g><g fill="#B9F0CF"><circle class="joint" cx="70" cy="24" r="9"/><circle class="joint" cx="70" cy="48" r="6"/><circle class="joint" cx="40" cy="66" r="6"/><circle class="joint" cx="100" cy="66" r="6"/><circle class="joint" cx="70" cy="72" r="6"/><circle class="joint" cx="48" cy="114" r="6"/><circle class="joint" cx="92" cy="114" r="6"/></g><rect x="30" y="124" width="80" height="6" rx="3" fill="#FF6A45"/></svg><h3 style="color:#fff">Biomechanics labs</h3><p style="color:#DCE6FF">Motion capture · force plates</p></div>
+    <div class="kpis reveal">
+      <div><b>122</b><span>balls in play across three fall games on stadium radar</span></div>
+      <div><b>36</b><span>barrels: 95+ mph in the 0 to 30 degree window, or harder as the angle climbs</span></div>
+      <div><b>64%</b><span>of those barrels reached base. The other 36% are why direction and contact depth matter too</span></div>
+      <div><b>7+</b><span>metrics read together on every swing: exit velocity, launch angle, direction, bat speed, attack angle, contact depth, pitch location and count</span></div>
     </div>
-  </div>
-</section>
+    <p class="reveal" style="margin-top:24px;color:var(--muted);max-width:70ch">Add direction and the fly out becomes a double down the line. Add contact depth and you learn why the ground ball happened. Add bat speed, attack angle, pitch location and the count, and you have a hitter's profile instead of a spreadsheet. We read all of it at once, write it in plain English, and show every number next to the conditions it was measured in.</p>
+  </section>
 
-<section class="band paperband" id="how">
-  <div class="wrap">
-    <div class="head reveal"><div class="eyebrow">How it works</div><h2>File in. Plan out.</h2></div>
-    <div class="flow" style="background:var(--midnight);border-radius:24px;padding:18px">
-      <div class="step reveal"><svg viewBox="0 0 84 84" aria-hidden="true"><rect x="18" y="8" width="48" height="68" rx="8" fill="#F1EEE6"/><path d="M50 8v16h16" fill="#B9F0CF"/><g stroke="#2F5BFF" stroke-width="4" stroke-linecap="round"><line x1="28" y1="40" x2="56" y2="40"/><line x1="28" y1="52" x2="56" y2="52"/><line x1="28" y1="64" x2="44" y2="64"/></g></svg><h3>Capture</h3><p>Camp, showcase, lesson, your own cage.</p></div>
-      <div class="step reveal"><svg viewBox="0 0 84 84" aria-hidden="true"><path d="M10 42L74 14L58 72L40 50Z" fill="#FF6A45"/><path d="M40 50L74 14" stroke="#14171C" stroke-width="3"/></svg><h3>Send</h3><p>Email it. Events send everyone at once.</p></div>
-      <div class="step reveal"><svg viewBox="0 0 150 150" aria-hidden="true"><rect x="25" y="25" width="100" height="100" rx="18" transform="rotate(45 75 75)" fill="#B9F0CF"/><g transform="translate(39,33) scale(0.6)"><path fill-rule="evenodd" d="M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z" fill="#0E1A2B"/><path d="M38 50H54A20 20 0 0 1 54 90H38Z" fill="#FF6A45"/></g></svg><h3>Translate</h3><p>A coach reads every one before it ships.</p></div>
-      <div class="step reveal"><svg viewBox="0 0 84 84" aria-hidden="true"><rect x="22" y="6" width="40" height="72" rx="8" fill="#F1EEE6"/><rect x="28" y="14" width="28" height="48" rx="4" fill="#0E1A2B"/><rect x="32" y="20" width="20" height="8" rx="2" fill="#B9F0CF"/><rect x="32" y="32" width="20" height="8" rx="2" fill="#2F5BFF"/><rect x="32" y="44" width="12" height="8" rx="2" fill="#FF6A45"/><circle cx="42" cy="70" r="3" fill="#14171C"/></svg><h3>Train</h3><p>The plan lives in the app. Re-test and see what moved.</p></div>
+  <section id="read">
+    <div class="head reveal"><div class="eyebrow">What we read</div><h2>From the stadium radar to the bat sensor.</h2><p>Every instrument measures something a little differently. We know what each one is good at, where it is unreliable, and how to put them side by side without mixing them up.</p></div>
+    <div class="table reveal">
+      <div class="row"><div class="n">Stadium radar and optical<small>TrackMan · Hawk-Eye</small></div><p>The gold standard for ball flight: exit velocity, launch angle, direction, distance, pitch velocity, spin and movement on every pitch and every ball in play, plus bat tracking when the system runs in game mode. We read the full export, including the columns most people never open.</p></div>
+      <div class="row"><div class="n">Portable radar and optical<small>Portable TrackMan · Rapsodo · Pocket Radar · Stalker</small></div><p>The cage, the bullpen and the travel-ball field. Smaller samples and different settings, so every number is labeled with the device and the setting it came from before it is compared to anything.</p></div>
+      <div class="row"><div class="n">Bat and ball sensors<small>Blast · Diamond Kinetics · HitTrax · smart balls</small></div><p>Bat speed, swing plane, time to contact, spin. Some readings are trustworthy and some are not, and we have audited them against radar on the same swing. We tell you which is which.</p></div>
+      <div class="row"><div class="n">Biomechanics labs<small>Markerless motion capture · force plates</small></div><p>The body behind the number: how the legs load, how the hips and shoulders separate, how force moves into the bat. We translate the lab report into the one or two movement patterns that explain the ball-flight numbers.</p></div>
     </div>
-  </div>
-</section>
+    <div class="formats">CSV · XLSX · JSON · a PDF report · a screenshot of the app. Send what you have and we will tell you what it can and cannot say.</div>
+  </section>
 
-<section class="band coralband" id="get">
-  <div class="wrap">
+  <section id="film">
+    <div class="head reveal"><div class="eyebrow">On real film</div><h2>Built for a college program first.</h2><p>These tools run every week on a Division I roster. The numbers are drawn on the actual video, so a player sees the strike zone, the contact point and the swing the way the staff sees it.</p></div>
+    <div class="film">
+      <div class="shot reveal"><img src="img/kzone.jpg" alt="Center-field video frame of a hitter swinging, with the strike zone drawn and the pitch location marked"><div><h3>K-Zone</h3><p>Every pitch of every at-bat with the zone drawn at the plate and the swing decision graded against the hitter's own damage zone.</p></div></div>
+      <div class="shot reveal"><img src="img/depth.jpg" alt="Open-side video frame of a hitter at contact, with the damage window and the contact point drawn in front of the plate"><div><h3>Contact depth</h3><p>Where the bat met the ball, measured in inches from the front of the plate, against the window where this hitter does damage.</p></div></div>
+      <div class="shot reveal"><img src="img/comp.jpg" alt="Skeleton overlay of a college hitter and a Major League comparison, synced at impact"><div><h3>Swing comparison</h3><p>A skeleton overlay of the player and his closest Major League comparison, synced at impact, matched on bat path before body type.</p></div></div>
+    </div>
+  </section>
+
+  <section id="get">
     <div class="head reveal"><div class="eyebrow">What you get</div><h2>From a spreadsheet to a plan.</h2></div>
     <div class="grid g3">
-      <div class="tile reveal"><svg viewBox="0 0 220 90" aria-hidden="true"><rect x="10" y="20" width="200" height="22" rx="11" fill="#E3E4DF"/><rect x="10" y="20" width="150" height="22" rx="11" fill="#B9F0CF"/><text x="16" y="36" font-family="IBM Plex Mono, monospace" font-size="11" fill="#14171C">STRENGTH</text><rect x="10" y="56" width="200" height="22" rx="11" fill="#E3E4DF"/><rect x="10" y="56" width="70" height="22" rx="11" fill="#FF6A45"/><text x="16" y="72" font-family="IBM Plex Mono, monospace" font-size="11" fill="#14171C">GROWTH</text></svg><h3>Strength and growth</h3><p>One thing to keep. One thing to build.</p></div>
-      <div class="tile reveal"><svg viewBox="0 0 220 90" aria-hidden="true"><rect x="20" y="8" width="180" height="74" rx="10" fill="#fff" stroke="#14171C" stroke-width="3"/><rect x="32" y="20" width="60" height="10" rx="5" fill="#2F5BFF"/><rect x="32" y="38" width="156" height="7" rx="3.5" fill="#E3E4DF"/><rect x="32" y="52" width="130" height="7" rx="3.5" fill="#E3E4DF"/><rect x="32" y="66" width="90" height="7" rx="3.5" fill="#B9F0CF"/><circle cx="178" cy="26" r="9" fill="#FF6A45"/></svg><h3>Custom evaluation</h3><p>A pro-style card, written by a coach.</p></div>
-      <div class="tile reveal"><svg viewBox="0 0 220 90" aria-hidden="true"><g fill="#E3E4DF"><rect x="20" y="60" width="18" height="22" rx="4"/><rect x="48" y="44" width="18" height="38" rx="4"/><rect x="76" y="30" width="18" height="52" rx="4"/><rect x="132" y="30" width="18" height="52" rx="4"/><rect x="160" y="44" width="18" height="38" rx="4"/><rect x="188" y="60" width="18" height="22" rx="4"/></g><rect x="104" y="14" width="18" height="68" rx="4" fill="#2F5BFF"/><circle cx="141" cy="18" r="10" fill="#FF6A45"/><text x="141" y="22" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#14171C">YOU</text></svg><h3>Benchmarks</h3><p>Against players your age and the level you want.</p></div>
-      <div class="tile reveal"><svg viewBox="0 0 220 90" aria-hidden="true"><rect x="78" y="6" width="64" height="80" rx="10" fill="#0E1A2B"/><rect x="88" y="18" width="44" height="8" rx="4" fill="#B9F0CF"/><rect x="88" y="32" width="44" height="8" rx="4" fill="#2F5BFF"/><rect x="88" y="46" width="30" height="8" rx="4" fill="#FF6A45"/><polygon points="98,62 98,78 112,70" fill="#fff"/></svg><h3>Plan and app</h3><p>Drills on video, a game journal, a mental routine.</p></div>
-      <div class="tile reveal"><svg viewBox="0 0 220 90" aria-hidden="true"><rect x="76" y="30" width="30" height="52" rx="4" fill="#B9F0CF"/><rect x="40" y="48" width="30" height="34" rx="4" fill="#2F5BFF"/><rect x="112" y="56" width="30" height="26" rx="4" fill="#FF6A45"/><text x="91" y="22" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="16" fill="#14171C">1</text><text x="55" y="40" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="16" fill="#14171C">2</text><text x="127" y="48" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="16" fill="#14171C">3</text><rect x="160" y="34" width="44" height="6" rx="3" fill="#E3E4DF"/><rect x="160" y="48" width="44" height="6" rx="3" fill="#E3E4DF"/><rect x="160" y="62" width="44" height="6" rx="3" fill="#E3E4DF"/></svg><h3>Leaderboards</h3><p>By event, or by percentile of your age group.</p></div>
-      <div class="tile reveal"><svg viewBox="0 0 220 90" aria-hidden="true"><circle cx="60" cy="40" r="22" fill="#B9F0CF"/><circle cx="60" cy="33" r="8" fill="#14171C"/><path d="M44 56a16 12 0 0 1 32 0" fill="#14171C"/><circle cx="150" cy="48" r="24" fill="none" stroke="#2F5BFF" stroke-width="6"/><line x1="168" y1="66" x2="196" y2="88" stroke="#2F5BFF" stroke-width="8" stroke-linecap="round"/><rect x="36" y="70" width="48" height="8" rx="4" fill="#FF6A45"/></svg><h3>Player Database</h3><p>Opt in. Coaches find you. You choose what they see.</p></div>
+      <div class="card mint reveal"><div class="k">01</div><h3>Strengths and growth</h3><p>Every evaluation opens with the one thing to keep and the one thing to build, written in a sentence a parent can repeat, before any chart appears.</p></div>
+      <div class="card sky reveal"><div class="k">02</div><h3>Custom evaluation</h3><p>A pro-style card written the way a college staff writes up its own players, with every metric shown next to the instrument, the setting and the sample size behind it.</p></div>
+      <div class="card coral reveal"><div class="k">03</div><h3>Benchmarks by age and level</h3><p>Where each number sits against players the same age and against the level he is aiming at. Good, average or a gap, said plainly, with the combination that matters most called out.</p></div>
+      <div class="card sky reveal"><div class="k">04</div><h3>Training plan and app</h3><p>The card becomes a plan: activation, a drill series with every drill on video, a game-day journal and a mental-game routine, in an app built for a college program first and then handed to campers.</p></div>
+      <div class="card mint reveal"><div class="k">05</div><h3>Leaderboards</h3><p>By event, so a weekend has its winners, or by percentile of an age group, so a 14-year-old is measured against 14-year-olds. Leaderboards, never rankings for sale.</p></div>
+      <div class="card coral reveal"><div class="k">06</div><h3>Player Database</h3><p>Opt in and your verified numbers become discoverable to college coaches searching on their own. You choose what is visible and you can change it any time. It can only help.</p></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="band nightband" id="who">
-  <div class="wrap">
+  <section id="who">
     <div class="head reveal"><div class="eyebrow">Who it's for</div><h2>Anyone holding a file they can't read.</h2></div>
-    <div class="who">
-      <div class="pill reveal"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="16" cy="14" r="7" fill="#B9F0CF"/><circle cx="30" cy="16" r="5" fill="#FF6A45"/><path d="M4 38a12 10 0 0 1 24 0" fill="#B9F0CF"/><path d="M22 38a9 8 0 0 1 18 0" fill="#FF6A45"/></svg><b>Players and parents</b><span>via camp · team · TBC23</span></div>
-      <div class="pill reveal"><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="6" y="10" width="32" height="24" rx="4" fill="#2F5BFF"/><rect x="12" y="4" width="20" height="10" rx="3" fill="#B9F0CF"/><text x="22" y="28" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="12" fill="#fff">12</text></svg><b>Teams and orgs</b><span>showcase CSVs</span></div>
-      <div class="pill reveal"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M8 36L22 6l14 30Z" fill="#FF6A45"/><rect x="4" y="34" width="36" height="6" rx="3" fill="#B9F0CF"/></svg><b>Tournaments</b><span>evals at the gate</span></div>
-      <div class="pill reveal"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M4 18L22 8l18 10-18 10Z" fill="#B9F0CF"/><path d="M10 22v10c0 3 6 6 12 6s12-3 12-6V22" fill="none" stroke="#2F5BFF" stroke-width="4"/></svg><b>College camps</b><span>the camp kit</span></div>
-      <div class="pill reveal"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M22 38s-14-8-14-19a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 11-14 19-14 19Z" fill="#FF6A45"/></svg><b>Foundations</b><span>sponsored evals</span></div>
-      <div class="pill reveal"><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="6" y="20" width="32" height="18" rx="3" fill="#2F5BFF"/><rect x="10" y="8" width="24" height="14" rx="3" fill="#B9F0CF"/><rect x="18" y="26" width="8" height="12" fill="#0E1A2B"/></svg><b>College programs</b><span>your own data</span></div>
+    <div class="grid g3">
+      <div class="card mint reveal"><h3>Players and parents</h3><p>The evaluation, the plan and the app reach you through the camp or team that captured your data, or through TBC23. One-time prices, nothing renews on its own.</p><div class="to">Through your camp, your team, or tbc23.com</div></div>
+      <div class="card sky reveal"><h3>Teams and travel organizations</h3><p>You came home from a showcase with a CSV for fifteen players. We translate it for every one of them, write the coach a team report, and give each family a card.</p><div class="to">Invoice to the organization</div></div>
+      <div class="card coral reveal"><h3>Tournaments and showcases</h3><p>Your event already captures data. We turn it into the evaluation every family wants to buy at the gate, in your brand, with leaderboards for the weekend.</p><div class="to">License per event</div></div>
+      <div class="card sky reveal"><h3>College camps</h3><p>A data standard any camp with a radar can run, the engine that writes the card, and a co-branded parent report. No standard, no card, no charge.</p><div class="to">License per player</div></div>
+      <div class="card mint reveal"><h3>Foundations and youth programs</h3><p>Kids who never get in front of a radar get a capture and a custom evaluation, paid for by the program. The family pays nothing.</p><div class="to">Sponsored evaluations</div></div>
+      <div class="card coral reveal"><h3>College programs</h3><p>The systems were built for one first: evaluation engine, plan generator, game-day journal and mental-game module, on your own data.</p><div class="to">Ask us</div></div>
     </div>
-    <div style="margin-top:28px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.01em"><span style="background:var(--mint);color:#14171C;padding:8px 14px;border-radius:10px">Baseball first.</span><span style="background:var(--coral);color:#14171C;padding:8px 14px;border-radius:10px">Softball next.</span></div>
-  </div>
-</section>
+    <div class="soft reveal"><span style="background:var(--mint)">Baseball first.</span><span style="background:var(--coral)">Softball next.</span><span style="color:var(--muted);font-family:var(--body);font-weight:400;font-size:15.5px;padding:0">Same instruments, same engine, its own benchmark tables.</span></div>
+  </section>
 
-<section class="band mintband" id="never">
-  <div class="wrap">
-    <div class="head reveal"><div class="eyebrow">Never</div><h2>Five things we will never do.</h2></div>
-    <div class="never">
-      <div class="no reveal"><svg viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="#FF6A45"/><line x1="8" y1="8" x2="22" y2="22" stroke="#14171C" stroke-width="4" stroke-linecap="round"/><line x1="22" y1="8" x2="8" y2="22" stroke="#14171C" stroke-width="4" stroke-linecap="round"/></svg>Sell a ranking</div>
-      <div class="no reveal"><svg viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="#FF6A45"/><line x1="8" y1="8" x2="22" y2="22" stroke="#14171C" stroke-width="4" stroke-linecap="round"/><line x1="22" y1="8" x2="8" y2="22" stroke="#14171C" stroke-width="4" stroke-linecap="round"/></svg>Call a college for you</div>
-      <div class="no reveal"><svg viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="#FF6A45"/><line x1="8" y1="8" x2="22" y2="22" stroke="#14171C" stroke-width="4" stroke-linecap="round"/><line x1="22" y1="8" x2="8" y2="22" stroke="#14171C" stroke-width="4" stroke-linecap="round"/></svg>Copy other services' data</div>
-      <div class="no reveal"><svg viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="#FF6A45"/><line x1="8" y1="8" x2="22" y2="22" stroke="#14171C" stroke-width="4" stroke-linecap="round"/><line x1="22" y1="8" x2="8" y2="22" stroke="#14171C" stroke-width="4" stroke-linecap="round"/></svg>Hold a family's money</div>
-      <div class="no reveal"><svg viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="#FF6A45"/><line x1="8" y1="8" x2="22" y2="22" stroke="#14171C" stroke-width="4" stroke-linecap="round"/><line x1="22" y1="8" x2="8" y2="22" stroke="#14171C" stroke-width="4" stroke-linecap="round"/></svg>Pitch fear</div>
+  <section id="how">
+    <div class="head reveal"><div class="eyebrow">How it works</div><h2>Capture anywhere. Translate once. Train all year.</h2></div>
+    <div class="flow">
+      <div class="step reveal"><div class="n">1</div><h3>Capture</h3><p>At a camp, a showcase, a tournament, a lesson or your own cage. Any device that writes a file.</p></div>
+      <div class="step reveal"><div class="n">2</div><h3>Send the file</h3><p>Email it, or the event sends everyone at once. We log the instrument, the setting and the date, because a number without them is a guess.</p></div>
+      <div class="step reveal"><div class="n">3</div><h3>We translate</h3><p>A coach reads every evaluation before it ships. Strength, growth, benchmark, plan. Plain English, small samples labeled as small samples.</p></div>
+      <div class="step reveal"><div class="n">4</div><h3>Train and re-test</h3><p>The plan lives in the app. The next capture shows what moved. Opt in, and coaches can find the verified numbers on their own.</p></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="wrap">
+  <section id="promise">
+    <div class="two">
+      <div>
+        <div class="head reveal"><div class="eyebrow">Never</div><h2>Five things we will never do.</h2></div>
+        <div class="never">
+          <div class="no reveal"><b>Sell a ranking</b><span>We publish measurements, the conditions they were measured in, and leaderboards families can see for themselves.</span></div>
+          <div class="no reveal"><b>Make the call for a college</b><span>No outreach, no introductions. Coaches search the database on their own. Players decide what they see.</span></div>
+          <div class="no reveal"><b>Copy other services' data</b><span>Every number was captured on a known instrument on a known day, or added by the family and labeled as theirs.</span></div>
+          <div class="no reveal"><b>Hold a family's money</b><span>Camps, teams, events, programs and TBC23 are our customers. We are never the merchant for a family.</span></div>
+          <div class="no reveal"><b>Pitch fear</b><span>The product is the feeling of knowing exactly where you stand and what to do about it.</span></div>
+        </div>
+      </div>
+      <div class="who reveal">
+        <div class="eyebrow">Who we are</div>
+        <h3 style="margin-block:10px 10px;font-size:24px">Built in a dugout. Tested by the players it is for.</h3>
+        <p>Dugout Digital is a family-owned software company in Clemson, South Carolina. It runs the technology behind TBC23, a college-coach-run camp and player-development business, and owns the evaluation engine, the benchmarks, the player app and the database described here.</p>
+        <p style="margin-top:12px">The systems were built for a college program first. The testers are junior-high and high-school players, and the first parent who could not read a spreadsheet lives in the same house.</p>
+      </div>
+    </div>
+  </section>
+
   <footer id="contact">
-    <div class="eyebrow" style="color:var(--electric)">Contact</div>
+    <div class="eyebrow">Contact</div>
     <a class="contact" href="mailto:hello@dugoutdigital.io">hello@dugoutdigital.io</a>
-    <p style="color:var(--slate);max-width:48ch">Family-owned software company in Clemson, South Carolina. Built for a college program first. Tested by the players it is for.</p>
-    <p class="fine">Dugout Digital, LLC. Dugout Digital licenses evaluation software to camps, teams, events and programs and is never the merchant of record for a family. It is not a recruiting service: it makes no introductions and does no outreach on a player's behalf. Players opt in to the database and control what is visible. Camps described here are open to any and all entrants, limited only by number, age, grade level and gender. © 2026 Dugout Digital, LLC</p>
+    <p class="fine">Dugout Digital, LLC · Clemson, SC. Dugout Digital licenses evaluation software to camps, teams, events and programs and is never the merchant of record for a family. It is not a recruiting service: it makes no introductions and does no outreach on a player's behalf. Players opt in to the database and control what is visible. Camps described here are open to any and all entrants, limited only by number, age, grade level and gender. Data shown on this page was captured on stadium TrackMan during fall 2026 games; players are not identified.</p>
+    <p class="fine">© 2026 Dugout Digital, LLC</p>
   </footer>
 </div>
 <script>
 (function(){
+  var pts=document.querySelectorAll('#pts circle');
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function countUp(el){
-    var to=parseFloat(el.getAttribute('data-to')),dec=parseInt(el.getAttribute('data-dec')||'0',10);
-    if(reduce||!('requestAnimationFrame' in window)){el.textContent=to.toFixed(dec);return}
-    var t0=null,dur=1400;
-    function f(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/dur);p=1-Math.pow(1-p,3);el.textContent=(to*p).toFixed(dec);if(p<1)requestAnimationFrame(f)}
-    requestAnimationFrame(f);
-  }
-  var hero=document.querySelectorAll('.stage .count');
-  setTimeout(function(){hero.forEach(countUp)},1300);
-  if(!('IntersectionObserver' in window)){document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in');e.querySelectorAll('.count').forEach(countUp)});return}
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('.count').forEach(countUp);io.unobserve(e.target)}})},{threshold:.2});
+  if(!reduce){pts.forEach(function(c,i){c.classList.add('dot');c.style.animationDelay=(0.3+i*0.012)+'s'})}
+  if(!('IntersectionObserver' in window)){document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
   document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
 })();
 </script>
