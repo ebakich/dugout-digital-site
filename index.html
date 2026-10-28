@@ -81,6 +81,12 @@ svg.chart{width:100%;height:auto;display:block}
 .fte .t{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.02em}
 .fte ol{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14px;color:var(--muted)}
 .fte ol b{color:var(--ink);font-weight:600}
+.shots3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.shot3{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.shot3 img{width:100%;height:auto;display:block;border-bottom:1px solid var(--line)}
+.shot3 div{padding:18px 20px;display:grid;gap:6px;align-content:start}
+.shot3 p{font-size:14.5px;color:var(--muted)}
+.shot3 .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral)}
 .roster{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:28px}
 .roster div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:14.5px;color:var(--muted)}
 .roster b{display:block;font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink);letter-spacing:-.01em;margin-bottom:4px}
@@ -321,11 +327,14 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
       <div class="phone reveal"><div class="fte"><div class="k">5 Tool Email</div><div class="t">The recruiting email, built from verified numbers</div><ol><li><b>Subject</b> leads with his best verified tool</li><li><b>Intro</b> grad year, position, school</li><li><b>Body</b> the numbers, with the instrument named</li><li><b>Video</b> one link, the right clip</li><li><b>Contacts</b> the coaches, by program and level</li></ol><p style="font-size:13.5px;color:var(--muted)">The family sends it. We never do.</p></div></div>
     </div>
 
+    <div class="head reveal" style="margin-top:40px;margin-bottom:22px"><div class="eyebrow">On the college roster today</div><h2 style="font-size:clamp(26px,3.4vw,40px)">The same system, with the stadium added.</h2><p>Three screens from the college version, with the player's name and face removed. Each one is built from the hitter's own game data and reads back to him in words.</p></div>
+    <div class="shots3">
+      <div class="shot3 reveal"><img src="img/t130_damage.jpg" alt="Loft and tilt block: the hitter's best swing, loft and tilt by pitch height graded in or out of the window, the machine round by height, and the drills that move it"><div><div class="k">Damage windows</div><h3>Loft and tilt by pitch height</h3><p>Where his hardest contact lives, how far uphill the barrel moves and how far it sits below his hands at the top, middle and bottom of the zone, graded against his own window. Then the two drills that move it.</p></div></div>
+      <div class="shot3 reveal"><img src="img/t130_spot.jpg" alt="Spotlight post: a Swing Lab overlay of the hitter and his Major League comparison synced at impact, with the coach's note beneath"><div><div class="k">Spotlight</div><h3>Coach-posted video on his page</h3><p>A Swing Lab overlay of his swing and the big leaguer who swings like him, synced at impact and matched on attack angle, swing-plane tilt and bat speed, with the coach's note and the game to watch that night.</p></div></div>
+      <div class="shot3 reveal"><img src="img/t130_ep.jpg" alt="At-bat card: the video above, result and count, exit velocity, launch and carry, every pitch with type, velocity and result, and where the ball was fielded"><div><div class="k">Every pitch</div><h3>The whole at-bat, pitch by pitch</h3><p>Every pitch with its type, velocity, location and result, the ball-flight numbers on the swing, where it was fielded, and the at-bat on video above it from the center-field, open-side and K-Zone angles.</p></div></div>
+    </div>
     <div class="roster reveal">
-      <div><b>Damage windows</b>Loft and tilt by pitch height, read against the window where he actually does damage.</div>
       <div><b>Contact depth</b>Inches from the front of the plate on every ball, with the verdict drawn on the open-side video.</div>
-      <div><b>Spotlight</b>Coach-posted video on his page: MLB comparison overlays, a swing to keep, a swing to fix.</div>
-      <div><b>Every-pitch playback</b>Each at-bat from the center-field, open-side and K-Zone angles, pitch by pitch.</div>
       <div><b>Mental game</b>A pre-pitch routine, a game-day journal and a review after every at-bat, in his own words.</div>
       <div><b>Retest and trend</b>Multiple captures a season, each one labeled, each one a point on his line.</div>
     </div>
