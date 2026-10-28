@@ -4,182 +4,171 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dugout Digital</title>
-<meta name="description" content="Dugout Digital is the software and operations company behind TBC23: an evaluation engine, a camp kit, a player app and a team report, licensed to college camps and travel organizations so a weekend of measured swings follows the player home.">
+<meta name="description" content="Dugout Digital translates baseball data. Any file from any device becomes a plain-English evaluation: strengths, growth, benchmarks by age, a training plan, leaderboards and an opt-in player database.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3Crect width='150' height='150' rx='34' fill='%230E1A2B'/%3E%3Crect x='25' y='25' width='100' height='100' rx='18' transform='rotate(45 75 75)' fill='%23B9F0CF'/%3E%3Cg transform='translate(39,33) scale(0.6)'%3E%3Cpath fill-rule='evenodd' d='M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z' fill='%230E1A2B'/%3E%3Cpath d='M38 50H54A20 20 0 0 1 54 90H38Z' fill='%23FF6A45'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 :root{
-  --bg:#0B1210; --bg2:#101A15; --surface:#15211B; --ink:#EEF2EC; --muted:#9DAAA1; --line:#243129;
-  --green:#7FCB9F; --green-deep:#173A28; --clay:#F0792F; --clay-soft:#FFB07A; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
-  --display:"Syne","Avenir Next","Helvetica Neue",sans-serif; --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
-  color-scheme:dark;
+  --paper:#F5F4EF; --white:#FFFFFF; --ink:#14171C; --slate:#5B6470; --line:#E3E4DF;
+  --electric:#2F5BFF; --electric-deep:#1C3FD1; --mint:#B9F0CF; --mint-deep:#1F6B45; --midnight:#0E1A2B; --bone:#F1EEE6; --coral:#FF6A45;
+  --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif; --body:"Inter","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
 }
-:root[data-theme="light"]{ color-scheme:light; --bg:#F3F4EF; --bg2:#EAECE4; --surface:#FFFFFF; --ink:#121A15; --muted:#5E6A61; --line:#D9DDD3; --green:#1F5F3F; --green-deep:#E3EDE6; --clay:#D96A2B; --clay-soft:#A84D18; }
+:root:not([data-theme="light"]){ }
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){ --paper:#0E1A2B; --white:#152638; --ink:#F1EEE6; --slate:#9AA7B8; --line:#243448; --electric:#7FB5FF; --electric-deep:#A9CBFF; --mint:#B9F0CF; --mint-deep:#B9F0CF; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --paper:#0E1A2B; --white:#152638; --ink:#F1EEE6; --slate:#9AA7B8; --line:#243448; --electric:#7FB5FF; --electric-deep:#A9CBFF; --mint:#B9F0CF; --mint-deep:#B9F0CF; color-scheme:dark; }
 *{box-sizing:border-box}
 html,body{margin:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:hidden}
-a{color:inherit}
-.wrap{max-width:1120px;margin:0 auto;padding-inline:20px;position:relative}
-
-/* field: a dark night-grass gradient with a faint grain, fixed behind everything */
-.field{position:fixed;inset:0;z-index:-1;background:
-  radial-gradient(1200px 700px at 70% -10%, #1C3627 0%, transparent 60%),
-  radial-gradient(900px 600px at -10% 100%, #16271E 0%, transparent 55%),
-  linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%)}
-.field::after{content:"";position:absolute;inset:0;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.9'/></svg>");mix-blend-mode:overlay}
-
-nav{display:flex;justify-content:space-between;align-items:center;padding-block:26px;gap:16px}
-.mark{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.01em;display:flex;align-items:center;gap:11px;text-decoration:none;white-space:nowrap}
-.mark i{display:inline-block;width:14px;height:24px;background:var(--clay);border-radius:2px 2px 8px 8px;transform:skewX(-9deg);box-shadow:0 0 24px rgba(240,121,47,.45)}
-nav .links{display:flex;gap:24px;font-size:15px;font-weight:500}
-nav .links a{text-decoration:none;color:var(--muted)}
-nav .links a:hover,nav .links a:focus-visible{color:var(--ink)}
-
-h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.02;margin:0;letter-spacing:-.02em}
-h1{font-size:clamp(46px,8.4vw,104px);font-weight:800;max-width:12ch}
-h1 em{font-style:normal;color:var(--clay)}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:hidden}
+a{color:var(--electric)}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:16px}
+nav{display:flex;justify-content:space-between;align-items:center;padding-block:22px;gap:16px}
+.mark{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02em;white-space:nowrap}
+.mark svg{width:38px;height:38px;flex:none}
+nav .links{display:flex;gap:22px;font-size:15px;font-weight:500}
+nav .links a{text-decoration:none;color:var(--slate)}
+nav .links a:hover{color:var(--ink)}
+@media (max-width:640px){nav .links a:not(:last-child){display:none}}
+h1,h2,h3{font-family:var(--display);line-height:1.02;margin:0;letter-spacing:-.03em;text-wrap:balance}
+h1{font-size:clamp(48px,8.6vw,108px);font-weight:700}
 h2{font-size:clamp(30px,4.4vw,48px);font-weight:700}
-h3{font-size:21px;font-weight:700}
-p{margin:0;max-width:60ch}
-.eyebrow{font-family:var(--mono);text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--green)}
-
-/* hero */
-.hero{min-height:calc(100svh - 90px);display:grid;align-content:center;gap:26px;padding-block:40px 70px;position:relative}
-.hero .lede{font-size:clamp(18px,2.1vw,22px);color:var(--muted);max-width:50ch}
-.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
-.btn{font-family:var(--display);font-weight:700;font-size:16px;padding:14px 22px;border-radius:8px;text-decoration:none;display:inline-block;border:2px solid transparent;transition:transform .15s,background .15s,border-color .15s}
-.btn.primary{background:var(--clay);color:#0B1210}
-.btn.primary:hover,.btn.primary:focus-visible{background:var(--clay-soft);transform:translateY(-1px)}
-.btn.ghost{border-color:var(--line);color:var(--ink);background:rgba(255,255,255,.03)}
-.btn.ghost:hover,.btn.ghost:focus-visible{border-color:var(--green)}
-.btn:focus-visible{outline:3px solid var(--green);outline-offset:2px}
-
-/* the flight: one measured ball, drawn across the hero */
-.flight{position:absolute;right:-6vw;top:8%;width:min(62vw,760px);aspect-ratio:760/420;pointer-events:none;opacity:.95}
-.flight svg{width:100%;height:100%;overflow:visible}
-.flight .arc{fill:none;stroke:var(--clay);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1200;stroke-dashoffset:1200}
-.flight .arc-glow{fill:none;stroke:var(--clay);stroke-width:10;stroke-linecap:round;opacity:.18;filter:blur(6px);stroke-dasharray:1200;stroke-dashoffset:1200}
-.flight .ball{fill:#fff;filter:drop-shadow(0 0 10px rgba(255,255,255,.7));opacity:0}
-.flight .grid line{stroke:var(--line);stroke-width:1}
-.flight .tag{font-family:var(--mono);font-size:13px;fill:var(--muted);letter-spacing:.08em;opacity:0}
-.flight .tag.strong{fill:var(--ink)}
-@media (prefers-reduced-motion:no-preference){
-  .flight .arc{animation:draw 2.4s cubic-bezier(.3,.7,.2,1) .4s forwards}
-  .flight .arc-glow{animation:draw 2.4s cubic-bezier(.3,.7,.2,1) .4s forwards}
-  .flight .ball{animation:fly 2.4s cubic-bezier(.3,.7,.2,1) .4s forwards, pop .3s .4s forwards}
-  .flight .tag{animation:fade .5s forwards}
-  .flight .t1{animation-delay:1.2s}.flight .t2{animation-delay:1.9s}.flight .t3{animation-delay:2.6s}.flight .t4{animation-delay:3.1s}
-}
-@media (prefers-reduced-motion:reduce){.flight .arc,.flight .arc-glow{stroke-dashoffset:0}.flight .ball,.flight .tag{opacity:1}}
-@keyframes draw{to{stroke-dashoffset:0}}
-@keyframes fly{to{offset-distance:100%}}
-@keyframes pop{to{opacity:1}}
-@keyframes fade{to{opacity:1}}
-.flight .ball{offset-path:path("M 20 380 C 180 60, 420 20, 740 150");offset-rotate:0deg}
-@media (max-width:860px){.flight{position:relative;right:auto;top:auto;width:100%;margin-top:6px;opacity:.9} h1{font-size:clamp(40px,12vw,64px);max-width:none} nav .links{gap:16px;font-size:14px} nav .links a{white-space:nowrap}}
-@media (max-width:520px){nav .links a:not(:last-child){display:none}}
-
-/* numbers strip */
-.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:8px}
-.strip div{background:var(--surface);padding:18px 18px 16px}
-.strip b{display:block;font-family:var(--display);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.strip span{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:8px}
-
-section{padding-block:84px;border-top:1px solid var(--line)}
+h3{font-size:20px;font-weight:700;letter-spacing:-.01em}
+p{margin:0;max-width:62ch}
+.eyebrow{font-family:var(--mono);text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--electric)}
+.hero{padding-block:48px 72px;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+@media (max-width:900px){.hero{grid-template-columns:1fr;padding-block:24px 56px}}
+.hero .copy{display:grid;gap:22px}
+.hero .sub{font-family:var(--display);font-weight:500;font-size:clamp(20px,2.4vw,26px);letter-spacing:-.01em;color:var(--ink)}
+.hero .lede{font-size:18px;color:var(--slate);max-width:52ch}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{font-family:var(--display);font-weight:700;font-size:16px;padding:14px 22px;border-radius:10px;text-decoration:none;display:inline-block;border:2px solid transparent;transition:transform .15s,background .15s,border-color .15s}
+.btn.primary{background:var(--electric);color:#fff}
+.btn.primary:hover{background:var(--electric-deep);transform:translateY(-1px)}
+.btn.ghost{border-color:var(--ink);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--electric);color:var(--electric)}
+.btn:focus-visible{outline:3px solid var(--electric);outline-offset:2px}
+.demo{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:14px;box-shadow:0 20px 60px rgba(20,23,28,.06)}
+.demo .raw{font-family:var(--mono);font-size:13px;color:var(--slate);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow-x:auto;white-space:nowrap}
+.demo .row{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.pill{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:6px;background:var(--mint);color:#14171C;white-space:nowrap;margin-top:3px}
+.pill.g{background:var(--electric);color:#fff}
+.demo .t{font-size:15.5px;line-height:1.5}
+.demo .t b{font-weight:600}
+.demo .who{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
+section{padding-block:76px;border-top:1px solid var(--line)}
 .sec-head{display:grid;gap:12px;margin-bottom:34px}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:26px;display:grid;gap:12px;align-content:start;position:relative;overflow:hidden}
-.card::before{content:"";position:absolute;inset:0 auto auto 0;width:100%;height:3px;background:linear-gradient(90deg,var(--clay),transparent 70%)}
-.card .tag{font-family:var(--mono);text-transform:uppercase;letter-spacing:.16em;font-size:11.5px;color:var(--muted)}
-.card p{font-size:16px;color:var(--muted)}
-.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;counter-reset:step}
-.step{padding:24px 22px 22px;border:1px solid var(--line);border-radius:12px;background:var(--surface);display:grid;gap:10px;align-content:start}
-.step .k{font-family:var(--display);font-weight:800;font-size:44px;color:var(--clay);line-height:1;letter-spacing:-.03em}
-.step p{font-size:15.5px;color:var(--muted)}
-.never{background:var(--green-deep);border:1px solid rgba(127,203,159,.25);border-radius:14px;padding:34px 30px;display:grid;gap:16px}
+.sec-head p{color:var(--slate);font-size:17px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;gap:10px;align-content:start}
+.card p{font-size:15.5px;color:var(--slate)}
+.card .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--electric)}
+.card svg{width:34px;height:34px;color:var(--ink)}
+.card .to{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint-deep);margin-top:6px}
+.formats{margin-top:16px;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--slate)}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.step{padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--white);display:grid;gap:8px;align-content:start}
+.step .n{font-family:var(--display);font-weight:700;font-size:40px;color:var(--electric);line-height:1;letter-spacing:-.03em}
+.step p{font-size:15.5px;color:var(--slate)}
+.never{background:var(--midnight);color:var(--bone);border-radius:16px;padding:34px 30px;display:grid;gap:16px}
+.never h2{color:var(--bone)}
 .never ul{margin:0;padding-left:20px;display:grid;gap:10px;max-width:64ch}
-.never li{color:#D7E3DA}
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-.card .to{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-top:auto}
-.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:34px;align-items:start}
-.data{display:grid;gap:12px;font-size:16px;color:var(--muted)}
-.data b{color:var(--ink);font-weight:600}
-footer{padding-block:56px 70px;display:grid;gap:14px;color:var(--muted);font-size:15px;border-top:1px solid var(--line)}
-.contact{font-family:var(--display);font-weight:800;font-size:clamp(24px,3.6vw,40px);color:var(--ink);user-select:all;letter-spacing:-.02em;text-decoration:none}
-.contact:hover{color:var(--clay)}
-.fine{font-size:13px;max-width:72ch}
-.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.never li{color:#D5DCE5;font-size:16px}
+.never li b{color:var(--mint);font-weight:600}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;align-items:start}
+.who p{color:var(--slate);font-size:16px}
+.soft{display:flex;gap:18px;align-items:center;flex-wrap:wrap;background:var(--mint);color:#14171C;border-radius:14px;padding:20px 24px;margin-top:28px}
+.soft b{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.01em}
+.soft span{font-size:15.5px}
+footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--slate);font-size:15px;border-top:1px solid var(--line)}
+.contact{font-family:var(--display);font-weight:700;font-size:clamp(24px,3.6vw,40px);color:var(--ink);letter-spacing:-.02em;text-decoration:none}
+.contact:hover{color:var(--electric)}
+.fine{font-size:13px;max-width:78ch}
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
-<div class="field" aria-hidden="true"></div>
 <div class="wrap">
   <nav>
-    <a class="mark" href="#top"><i></i>Dugout Digital</a>
-    <div class="links"><a href="#build">What we build</a><a href="#how">Partner camps</a><a href="#who">Who buys what</a><a href="#contact">Contact</a></div>
+    <a class="mark" href="#top" aria-label="Dugout Digital home">
+      <svg viewBox="0 0 150 150" aria-hidden="true"><rect x="25" y="25" width="100" height="100" rx="18" transform="rotate(45 75 75)" fill="currentColor"/><g transform="translate(39,33) scale(0.6)"><path fill-rule="evenodd" d="M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z" fill="#B9F0CF"/><path d="M38 50H54A20 20 0 0 1 54 90H38Z" fill="#2F5BFF"/></g></svg>
+      Dugout Digital
+    </a>
+    <div class="links"><a href="#read">What we read</a><a href="#get">What you get</a><a href="#who">Who it's for</a><a href="#contact">Contact</a></div>
   </nav>
 
   <header class="hero" id="top">
-    <div class="flight" aria-hidden="true">
-      <svg viewBox="0 0 760 420">
-        <g class="grid">
-          <line x1="20" y1="380" x2="740" y2="380"/>
-          <line x1="20" y1="380" x2="20" y2="30"/>
-          <line x1="200" y1="380" x2="200" y2="372"/><line x1="380" y1="380" x2="380" y2="372"/><line x1="560" y1="380" x2="560" y2="372"/>
-        </g>
-        <path class="arc-glow" d="M 20 380 C 180 60, 420 20, 740 150"/>
-        <path class="arc" d="M 20 380 C 180 60, 420 20, 740 150"/>
-        <circle class="ball" r="6"/>
-        <text class="tag t1" x="150" y="190">EXIT 91 MPH</text>
-        <text class="tag t2" x="330" y="90">LAUNCH 26°</text>
-        <text class="tag t3" x="560" y="110">320 FT</text>
-        <text class="tag t4 strong" x="20" y="410">EVERY SWING. MEASURED. VERIFIED. YOURS.</text>
-      </svg>
+    <div class="copy">
+      <div class="eyebrow">Baseball data, in plain English</div>
+      <h1>We translate the numbers.</h1>
+      <div class="sub">Any data. Any device. Plain English.</div>
+      <p class="lede">Exit velocity, launch angle, bat speed, spin, a timed sixty. Parents hear the words and nobody tells them if the numbers are good. We read the file from wherever it was captured and hand back what it means: the strength, the growth, how it compares to players the same age, and what to do next.</p>
+      <div class="cta">
+        <a class="btn primary" href="mailto:hello@dugoutdigital.io?subject=Translate%20my%20file">Send us a file</a>
+        <a class="btn ghost" href="#how">How it works</a>
+      </div>
     </div>
-    <div class="eyebrow">Clemson, South Carolina</div>
-    <h1>Camp data should <em>follow the player.</em></h1>
-    <p class="lede">A player goes to a college camp, swings in front of TrackMan, runs a timed sixty, and the numbers stay in a spreadsheet nobody opens. We build the evaluation engine, the camp kit and the player app that turn that weekend into a verified record the player trains from ... and we license them to the camps and organizations that run the weekend.</p>
-    <div class="cta">
-      <a class="btn primary" href="#contact">Camp directors: partner with us</a>
-      <a class="btn ghost" href="#who">Who buys what</a>
-    </div>
-    <div class="strip" aria-label="What a partner camp weekend produces">
-      <div><b>100%</b><span>of swings and pitches measured</span></div>
-      <div><b>1</b><span>data standard every host camp runs</span></div>
-      <div><b>1</b><span>verified card per player, in your brand</span></div>
-      <div><b>0</b><span>rankings sold. ever.</span></div>
+    <div class="demo" aria-label="Example translation">
+      <div class="who">One ball in play · 17-year-old left-handed hitter · stadium radar</div>
+      <div class="raw">ExitSpeed,91.2,Angle,26.3,Distance,319.8,Direction,oppo,Result,FlyBall</div>
+      <div class="row"><span class="pill">Translation</span><div class="t">91 off the bat at 26 degrees carried 320 feet to the opposite field. That is a double in most parks and a home run in some. Hard, high and the other way is the swing you want.</div></div>
+      <div class="who">Same hitter · 19 balls in play · machine round the week before</div>
+      <div class="row"><span class="pill g">Strength</span><div class="t"><b>He hits it hard.</b> His best ball left at 95.5 and his hardest ten averaged 94.7. That is real power for his age.</div></div>
+      <div class="row"><span class="pill">Growth</span><div class="t"><b>Too many on the ground.</b> 58 percent of his balls were grounders. The hard ones need to leave the ground, so the plan starts with the top of the zone.</div></div>
     </div>
   </header>
 
-  <section id="build">
-    <div class="sec-head reveal"><div class="eyebrow">What we build</div><h2>Four pieces. One record of the player.</h2></div>
-    <div class="grid2">
-      <div class="card reveal"><div class="tag">The Evaluation Engine</div><h3>From a test battery to a pro-style card</h3><p>Exit velocity, launch, bat speed, pitch data, speed and arm, scored against published thresholds and written up the way a college staff writes up its own players. Small samples are shown as small samples. The player sees his own numbers, never a rank.</p></div>
-      <div class="card reveal"><div class="tag">The Camp Kit</div><h3>A data standard any TrackMan camp can run</h3><p>Exact roster names, a Data Captain, tagged pitches, tracked swings, instrument and setting logged, lineups before the first pitch, a QA gate. Pass the gate and every camper leaves with a card in the host camp's brand. No standard, no card, no charge.</p></div>
-      <div class="card reveal"><div class="tag">The Player App</div><h3>From evaluation to plan to game journal</h3><p>The card becomes a strength, a growth target and a drill series with every drill on video, a game-day tap journal, a mental-game module and a coach-to-coach email the family sends itself. Built for a college program first, then handed to campers.</p></div>
-      <div class="card reveal"><div class="tag">The Team Report</div><h3>Twelve players, one coach-facing read</h3><p>A travel team or a tournament field measured on the same battery, with a team report the coach can plan a season from and an individual card for every player. Same engine, same thresholds, same honesty about sample size.</p></div>
+  <section id="read">
+    <div class="sec-head reveal"><div class="eyebrow">What we read</div><h2>Any file from any of these.</h2><p>From the radar bolted to a college stadium to the sensor on a bat knob. If it produced a file, we can translate it.</p></div>
+    <div class="grid g4">
+      <div class="card reveal"><svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 30h28M10 30V14l8-8 8 8v16"/><path d="M18 6v-3"/><path d="M14 30v-8h8v8"/></svg><h3>Stadium radar and optical</h3><p>Stadium TrackMan and Hawk-Eye exports. Every pitch, every ball in play, bat tracking when it ran.</p></div>
+      <div class="card reveal"><svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="6" width="22" height="24" rx="3"/><path d="M12 18a6 6 0 0 1 12 0M15 18a3 3 0 0 1 6 0M18 30v3"/></svg><h3>Portable radar</h3><p>Portable TrackMan, Rapsodo, Pocket Radar, Stalker. The cage, the bullpen, the travel-ball field on a Saturday.</p></div>
+      <div class="card reveal"><svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 28 28 8"/><path d="M24 4l8 8"/><circle cx="9" cy="27" r="3"/><path d="M14 10a8 8 0 0 1 12 12"/></svg><h3>Bat and ball sensors</h3><p>Blast, Diamond Kinetics, HitTrax, smart balls. Bat speed, swing plane, contact. We also say which readings to trust.</p></div>
+      <div class="card reveal"><svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="6" r="3"/><path d="M18 9v9M18 18l-7 10M18 18l7 10M18 12l-8 4M18 12l8 4"/></svg><h3>Biomechanics labs</h3><p>Markerless motion capture and force plates. The body behind the number, in words a parent can use.</p></div>
     </div>
+    <div class="formats">CSV · XLSX · JSON · a screenshot of the app · a photo of the readout. Send what you have.</div>
   </section>
 
-  <section id="how">
-    <div class="sec-head reveal"><div class="eyebrow">How a partner camp works</div><h2>Capture it right once. Train from it all year.</h2></div>
-    <div class="flow">
-      <div class="step reveal"><div class="k">1</div><h3>Capture</h3><p>Your camp runs the data standard on your instruments. Every swing and every pitch is measured the same way, so a card from one weekend means the same thing as a card from the next.</p></div>
-      <div class="step reveal"><div class="k">2</div><h3>Verify</h3><p>A coach reviews every evaluation before it ships. Anything that fails the standard is marked, not inflated, and never billed.</p></div>
-      <div class="step reveal"><div class="k">3</div><h3>Deliver</h3><p>Your camp delivers the card to the family, in your brand, at your price. We invoice you per player. We never sell to the family and never hold their money.</p></div>
-      <div class="step reveal"><div class="k">4</div><h3>Train</h3><p>The card opens in the player app: the strength to keep, the one thing to build, the drills to build it, and the next camp to prove it.</p></div>
+  <section id="get">
+    <div class="sec-head reveal"><div class="eyebrow">What you get</div><h2>From a spreadsheet to a plan.</h2></div>
+    <div class="grid g3">
+      <div class="card reveal"><div class="k">01</div><h3>Strengths and growth</h3><p>Every evaluation opens with the one thing to keep and the one thing to build, in a sentence, before any chart.</p></div>
+      <div class="card reveal"><div class="k">02</div><h3>Custom evaluation</h3><p>A pro-style card written the way a college staff writes up its own players. Small samples are shown as small samples, never inflated.</p></div>
+      <div class="card reveal"><div class="k">03</div><h3>Benchmarks by age and level</h3><p>Where the number sits against players the same age and the level he is aiming at. Good, average or a gap, said plainly.</p></div>
+      <div class="card reveal"><div class="k">04</div><h3>Training plan and app</h3><p>The card becomes a plan: activation, a drill series with every drill on video, a game-day journal and a mental-game routine, in an app built for a college program first.</p></div>
+      <div class="card reveal"><div class="k">05</div><h3>Leaderboards</h3><p>By event, so a weekend has its winners, or by percentile of an age group, so a 14-year-old is measured against 14-year-olds. Leaderboards, never rankings for sale.</p></div>
+      <div class="card reveal"><div class="k">06</div><h3>Player Database</h3><p>Opt in and your verified numbers become discoverable to college coaches searching on their own. You choose what is visible and you can change it any time. It can only help.</p></div>
     </div>
   </section>
 
   <section id="who">
-    <div class="sec-head reveal"><div class="eyebrow">Who buys what</div><h2>We sell to the people who run the weekend.</h2></div>
-    <div class="grid3">
-      <div class="card reveal"><div class="tag">Camp directors</div><h3>Evaluation license + camp kit</h3><p>Per-player wholesale pricing. You set the retail or bundle it into the camp fee. Co-branded parent report, your logo, your voice. Pilots with a small number of TrackMan camps, summer 2027.</p><div class="to">Invoice from Dugout Digital</div></div>
-      <div class="card reveal"><div class="tag">Travel and tournament directors</div><h3>Team report</h3><p>A team or a tournament field on the full battery, a coach report, a card per player. Sold today through TBC23.</p><div class="to">Buy through TBC23</div></div>
-      <div class="card reveal"><div class="tag">Families</div><h3>Camp evaluation, player app, 5 Tool Email</h3><p>We do not sell to families. The camp you attend delivers your card, and the player app, the evaluation and the 5 Tool Email are sold by TBC23 at tbc23.com. One-time prices, nothing renews on its own.</p><div class="to"><a href="https://tbc23.com" rel="noopener">tbc23.com</a></div></div>
+    <div class="sec-head reveal"><div class="eyebrow">Who it's for</div><h2>Anyone holding a file they can't read.</h2></div>
+    <div class="grid g3">
+      <div class="card reveal"><h3>Players and parents</h3><p>The evaluation, the plan and the app reach you through the camp or team that captured your data, or through TBC23. One-time prices, nothing renews on its own.</p><div class="to">Through your camp, your team, or tbc23.com</div></div>
+      <div class="card reveal"><h3>Teams and travel organizations</h3><p>You came home from a showcase with a CSV. We translate it for every player, write the coach a team report, and give each family a card.</p><div class="to">Invoice to the organization</div></div>
+      <div class="card reveal"><h3>Tournaments and showcases</h3><p>Your event already captures data. We turn it into the evaluation every family wants to buy at the gate, in your brand, with leaderboards for the weekend.</p><div class="to">License per event</div></div>
+      <div class="card reveal"><h3>College camps</h3><p>A data standard any camp with a radar can run, the engine that writes the card, and a co-branded parent report. No standard, no card, no charge.</p><div class="to">License per player</div></div>
+      <div class="card reveal"><h3>Foundations and youth programs</h3><p>Kids who never get in front of a radar get a capture and a custom evaluation, paid for by the program. The family pays nothing.</p><div class="to">Sponsored evaluations</div></div>
+      <div class="card reveal"><h3>College programs</h3><p>The systems were built for one first. Evaluation engine, plan generator, game-day journal, mental-game module, on your own data.</p><div class="to">Ask us</div></div>
+    </div>
+    <div class="soft reveal"><b>Baseball first. Softball next.</b><span>Same instruments, same engine, its own benchmark tables. Softball opens once the baseball benchmarks are proven.</span></div>
+  </section>
+
+  <section id="how">
+    <div class="sec-head reveal"><div class="eyebrow">How it works</div><h2>Capture anywhere. Translate once. Train all year.</h2></div>
+    <div class="flow">
+      <div class="step reveal"><div class="n">1</div><h3>Capture</h3><p>At a camp, a showcase, a tournament, a lesson, or your own cage. Any device that writes a file.</p></div>
+      <div class="step reveal"><div class="n">2</div><h3>Send the file</h3><p>Email it, or the event sends it for everyone at once. We log the instrument, the setting and the date, because a number without them is a guess.</p></div>
+      <div class="step reveal"><div class="n">3</div><h3>We translate</h3><p>A coach reads every evaluation before it ships. Strength, growth, benchmark, plan. Plain English, small samples labeled.</p></div>
+      <div class="step reveal"><div class="n">4</div><h3>Train and re-test</h3><p>The plan lives in the app. The next capture shows what moved. Opt in, and coaches can find the verified numbers on their own.</p></div>
     </div>
   </section>
 
@@ -188,18 +177,18 @@ footer{padding-block:56px 70px;display:grid;gap:14px;color:var(--muted);font-siz
       <div class="never reveal">
         <h2>What we will never do</h2>
         <ul>
-          <li>Rate, rank or place a player. We publish measurements and the conditions they were measured in.</li>
-          <li>Send a player's information to a college. The family owns the card and decides who sees it.</li>
-          <li>Copy data from other services. Every number was captured at a camp that runs our standard.</li>
-          <li>Sell to a family, hold a family's money, or give anything away to a prospect. Camps and organizations are our customers.</li>
-          <li>Pitch a family on fear. The product is the feeling of having given yourself the best chance.</li>
+          <li><b>Sell a ranking.</b> We publish measurements, the conditions they were measured in, and leaderboards families can see for themselves.</li>
+          <li><b>Make the call for a college.</b> We do no outreach and no introductions. Coaches search the database on their own; players decide what they see.</li>
+          <li><b>Copy data from other services.</b> Every number was captured on a known instrument on a known day, or added by the family and labeled as theirs.</li>
+          <li><b>Sell to a family directly or hold a family's money.</b> Camps, teams, events, programs and TBC23 are our customers.</li>
+          <li><b>Pitch fear.</b> The product is the feeling of knowing exactly where you stand and what to do about it.</li>
         </ul>
       </div>
-      <div class="data reveal">
+      <div class="who reveal">
         <div class="eyebrow">Who we are</div>
-        <h3 style="margin-block:6px 4px">Built in a dugout. Tested by the players it is for.</h3>
-        <p>Dugout Digital is a family-owned software and operations company in Clemson, South Carolina. It runs the technology and product work behind TBC23, a college-coach-run camp and player-development business, and owns the evaluation engine, the camp kit, the player app and the team report described here. The systems were built for a college program first: an evaluation engine, a plan generator that writes activation and drill series from the diagnosis, a game-day journal and a mental-game module.</p>
-        <p>The product testers are the junior-high and high-school players it is for. The company sells to camps and organizations; families buy from their camp or from TBC23.</p>
+        <h3 style="margin-block:10px 10px">Built in a dugout. Tested by the players it is for.</h3>
+        <p>Dugout Digital is a family-owned software company in Clemson, South Carolina. It runs the technology behind TBC23, a college-coach-run camp and player-development business, and owns the evaluation engine, the benchmarks, the player app and the database described here.</p>
+        <p style="margin-top:12px">The systems were built for a college program first. The testers are junior-high and high-school players, and the first parent who could not read a spreadsheet lives in the same house.</p>
       </div>
     </div>
   </section>
@@ -207,14 +196,14 @@ footer{padding-block:56px 70px;display:grid;gap:14px;color:var(--muted);font-siz
   <footer id="contact">
     <div class="eyebrow">Contact</div>
     <a class="contact" href="mailto:hello@dugoutdigital.io">hello@dugoutdigital.io</a>
-    <p class="fine">Dugout Digital, LLC · Clemson, SC. Dugout Digital licenses software and evaluation tools to camps and organizations and is never the merchant of record for a family. Camps described here are open to any and all entrants, limited only by number, age, grade level and gender. Dugout Digital is not a recruiting or scouting service and does not rate, rank or place players.</p>
+    <p class="fine">Dugout Digital, LLC · Clemson, SC. Dugout Digital licenses evaluation software to camps, teams, events and programs and is never the merchant of record for a family. It is not a recruiting service: it makes no introductions and does no outreach on a player's behalf. Players opt in to the database and control what is visible. Camps described here are open to any and all entrants, limited only by number, age, grade level and gender.</p>
     <p class="fine">© 2026 Dugout Digital, LLC</p>
   </footer>
 </div>
 <script>
 (function(){
   if(!('IntersectionObserver' in window)){document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in'));return}
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
   document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
 })();
 </script>
