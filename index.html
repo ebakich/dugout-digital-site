@@ -91,6 +91,23 @@ svg.chart{width:100%;height:auto;display:block}
 .roster div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:14.5px;color:var(--muted)}
 .roster b{display:block;font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink);letter-spacing:-.01em;margin-bottom:4px}
 .prop{margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint)}
+/* now what */
+.nw{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel)}
+@media (max-width:900px){.nw{grid-template-columns:1fr}}
+.nw > div{padding:24px;display:grid;gap:12px;align-content:start;border-left:1px solid var(--line)}
+.nw > div:first-child{border-left:0}
+@media (max-width:900px){.nw > div{border-left:0;border-top:1px solid var(--line)}.nw > div:first-child{border-top:0}}
+.nw .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase}
+.nw .big{font-family:var(--display);font-weight:700;font-size:40px;letter-spacing:-.03em;line-height:1}
+.nw .big small{font-family:var(--mono);font-size:12px;letter-spacing:.12em;font-weight:500;color:var(--muted);margin-left:8px;text-transform:uppercase}
+.nw p{font-size:15px;color:var(--muted)}
+.nw p b{color:var(--ink);font-weight:600}
+.nw ol{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14.5px;color:var(--ink)}
+.nw ol span{color:var(--muted);font-size:13px}
+.nw .bar{height:8px;border-radius:4px;background:var(--line);position:relative;overflow:hidden}
+.nw .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.nw .goal{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.nwgrid{display:grid;gap:18px}
 /* sections */
 section{padding-block:76px;border-top:1px solid var(--line)}
 .head{display:grid;gap:12px;margin-bottom:34px;max-width:64ch}
@@ -166,18 +183,18 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
       <svg viewBox="0 0 150 150" aria-hidden="true"><rect x="25" y="25" width="100" height="100" rx="18" transform="rotate(45 75 75)" fill="#B9F0CF"/><g transform="translate(39,33) scale(0.6)"><path fill-rule="evenodd" d="M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z" fill="#0E1A2B"/><path d="M38 50H54A20 20 0 0 1 54 90H38Z" fill="#FF6A45"/></g></svg>
       Dugout Digital
     </a>
-    <div class="links"><a href="#story">The story</a><a href="#app">Inside the app</a><a href="#read">What we read</a><a href="#get">What you get</a><a href="#who">Who it's for</a><a href="#contact">Contact</a></div>
+    <div class="links"><a href="#story">The story</a><a href="#nowwhat">Now what</a><a href="#app">Inside the app</a><a href="#read">What we read</a><a href="#get">What you get</a><a href="#who">Who it's for</a><a href="#contact">Contact</a></div>
   </nav>
 
   <header class="hero" id="top">
     <div class="copy">
-      <div class="eyebrow">Baseball data, read together</div>
+      <div class="eyebrow">Assess. Don't guess.</div>
       <h1>We translate the numbers.</h1>
-      <div class="sub"><b>Any data.</b> <i>Any device.</i> <u>Plain English.</u></div>
-      <p class="lede">A player comes home from a camp, a showcase or a lesson with a file full of exit velocities, launch angles, bat speeds and spin rates. Nobody tells the family what they mean, and no single number ever does. We read the whole file, every metric against every other, and hand back the story: the strength, the growth, where it sits against players the same age, and what to work on next.</p>
+      <div class="sub"><b>Any data.</b> <u>Plain English.</u> <i>A plan.</i></div>
+      <p class="lede">A player comes home from a camp, a showcase or a lesson with a file full of exit velocities, launch angles, bat speeds and spin rates. We turn it into something simple: what he does well, what to build next, how he compares to players his age, and the exact drills and training plan to improve it. Simple answers from complicated data, and the next step to take.</p>
       <div class="cta">
         <a class="btn b-electric" href="mailto:hello@dugoutdigital.io?subject=Translate%20my%20file">Send us a file</a>
-        <a class="btn b-ghost" href="#story">See how we read it</a>
+        <a class="btn b-ghost" href="#nowwhat">See the now-what</a>
       </div>
     </div>
     <div class="panel" aria-label="Exit velocity against launch angle for 122 balls in play">
@@ -308,6 +325,22 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
       <div><b>7+</b><span>metrics read together on every swing: exit velocity, launch angle, direction, bat speed, attack angle, contact depth, pitch location and count</span></div>
     </div>
     <p class="reveal" style="margin-top:24px;color:var(--muted);max-width:70ch">Add direction and the fly out becomes a double down the line. Add contact depth and you learn why the ground ball happened. Add bat speed, attack angle, pitch location and the count, and you have a hitter's profile instead of a spreadsheet. We read all of it at once, write it in plain English, and show every number next to the conditions it was measured in.</p>
+  </section>
+
+  <section id="nowwhat">
+    <div class="head reveal"><div class="eyebrow">The now-what</div><h2>A number is useless without the next step.</h2><p>Every service can hand you a readout. We hand you the readout, what it means, and the drills that move it. Two real examples, one from a camper and one from a college hitter, exactly as they appear in the app.</p></div>
+    <div class="nwgrid">
+      <div class="nw reveal">
+        <div><div class="k" style="color:var(--sky)">The number · sample camper, age 13</div><div class="big">43%<small>hard-hit</small></div><div class="bar"><i style="width:43%;background:var(--sky)"></i></div><div class="goal">Goal for his class · 80%</div><p>Field TrackMan, three camp games. Peak exit velocity 87.9 and an EV50 of 77.0, both past the goal. Hard-hit rate 43 percent, well short of it.</p></div>
+        <div><div class="k" style="color:var(--mint)">What it means</div><p><b>When he squares it up, it's loud. The opportunity is how often.</b> Three of his seven balls in play were hard-hit. The bat speed is there and the body has not caught up to it yet, so the hard contact comes and goes. This is a strength curve problem, not a swing problem.</p><p>W.I.N. in his app: Strength, swing decisions. Growth, quality contact.</p></div>
+        <div><div class="k" style="color:var(--coral)">What we do about it</div><ol><li>Activation every time he hits <span>· 14 minutes, mobility to explosive</span></li><li>Goblet lateral lunge <span>· 3 × 6 each side, build the load</span></li><li>Med ball sit-up and throw <span>· 3 × 8, throw it through the wall</span></li><li>Walk-through swings <span>· 3 × 5, drive the ball to the left-center gap</span></li><li>Uphill tee <span>· 3 × 10, line drives off the back of the cage</span></li></ol><p>Twelve weeks, every drill on video, retest at the next camp. The hard-hit number is the one we watch.</p></div>
+      </div>
+      <div class="nw reveal">
+        <div><div class="k" style="color:var(--sky)">The number · college hitter, 80 game swings</div><div class="big">−24.1°<small>tilt on low pitches</small></div><div class="bar"><i style="width:34%;background:var(--sky)"></i></div><div class="goal">His window on the low pitch · −35° to −26°</div><p>Stadium TrackMan bat tracking in games. Loft in the window at every height. Tilt in the window up top and in the middle, flat on the pitch at the bottom of the zone.</p></div>
+        <div><div class="k" style="color:var(--mint)">What it means</div><p><b>His barrel is not getting under the low pitch.</b> On high and middle pitches the barrel sits where it should and the line drive carries. On the low pitch it stays flat, so the hardest contact down there turns into a ground ball instead of the gap. One height, one fix.</p><p>In his app: Tilt, bottom of the zone, match the pitch and drive it in the air to the gap on your side of center.</p></div>
+        <div><div class="k" style="color:var(--coral)">What we do about it</div><ol><li>High, middle, low tee <span>· one flight at three heights, each ball leaves at its own tee height</span></li><li>Low tee plus ladder <span>· gap to gap, never a chopper</span></li><li>Video-model method <span>· keep the path in the window against live arms</span></li><li>Machine retest in two to three weeks <span>· top, middle, bottom of the zone</span></li></ol><p>The read rebuilds after every game. When the low-pitch tilt moves into the window, the drill comes off the list.</p></div>
+      </div>
+    </div>
   </section>
 
   <section id="app">
