@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dugout Digital</title>
-<meta name="description" content="Dugout Digital translates baseball data. Any file from any device, read together, becomes a plain-English evaluation: strengths, growth, benchmarks by age and level, a training plan, leaderboards and an opt-in player database.">
+<meta name="description" content="Data made simple. Dugout Digital turns baseball data from any camp, showcase or device into plain English and a training plan: custom evaluation, K-Zone, contact depth, loft and tilt, spray chart with video, leaderboards, MLB comps, drills and 5 Tool Email.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3Crect width='150' height='150' rx='34' fill='%230E1A2B'/%3E%3Crect x='25' y='25' width='100' height='100' rx='18' transform='rotate(45 75 75)' fill='%23B9F0CF'/%3E%3Cg transform='translate(39,33) scale(0.6)'%3E%3Cpath fill-rule='evenodd' d='M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z' fill='%230E1A2B'/%3E%3Cpath d='M38 50H54A20 20 0 0 1 54 90H38Z' fill='%23FF6A45'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -24,8 +24,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17p
 a{color:var(--sky)}
 .wrap{max-width:1180px;margin:0 auto;padding-inline:16px}
 nav{display:flex;justify-content:space-between;align-items:center;padding-block:22px;gap:16px}
-.mark{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02em;white-space:nowrap}
-.mark svg{width:40px;height:40px;flex:none}
+.mark{display:flex;align-items:center;gap:13px;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:700;font-size:26px;letter-spacing:-.02em;white-space:nowrap}
+.mark svg{width:58px;height:58px;flex:none}
 nav .links{display:flex;gap:22px;font-size:15px;font-weight:500}
 nav .links a{text-decoration:none;color:var(--muted);white-space:nowrap}
 nav .links a:hover{color:var(--ink)}
@@ -108,6 +108,21 @@ svg.chart{width:100%;height:auto;display:block}
 .nw .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
 .nw .goal{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .nwgrid{display:grid;gap:18px}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.gi{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:auto auto}
+.gi .im{height:260px;overflow:hidden;background:#0a0c10;border-bottom:1px solid var(--line)}
+.gi .im img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.gi .im.phone{display:flex;justify-content:center;align-items:flex-start;background:#0a0c10}
+.gi .im.phone img{width:auto;max-width:100%;height:100%;object-fit:cover;object-position:top}
+.gi div.tx{padding:14px 18px 16px;display:grid;gap:3px}
+.gi h3{font-size:18px}
+.gi p{font-size:14px;color:var(--muted)}
+.gi .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--c,var(--mint))}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips span{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:10px 16px;font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:-.01em}
+.chips span i{font-style:normal;font-family:var(--body);font-weight:400;color:var(--muted);font-size:13.5px;margin-left:8px}
+.lead{font-size:17px;color:var(--muted);max-width:60ch}
 /* sections */
 section{padding-block:76px;border-top:1px solid var(--line)}
 .head{display:grid;gap:12px;margin-bottom:34px;max-width:64ch}
@@ -183,18 +198,18 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
       <svg viewBox="0 0 150 150" aria-hidden="true"><rect x="25" y="25" width="100" height="100" rx="18" transform="rotate(45 75 75)" fill="#B9F0CF"/><g transform="translate(39,33) scale(0.6)"><path fill-rule="evenodd" d="M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z" fill="#0E1A2B"/><path d="M38 50H54A20 20 0 0 1 54 90H38Z" fill="#FF6A45"/></g></svg>
       Dugout Digital
     </a>
-    <div class="links"><a href="#story">The story</a><a href="#nowwhat">Now what</a><a href="#app">Inside the app</a><a href="#read">What we read</a><a href="#get">What you get</a><a href="#who">Who it's for</a><a href="#contact">Contact</a></div>
+    <div class="links"><a href="#see">See it</a><a href="#nowwhat">Now what</a><a href="#who">Who it's for</a><a href="#contact">Contact</a></div>
   </nav>
 
   <header class="hero" id="top">
     <div class="copy">
-      <div class="eyebrow">Assess. Don't guess.</div>
+      <div class="eyebrow">Data made simple</div>
       <h1>We translate the numbers.</h1>
       <div class="sub"><b>Any data.</b> <u>Plain English.</u> <i>A plan.</i></div>
-      <p class="lede">A player comes home from a camp, a showcase or a lesson with a file full of exit velocities, launch angles, bat speeds and spin rates. We turn it into something simple: what he does well, what to build next, how he compares to players his age, and the exact drills and training plan to improve it. Simple answers from complicated data, and the next step to take.</p>
+      <p class="lede">Your player's numbers from any camp, showcase, lesson or device, turned into what they mean and exactly what to do next.</p>
       <div class="cta">
         <a class="btn b-electric" href="mailto:hello@dugoutdigital.io?subject=Translate%20my%20file">Send us a file</a>
-        <a class="btn b-ghost" href="#nowwhat">See the now-what</a>
+        <a class="btn b-ghost" href="#see">See it</a>
       </div>
     </div>
     <div class="panel" aria-label="Exit velocity against launch angle for 122 balls in play">
@@ -306,155 +321,65 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
 <circle cx="507" cy="130" r="5" fill="#FF6A45" opacity="0.95"/></g>
       </svg>
       <div class="legend"><span><i style="background:#FF6A45"></i>Home run</span><span><i style="background:#2F5BFF"></i>Double or triple</span><span><i style="background:#B9F0CF"></i>Single</span><span><i style="background:#5B6470"></i>Out</span></div>
-      <div class="cap"><b>Four home runs, all above 92 mph and between 19° and 30°.</b> Balls hit just as hard outside that window became ground outs and fly outs. Hard is not enough. Hard at the right angle is the story, and that is what we explain.</div>
+      <div class="cap"><b>Hard is not enough. Hard at the right angle is the story.</b> Every home run here left above 92 mph between 19° and 30°. We explain that, then we train it.</div>
     </div>
+  
   </header>
 
-  <section id="story">
-    <div class="head reveal"><div class="eyebrow">The story is the combination</div><h2>Same exit velocity. Four different outcomes.</h2><p>These are four real balls from our fall games. Every one left the bat at about 91 miles per hour. Exit velocity alone would call all four the same swing. Launch angle tells you which one went 374 feet.</p></div>
-    <div class="same">
-      <div class="ball reveal" style="--c:#5B6470"><div class="ev">91.2<small>MPH</small></div><div class="la">Launch angle −7.5°</div><div class="bar"><i style="width:4%"></i></div><div class="res">Ground out</div><div class="d">14 feet. A hard-hit ball into the dirt.</div></div>
-      <div class="ball reveal" style="--c:#B9F0CF"><div class="ev">91.2<small>MPH</small></div><div class="la">Launch angle 22.0°</div><div class="bar"><i style="width:80%"></i></div><div class="res">Sacrifice fly</div><div class="d">300 feet. Deep enough to score the run.</div></div>
-      <div class="ball reveal" style="--c:#FF6A45"><div class="ev">92.5<small>MPH</small></div><div class="la">Launch angle 29.1°</div><div class="bar"><i style="width:100%"></i></div><div class="res">Home run</div><div class="d">374 feet. The same contact, seven degrees higher.</div></div>
-      <div class="ball reveal" style="--c:#7FB5FF"><div class="ev">91.3<small>MPH</small></div><div class="la">Launch angle 44.2°</div><div class="bar"><i style="width:67%"></i></div><div class="res">Fly out</div><div class="d">252 feet. Too high. Hang time, not distance.</div></div>
+  <section id="see">
+    <div class="head reveal"><div class="eyebrow">Inside the Damage &amp; Chaos app</div><h2>See it. Every screen is real.</h2><p class="lead">Built for a college program, handed to campers. Names and faces removed.</p></div>
+    <div class="gal">
+      <div class="gi reveal" style="--c:var(--sky)"><div class="im"><img src="img/eval_grid.jpg" alt="Custom evaluation grid graded against the class goal"></div><div class="tx"><div class="k">Custom evaluation</div><h3>Every number, graded</h3><p>Against the goal for his class. Tap any metric and it explains itself.</p></div></div>
+      <div class="gi reveal" style="--c:var(--coral)"><div class="im"><img src="img/kzone.jpg" alt="K-Zone drawn on the center-field video"></div><div class="tx"><div class="k">K-Zone</div><h3>Every pitch, graded on the video</h3><p>Green or red against his own damage zone.</p></div></div>
+      <div class="gi reveal" style="--c:var(--mint)"><div class="im"><img src="img/depth.jpg" alt="Contact depth drawn on the open-side video"></div><div class="tx"><div class="k">Contact depth</div><h3>Where the bat met the ball</h3><p>Inches from the plate, against his damage window.</p></div></div>
+      <div class="gi reveal" style="--c:var(--sky)"><div class="im"><img src="img/t130_damage.jpg" alt="Loft and tilt by pitch height with the drills that move it"></div><div class="tx"><div class="k">Loft + tilt</div><h3>His damage window by pitch height</h3><p>In the window or not, top to bottom of the zone. Then the drills.</p></div></div>
+      <div class="gi reveal" style="--c:var(--mint)"><div class="im"><img src="img/t130_hunt.jpg" alt="Hunting damage heat map of the strike zone"></div><div class="tx"><div class="k">Hunting damage</div><h3>Where his barrels live</h3><p>The zone to hunt with less than two strikes.</p></div></div>
+      <div class="gi reveal" style="--c:var(--coral)"><div class="im"><img src="img/t130_spray.jpg" alt="Team spray chart with every ball in play colored by result"></div><div class="tx"><div class="k">Spray chart</div><h3>Every ball. Tap a dot, the video plays.</h3><p>Filter by game, result and pitcher hand.</p></div></div>
+      <div class="gi reveal" style="--c:var(--sky)"><div class="im"><img src="img/t130_spot.jpg" alt="Swing Lab overlay with a Major League comparison"></div><div class="tx"><div class="k">MLB comp</div><h3>Who swings like him</h3><p>Matched on bat path, synced at impact, with his damage video on Savant.</p></div></div>
+      <div class="gi reveal" style="--c:var(--coral)"><div class="im"><img src="img/t130_leaders.jpg" alt="Leaderboards by category"></div><div class="tx"><div class="k">Leaderboards</div><h3>By event or by age group</h3><p>Swing decisions, quality contact, bat tracking. Never a ranking for sale.</p></div></div>
+      <div class="gi reveal" style="--c:var(--mint)"><div class="im phone"><img src="img/app_win.jpg" alt="W.I.N. screen"></div><div class="tx"><div class="k">W.I.N.</div><h3>One strength, one growth target</h3><p>What's important now, in a read he can repeat.</p></div></div>
+      <div class="gi reveal" style="--c:var(--sky)"><div class="im phone"><img src="img/app_ipdp.jpg" alt="Activation and drills on video"></div><div class="tx"><div class="k">Activation + drills</div><h3>The plan, every drill on video</h3><p>Build the body, then build the swing.</p></div></div>
+      <div class="gi reveal" style="--c:var(--coral)"><div class="im phone"><img src="img/app_progress.jpg" alt="Progress chart"></div><div class="tx"><div class="k">Progress</div><h3>Him against him</h3><p>Every retest is a point on his line.</p></div></div>
+      <div class="gi reveal" style="--c:var(--mint)"><div class="im"><img src="img/t130_ep.jpg" alt="At-bat card with every pitch"></div><div class="tx"><div class="k">Every pitch</div><h3>The whole at-bat, on video</h3><p>Type, velocity, location and result for every pitch.</p></div></div>
+      <div class="gi reveal" style="--c:var(--sky)"><div class="im phone"><img src="img/app_abs.jpg" alt="Game at-bats list"></div><div class="tx"><div class="k">Game at-bats</div><h3>His video library</h3><p>Every plate appearance, every angle, every number.</p></div></div>
+      <div class="gi reveal" style="--c:var(--coral)"><div class="im"><img src="img/eval_plan.jpg" alt="Development plan paragraphs"></div><div class="tx"><div class="k">Development plan</div><h3>Strengths and growth, in words</h3><p>Written by a coach for the family to read.</p></div></div>
+      <div class="gi reveal" style="--c:var(--mint)"><div class="im" style="display:grid;align-content:center;padding:22px;gap:8px"><div class="k" style="color:var(--mint)">5 Tool Email</div><div style="font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.02em">The recruiting email, built from his verified numbers</div><div style="font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--muted)">SUBJECT · INTRO · BODY · VIDEO · CONTACTS</div></div><div class="tx"><div class="k">5 Tool Email</div><h3>Coach-ready, family-sent</h3><p>Unlimited programs. We never send it for him.</p></div></div>
     </div>
-    <div class="kpis reveal">
-      <div><b>122</b><span>balls in play across three fall games on stadium radar</span></div>
-      <div><b>36</b><span>barrels: 95+ mph in the 0 to 30 degree window, or harder as the angle climbs</span></div>
-      <div><b>64%</b><span>of those barrels reached base. The other 36% are why direction and contact depth matter too</span></div>
-      <div><b>7+</b><span>metrics read together on every swing: exit velocity, launch angle, direction, bat speed, attack angle, contact depth, pitch location and count</span></div>
-    </div>
-    <p class="reveal" style="margin-top:24px;color:var(--muted);max-width:70ch">Add direction and the fly out becomes a double down the line. Add contact depth and you learn why the ground ball happened. Add bat speed, attack angle, pitch location and the count, and you have a hitter's profile instead of a spreadsheet. We read all of it at once, write it in plain English, and show every number next to the conditions it was measured in.</p>
   </section>
 
   <section id="nowwhat">
-    <div class="head reveal"><div class="eyebrow">The now-what</div><h2>A number is useless without the next step.</h2><p>Every service can hand you a readout. We hand you the readout, what it means, and the drills that move it. Two real examples, one from a camper and one from a college hitter, exactly as they appear in the app.</p></div>
-    <div class="nwgrid">
-      <div class="nw reveal">
-        <div><div class="k" style="color:var(--sky)">The number · sample camper, age 13</div><div class="big">43%<small>hard-hit</small></div><div class="bar"><i style="width:43%;background:var(--sky)"></i></div><div class="goal">Goal for his class · 80%</div><p>Field TrackMan, three camp games. Peak exit velocity 87.9 and an EV50 of 77.0, both past the goal. Hard-hit rate 43 percent, well short of it.</p></div>
-        <div><div class="k" style="color:var(--mint)">What it means</div><p><b>When he squares it up, it's loud. The opportunity is how often.</b> Three of his seven balls in play were hard-hit. The bat speed is there and the body has not caught up to it yet, so the hard contact comes and goes. This is a strength curve problem, not a swing problem.</p><p>W.I.N. in his app: Strength, swing decisions. Growth, quality contact.</p></div>
-        <div><div class="k" style="color:var(--coral)">What we do about it</div><ol><li>Activation every time he hits <span>· 14 minutes, mobility to explosive</span></li><li>Goblet lateral lunge <span>· 3 × 6 each side, build the load</span></li><li>Med ball sit-up and throw <span>· 3 × 8, throw it through the wall</span></li><li>Walk-through swings <span>· 3 × 5, drive the ball to the left-center gap</span></li><li>Uphill tee <span>· 3 × 10, line drives off the back of the cage</span></li></ol><p>Twelve weeks, every drill on video, retest at the next camp. The hard-hit number is the one we watch.</p></div>
-      </div>
-      <div class="nw reveal">
-        <div><div class="k" style="color:var(--sky)">The number · college hitter, 80 game swings</div><div class="big">−24.1°<small>tilt on low pitches</small></div><div class="bar"><i style="width:34%;background:var(--sky)"></i></div><div class="goal">His window on the low pitch · −35° to −26°</div><p>Stadium TrackMan bat tracking in games. Loft in the window at every height. Tilt in the window up top and in the middle, flat on the pitch at the bottom of the zone.</p></div>
-        <div><div class="k" style="color:var(--mint)">What it means</div><p><b>His barrel is not getting under the low pitch.</b> On high and middle pitches the barrel sits where it should and the line drive carries. On the low pitch it stays flat, so the hardest contact down there turns into a ground ball instead of the gap. One height, one fix.</p><p>In his app: Tilt, bottom of the zone, match the pitch and drive it in the air to the gap on your side of center.</p></div>
-        <div><div class="k" style="color:var(--coral)">What we do about it</div><ol><li>High, middle, low tee <span>· one flight at three heights, each ball leaves at its own tee height</span></li><li>Low tee plus ladder <span>· gap to gap, never a chopper</span></li><li>Video-model method <span>· keep the path in the window against live arms</span></li><li>Machine retest in two to three weeks <span>· top, middle, bottom of the zone</span></li></ol><p>The read rebuilds after every game. When the low-pitch tilt moves into the window, the drill comes off the list.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="app">
-    <div class="head reveal"><div class="eyebrow">What we build for our players</div><h2>The evaluation is the start. The app is the system.</h2><p>A camper leaves with a custom evaluation that reads like a scouting report written for his family. Then the same numbers build his app: what to work on, how, and who swings like him. Our college hitters train in this system every week. Everything below is real, built in-house, and shown on our sample camper.</p></div>
-
-    <div class="wide reveal"><img src="img/eval_grid.jpg" alt="Sample custom evaluation: hitting and swing-decision metrics graded against the goal for the player's graduating class"><div><div class="k">Custom evaluation</div><h3>Every number graded against his class goal.</h3><p>Field radar, cage sensor and combine, side by side, each metric graded against the goal for his graduating class and labeled with the instrument it came from. Tap any metric and it explains itself in plain English. Data we did not capture is shown as pending, never guessed.</p></div></div>
-    <div class="wide flip reveal"><div><div class="k">Development plan</div><h3>Then the numbers become sentences.</h3><p>Strengths first, the opportunity for growth second, written by a coach in the voice a 13-year-old and his parents will actually read. The evaluation says what to keep, what to build, and where the next five miles an hour live.</p></div><img src="img/eval_plan.jpg" alt="Sample development plan: a strengths paragraph and an opportunity-for-growth paragraph written in plain English"></div>
-
-    <div class="phones">
-      <div class="phone reveal"><div class="scr"><img src="img/app_win.jpg" alt="W.I.N. screen: strength, growth and this block's plan"></div><div class="k">W.I.N.</div><h3>What's Important Now</h3><p>One strength, one growth target and one hunt for the block. The whole plan in a read a player can repeat.</p></div>
-      <div class="phone reveal"><div class="scr"><img src="img/app_kzone.jpg" alt="K-Zone screen: three pitches plotted on the strike zone with the heart marked and decisions graded"></div><div class="k">K-Zone</div><h3>Every pitch, graded</h3><p>Each pitch of each at-bat plotted on the zone, green or red against his own damage zone, played over the real video.</p></div>
-      <div class="phone reveal"><div class="scr"><img src="img/app_abs.jpg" alt="Game at-bats list with result, exit velocity, launch angle, K-Zone and contact-depth buttons"></div><div class="k">Game at-bats</div><h3>A video library of his at-bats</h3><p>Every plate appearance with its numbers, the K-Zone, and whether contact came in the window, too deep or too far out front.</p></div>
-      <div class="phone reveal"><div class="scr"><img src="img/app_spray.jpg" alt="Spray chart of balls in play colored by exit velocity"></div><div class="k">Spray chart</div><h3>Where it went, how hard</h3><p>Every ball in play on the field, colored by exit velocity, with the read a coach would give him.</p></div>
-      <div class="phone reveal"><div class="scr"><img src="img/app_ipdp.jpg" alt="Individual player development plan: activation exercises and a drill series, each with a video button"></div><div class="k">iPDP</div><h3>Activation and drills, on video</h3><p>Mobility and explosive work to build the body, then a drill series matched to the growth target. Every drill plays on tap.</p></div>
-      <div class="phone reveal"><div class="scr"><img src="img/app_progress.jpg" alt="Progress chart: exit velocity across camp and training blocks"></div><div class="k">Progress</div><h3>Him against him</h3><p>Every retest adds a point. Trend lines over blocks and seasons, never a ranking against anyone else.</p></div>
-      <div class="phone reveal"><div class="scr"><img src="img/app_comp.jpg" alt="MLB comparison card with the comp's exit velocity, sweet-spot and bat-speed numbers"></div><div class="k">MLB comp</div><h3>Who swings like him</h3><p>Matched on bat path before body type, with a link to the comp's damage video on Baseball Savant.</p></div>
-      <div class="phone reveal"><div class="fte"><div class="k">5 Tool Email</div><div class="t">The recruiting email, built from verified numbers</div><ol><li><b>Subject</b> leads with his best verified tool</li><li><b>Intro</b> grad year, position, school</li><li><b>Body</b> the numbers, with the instrument named</li><li><b>Video</b> one link, the right clip</li><li><b>Contacts</b> the coaches, by program and level</li></ol><p style="font-size:13.5px;color:var(--muted)">The family sends it. We never do.</p></div></div>
-    </div>
-
-    <div class="head reveal" style="margin-top:40px;margin-bottom:22px"><div class="eyebrow">On the college roster today</div><h2 style="font-size:clamp(26px,3.4vw,40px)">The same system, with the stadium added.</h2><p>Three screens from the college version, with the player's name and face removed. Each one is built from the hitter's own game data and reads back to him in words.</p></div>
-    <div class="shots3">
-      <div class="shot3 reveal"><img src="img/t130_damage.jpg" alt="Loft and tilt block: the hitter's best swing, loft and tilt by pitch height graded in or out of the window, the machine round by height, and the drills that move it"><div><div class="k">Damage windows</div><h3>Loft and tilt by pitch height</h3><p>Where his hardest contact lives, how far uphill the barrel moves and how far it sits below his hands at the top, middle and bottom of the zone, graded against his own window. Then the two drills that move it.</p></div></div>
-      <div class="shot3 reveal"><img src="img/t130_spot.jpg" alt="Spotlight post: a Swing Lab overlay of the hitter and his Major League comparison synced at impact, with the coach's note beneath"><div><div class="k">Spotlight</div><h3>Coach-posted video on his page</h3><p>A Swing Lab overlay of his swing and the big leaguer who swings like him, synced at impact and matched on attack angle, swing-plane tilt and bat speed, with the coach's note and the game to watch that night.</p></div></div>
-      <div class="shot3 reveal"><img src="img/t130_ep.jpg" alt="At-bat card: the video above, result and count, exit velocity, launch and carry, every pitch with type, velocity and result, and where the ball was fielded"><div><div class="k">Every pitch</div><h3>The whole at-bat, pitch by pitch</h3><p>Every pitch with its type, velocity, location and result, the ball-flight numbers on the swing, where it was fielded, and the at-bat on video above it from the center-field, open-side and K-Zone angles.</p></div></div>
-    </div>
-    <div class="roster reveal">
-      <div><b>Contact depth</b>Inches from the front of the plate on every ball, with the verdict drawn on the open-side video.</div>
-      <div><b>Mental game</b>A pre-pitch routine, a game-day journal and a review after every at-bat, in his own words.</div>
-      <div><b>Retest and trend</b>Multiple captures a season, each one labeled, each one a point on his line.</div>
-    </div>
-    <div class="prop">Proprietary system · built in-house · running on a Division I roster today</div>
-  </section>
-
-  <section id="read">
-    <div class="head reveal"><div class="eyebrow">What we read</div><h2>From the stadium radar to the bat sensor.</h2><p>Every instrument measures something a little differently. We know what each one is good at, where it is unreliable, and how to put them side by side without mixing them up.</p></div>
-    <div class="table reveal">
-      <div class="row"><div class="n">Stadium radar and optical<small>TrackMan · Hawk-Eye</small></div><p>The gold standard for ball flight: exit velocity, launch angle, direction, distance, pitch velocity, spin and movement on every pitch and every ball in play, plus bat tracking when the system runs in game mode. We read the full export, including the columns most people never open.</p></div>
-      <div class="row"><div class="n">Portable radar and optical<small>Portable TrackMan · Rapsodo · Pocket Radar · Stalker</small></div><p>The cage, the bullpen and the travel-ball field. Smaller samples and different settings, so every number is labeled with the device and the setting it came from before it is compared to anything.</p></div>
-      <div class="row"><div class="n">Bat and ball sensors<small>Blast · Diamond Kinetics · HitTrax · smart balls</small></div><p>Bat speed, swing plane, time to contact, spin. Some readings are trustworthy and some are not, and we have audited them against radar on the same swing. We tell you which is which.</p></div>
-      <div class="row"><div class="n">Biomechanics labs<small>Markerless motion capture · force plates</small></div><p>The body behind the number: how the legs load, how the hips and shoulders separate, how force moves into the bat. We translate the lab report into the one or two movement patterns that explain the ball-flight numbers.</p></div>
-    </div>
-    <div class="formats">CSV · XLSX · JSON · a PDF report · a screenshot of the app. Send what you have and we will tell you what it can and cannot say.</div>
-  </section>
-
-  <section id="film">
-    <div class="head reveal"><div class="eyebrow">On real film</div><h2>The college version, on real film.</h2><p>The same system, with the stadium cameras and radar added. These tools run every week on a Division I roster. The numbers are drawn on the actual video, so a player sees the strike zone, the contact point and the swing the way the staff sees it.</p></div>
-    <div class="film">
-      <div class="shot reveal"><img src="img/kzone.jpg" alt="Center-field video frame of a hitter swinging, with the strike zone drawn and the pitch location marked"><div><h3>K-Zone</h3><p>Every pitch of every at-bat with the zone drawn at the plate and the swing decision graded against the hitter's own damage zone.</p></div></div>
-      <div class="shot reveal"><img src="img/depth.jpg" alt="Open-side video frame of a hitter at contact, with the damage window and the contact point drawn in front of the plate"><div><h3>Contact depth</h3><p>Where the bat met the ball, measured in inches from the front of the plate, against the window where this hitter does damage.</p></div></div>
-      <div class="shot reveal"><img src="img/comp.jpg" alt="Skeleton overlay of a college hitter and a Major League comparison, synced at impact"><div><h3>Swing comparison</h3><p>A skeleton overlay of the player and his closest Major League comparison, synced at impact, matched on bat path before body type.</p></div></div>
-    </div>
-  </section>
-
-  <section id="get">
-    <div class="head reveal"><div class="eyebrow">What you get</div><h2>From a spreadsheet to a plan.</h2></div>
-    <div class="grid g3">
-      <div class="card mint reveal"><div class="k">01</div><h3>Strengths and growth</h3><p>Every evaluation opens with the one thing to keep and the one thing to build, written in a sentence a parent can repeat, before any chart appears.</p></div>
-      <div class="card sky reveal"><div class="k">02</div><h3>Custom evaluation</h3><p>A pro-style card written the way a college staff writes up its own players, with every metric shown next to the instrument, the setting and the sample size behind it.</p></div>
-      <div class="card coral reveal"><div class="k">03</div><h3>Benchmarks by age and level</h3><p>Where each number sits against players the same age and against the level he is aiming at. Good, average or a gap, said plainly, with the combination that matters most called out.</p></div>
-      <div class="card sky reveal"><div class="k">04</div><h3>Training plan and app</h3><p>The card becomes a plan: activation, a drill series with every drill on video, a game-day journal and a mental-game routine, in an app built for a college program first and then handed to campers.</p></div>
-      <div class="card mint reveal"><div class="k">05</div><h3>Leaderboards</h3><p>By event, so a weekend has its winners, or by percentile of an age group, so a 14-year-old is measured against 14-year-olds. Leaderboards, never rankings for sale.</p></div>
-      <div class="card coral reveal"><div class="k">06</div><h3>Player Database</h3><p>Opt in and your verified numbers become discoverable to college coaches searching on their own. You choose what is visible and you can change it any time. It can only help.</p></div>
+    <div class="head reveal"><div class="eyebrow">The now-what</div><h2>We explain the number. Then we fix it.</h2></div>
+    <div class="nw reveal">
+      <div><div class="k" style="color:var(--sky)">The number · sample camper, 13</div><div class="big">43%<small>hard-hit</small></div><div class="bar"><i style="width:43%;background:var(--sky)"></i></div><div class="goal">Goal for his class · 80%</div><p>Peak exit velocity 87.9. Hard-hit rate 43 percent.</p></div>
+      <div><div class="k" style="color:var(--mint)">What it means</div><p><b>When he squares it up, it's loud. The opportunity is how often.</b> The bat speed is there. The body has not caught up to it yet.</p></div>
+      <div><div class="k" style="color:var(--coral)">What we do about it</div><ol><li>Activation every time he hits</li><li>Goblet lateral lunge <span>· 3 × 6</span></li><li>Med ball sit-up and throw <span>· 3 × 8</span></li><li>Walk-through swings <span>· 3 × 5</span></li><li>Uphill tee <span>· 3 × 10</span></li></ol><p>Twelve weeks, every drill on video, retest at the next camp.</p></div>
     </div>
   </section>
 
   <section id="who">
-    <div class="head reveal"><div class="eyebrow">Who it's for</div><h2>Anyone holding a file they can't read.</h2></div>
-    <div class="grid g3">
-      <div class="card mint reveal"><h3>Players and parents</h3><p>The evaluation, the plan and the app reach you through the camp or team that captured your data, or through TBC23. One-time prices, nothing renews on its own.</p><div class="to">Through your camp, your team, or tbc23.com</div></div>
-      <div class="card sky reveal"><h3>Teams and travel organizations</h3><p>You came home from a showcase with a CSV for fifteen players. We translate it for every one of them, write the coach a team report, and give each family a card.</p><div class="to">Invoice to the organization</div></div>
-      <div class="card coral reveal"><h3>Tournaments and showcases</h3><p>Your event already captures data. We turn it into the evaluation every family wants to buy at the gate, in your brand, with leaderboards for the weekend.</p><div class="to">License per event</div></div>
-      <div class="card sky reveal"><h3>College camps</h3><p>A data standard any camp with a radar can run, the engine that writes the card, and a co-branded parent report. No standard, no card, no charge.</p><div class="to">License per player</div></div>
-      <div class="card mint reveal"><h3>Foundations and youth programs</h3><p>Kids who never get in front of a radar get a capture and a custom evaluation, paid for by the program. The family pays nothing.</p><div class="to">Sponsored evaluations</div></div>
-      <div class="card coral reveal"><h3>College programs</h3><p>The systems were built for one first: evaluation engine, plan generator, game-day journal and mental-game module, on your own data.</p><div class="to">Ask us</div></div>
+    <div class="head reveal"><div class="eyebrow">Who it's for</div><h2>Everyone holding a file.</h2></div>
+    <div class="chips reveal">
+      <span>Players<i>your numbers, your plan</i></span>
+      <span>Parents<i>finally, in plain English</i></span>
+      <span>Coaches<i>the read on every hitter</i></span>
+      <span>Teams &amp; travel orgs<i>the showcase CSV, translated</i></span>
+      <span>Tournaments &amp; showcases<i>evals at the gate, in your brand</i></span>
+      <span>Facilities<i>every session becomes a plan</i></span>
+      <span>College camps<i>the camp kit</i></span>
+      <span>Foundations<i>sponsored evaluations</i></span>
     </div>
-    <div class="soft reveal"><span style="background:var(--mint)">Baseball first.</span><span style="background:var(--coral)">Softball next.</span><span style="color:var(--muted);font-family:var(--body);font-weight:400;font-size:15.5px;padding:0">Same instruments, same engine, its own benchmark tables.</span></div>
-  </section>
-
-  <section id="how">
-    <div class="head reveal"><div class="eyebrow">How it works</div><h2>Capture anywhere. Translate once. Train all year.</h2></div>
-    <div class="flow">
-      <div class="step reveal"><div class="n">1</div><h3>Capture</h3><p>At a camp, a showcase, a tournament, a lesson or your own cage. Any device that writes a file.</p></div>
-      <div class="step reveal"><div class="n">2</div><h3>Send the file</h3><p>Email it, or the event sends everyone at once. We log the instrument, the setting and the date, because a number without them is a guess.</p></div>
-      <div class="step reveal"><div class="n">3</div><h3>We translate</h3><p>A coach reads every evaluation before it ships. Strength, growth, benchmark, plan. Plain English, small samples labeled as small samples.</p></div>
-      <div class="step reveal"><div class="n">4</div><h3>Train and re-test</h3><p>The plan lives in the app. The next capture shows what moved. Opt in, and coaches can find the verified numbers on their own.</p></div>
+    <div class="head reveal" style="margin-top:44px;margin-bottom:16px"><div class="eyebrow">What we read</div></div>
+    <div class="chips reveal">
+      <span>TrackMan</span><span>Hawk-Eye</span><span>Rapsodo</span><span>Pocket Radar</span><span>Stalker</span><span>Blast</span><span>Diamond Kinetics</span><span>HitTrax</span><span>Motion capture</span><span>Force plates</span><span style="color:var(--muted);font-family:var(--body);font-weight:400">CSV · XLSX · JSON · a screenshot</span>
     </div>
-  </section>
-
-  <section id="promise">
-    <div class="two">
-      <div>
-        <div class="head reveal"><div class="eyebrow">Never</div><h2>Five things we will never do.</h2></div>
-        <div class="never">
-          <div class="no reveal"><b>Sell a ranking</b><span>We publish measurements, the conditions they were measured in, and leaderboards families can see for themselves.</span></div>
-          <div class="no reveal"><b>Make the call for a college</b><span>No outreach, no introductions. Coaches search the database on their own. Players decide what they see.</span></div>
-          <div class="no reveal"><b>Copy other services' data</b><span>Every number was captured on a known instrument on a known day, or added by the family and labeled as theirs.</span></div>
-          <div class="no reveal"><b>Hold a family's money</b><span>Camps, teams, events, programs and TBC23 are our customers. We are never the merchant for a family.</span></div>
-          <div class="no reveal"><b>Pitch fear</b><span>The product is the feeling of knowing exactly where you stand and what to do about it.</span></div>
-        </div>
-      </div>
-      <div class="who reveal">
-        <div class="eyebrow">Who we are</div>
-        <h3 style="margin-block:10px 10px;font-size:24px">Built in a dugout. Tested by the players it is for.</h3>
-        <p>Dugout Digital is a family-owned software company in Clemson, South Carolina. It runs the technology behind TBC23, a college-coach-run camp and player-development business, and owns the evaluation engine, the benchmarks, the player app and the database described here.</p>
-        <p style="margin-top:12px">The systems were built for a college program first. The testers are junior-high and high-school players, and the first parent who could not read a spreadsheet lives in the same house.</p>
-      </div>
-    </div>
+    <div class="soft reveal"><span style="background:var(--mint)">Baseball first.</span><span style="background:var(--coral)">Softball next.</span></div>
   </section>
 
   <footer id="contact">
     <div class="eyebrow">Contact</div>
     <a class="contact" href="mailto:hello@dugoutdigital.io">hello@dugoutdigital.io</a>
-    <p class="fine">Dugout Digital, LLC · Clemson, SC. Dugout Digital licenses evaluation software to camps, teams, events and programs and is never the merchant of record for a family. It is not a recruiting service: it makes no introductions and does no outreach on a player's behalf. Players opt in to the database and control what is visible. Camps described here are open to any and all entrants, limited only by number, age, grade level and gender. Data shown on this page was captured on stadium TrackMan during fall 2026 games; players are not identified.</p>
-    <p class="fine">© 2026 Dugout Digital, LLC</p>
+    <p style="color:var(--muted);max-width:52ch">Family-owned software company in Clemson, South Carolina. Built for a college program first. Tested by the players it is for. <a href="never.html">What we will never do →</a></p>
+    <p class="fine">Dugout Digital, LLC. Dugout Digital licenses evaluation software to camps, teams, events and programs and is never the merchant of record for a family. It is not a recruiting service: it makes no introductions and does no outreach on a player's behalf. Players opt in to the database and control what is visible. Camps described here are open to any and all entrants, limited only by number, age, grade level and gender. Screens and data on this page come from a fictional sample camper and from a college roster with players unidentified. © 2026 Dugout Digital, LLC</p>
   </footer>
 </div>
 <script>
@@ -463,7 +388,7 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduce){pts.forEach(function(c,i){c.classList.add('dot');c.style.animationDelay=(0.3+i*0.012)+'s'})}
   if(!('IntersectionObserver' in window)){document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')});return}
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08});
   document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
 })();
 </script>
