@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dugout Digital · Player Portal</title>
+<meta name="description" content="Prototype of the Dugout Digital Player Portal: every verified evaluation number searchable and filterable by college coaches. Sample data only.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3Crect width='150' height='150' rx='34' fill='%230E1A2B'/%3E%3Crect x='25' y='25' width='100' height='100' rx='18' transform='rotate(45 75 75)' fill='%23B9F0CF'/%3E%3Cg transform='translate(39,33) scale(0.6)'%3E%3Cpath fill-rule='evenodd' d='M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z' fill='%230E1A2B'/%3E%3Cpath d='M38 50H54A20 20 0 0 1 54 90H38Z' fill='%23FF6A45'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{--bg:#0B1522;--panel:#13233A;--panel2:#182B45;--line:#22364F;--ink:#F1EEE6;--muted:#9AA7B8;--electric:#2F5BFF;--sky:#7FB5FF;--mint:#B9F0CF;--coral:#FF6A45;--display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;--body:"Inter","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;color-scheme:dark}
+:root:not([data-theme="light"]){}
+:root[data-theme="dark"]{}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px}
+nav{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:16px}
+.mark{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.02em;white-space:nowrap}
+.mark svg{width:44px;height:44px}
+nav .links{display:flex;gap:18px;font-size:14px;font-weight:500}nav .links a{color:var(--muted);text-decoration:none}nav .links a:hover{color:var(--ink)}
+.sample{background:var(--coral);color:#0B1522;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:9px 14px;border-radius:10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.sample b{font-weight:700}
+h1{font-family:var(--display);font-size:clamp(30px,4.5vw,46px);letter-spacing:-.03em;line-height:1;margin:0 0 8px}
+.lead{color:var(--muted);max-width:60ch;margin:0 0 20px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mint)}
+.layout{display:grid;grid-template-columns:290px 1fr;gap:18px;align-items:start}
+@media (max-width:860px){.layout{grid-template-columns:1fr}}
+.filters{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:14px;position:sticky;top:12px}
+.f{display:grid;gap:6px}
+.f label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.f select,.f input[type=number]{background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:9px 10px;font:inherit;font-size:14px;width:100%}
+.f .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.f .rng{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--electric)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:6px 11px;font:inherit;font-size:13px;cursor:pointer}
+.chips button.on{background:var(--electric);border-color:var(--electric);color:#fff}
+.reset{background:none;border:1px solid var(--line);color:var(--muted);border-radius:9px;padding:9px;font:inherit;cursor:pointer}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.bar .n{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.02em}
+.bar select{background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:8px 10px;font:inherit;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:8px;cursor:pointer;transition:transform .12s,border-color .12s}
+.card:hover{transform:translateY(-2px);border-color:var(--sky)}
+.card .nm{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.02em;line-height:1.1}
+.card .sub{font-size:13px;color:var(--muted)}
+.card .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:4px}
+.card .stats div{background:var(--panel2);border-radius:9px;padding:8px 8px 7px}
+.card .stats b{display:block;font-family:var(--display);font-size:19px;letter-spacing:-.02em;line-height:1}
+.card .stats span{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.card .ver{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mint);display:flex;align-items:center;gap:6px}
+.card .ver i{width:8px;height:8px;border-radius:50%;background:var(--mint);display:inline-block}
+.empty{color:var(--muted);padding:30px;text-align:center;border:1px dashed var(--line);border-radius:14px}
+.modal{position:fixed;inset:0;background:rgba(5,10,18,.8);display:none;align-items:center;justify-content:center;padding:16px;z-index:9}
+.modal.open{display:flex}
+.mbox{background:var(--panel);border:1px solid var(--line);border-radius:18px;max-width:640px;width:100%;padding:24px;display:grid;gap:14px;max-height:92vh;overflow:auto}
+.mbox h2{font-family:var(--display);font-size:26px;letter-spacing:-.03em;margin:0;line-height:1}
+.mbox .tbl{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.mbox .tbl div{background:var(--panel2);border-radius:10px;padding:10px}
+.mbox .tbl b{display:block;font-family:var(--display);font-size:22px;letter-spacing:-.02em;line-height:1}
+.mbox .tbl span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mbox .x{justify-self:end;background:none;border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:8px 12px;font:inherit;cursor:pointer}
+.note{font-size:13px;color:var(--muted)}
+footer{padding-block:40px;color:var(--muted);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="mark" href="index.html" aria-label="Dugout Digital home"><svg viewBox="0 0 150 150" aria-hidden="true"><rect x="25" y="25" width="100" height="100" rx="18" transform="rotate(45 75 75)" fill="#B9F0CF"/><g transform="translate(39,33) scale(0.6)"><path fill-rule="evenodd" d="M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z" fill="#0E1A2B"/><path d="M38 50H54A20 20 0 0 1 54 90H38Z" fill="#FF6A45"/></g></svg>Dugout Digital</a>
+    <div class="links"><a href="index.html">Home</a><a href="index.html#contact">Book a pilot</a></div>
+  </nav>
+  <div class="sample"><span><b>Prototype · sample data.</b> Every player on this page is fictional.</span><span>Numbers shown the way a coach would search them</span></div>
+  <div class="eyebrow">Player Portal</div>
+  <h1>Search verified numbers the way you search for a house.</h1>
+  <p class="lead">Every data point from a Dugout Digital evaluation becomes a filter. Players opt in and choose what is visible. Every number carries the event, the instrument and the date it was measured.</p>
+  <div class="layout">
+    <aside class="filters" aria-label="Filters">
+      <div class="f"><label>Position</label><div class="chips" id="posChips"></div></div>
+      <div class="f"><label>Grad year</label><div class="chips" id="gradChips"></div></div>
+      <div class="f"><label>State</label><select id="st"><option value="">Any state</option></select></div>
+      <div class="f"><label>Height · at least</label><div class="rng"><span id="htLbl">5'2"</span><span>6'4"</span></div><input type="range" id="ht" min="62" max="76" value="62"></div>
+      <div class="f"><label>Max exit velocity · at least</label><div class="rng"><span id="evLbl">60 mph</span><span>105</span></div><input type="range" id="ev" min="60" max="105" value="60"></div>
+      <div class="f"><label>60-yard · at most</label><div class="rng"><span>6.2</span><span id="sxLbl">8.5 s</span></div><input type="range" id="sx" min="620" max="850" value="850"></div>
+      <div class="f"><label>Fastball or arm · at least</label><div class="rng"><span id="vLbl">55 mph</span><span>95</span></div><input type="range" id="v" min="55" max="95" value="55"></div>
+      <div class="f"><label>Verified at</label><select id="ev_"><option value="">Any partner event</option></select></div>
+      <button class="reset" id="reset">Clear filters</button>
+    </aside>
+    <main>
+      <div class="bar"><div class="n"><span id="count">0</span> players</div><select id="sort"><option value="ev">Sort · exit velocity</option><option value="sixty">Sort · 60 time</option><option value="velo">Sort · velocity</option><option value="grad">Sort · grad year</option><option value="ht">Sort · height</option></select></div>
+      <div class="grid" id="grid"></div>
+      <div class="empty" id="empty" style="display:none">No players match. Loosen a filter.</div>
+      <p class="note" style="margin-top:16px">A real portal lists only players whose families opted in, shows only the fields they chose, and never ranks. Sorting by a number is the coach's choice, not ours.</p>
+    </main>
+  </div>
+  <footer>Dugout Digital, LLC · prototype · all players fictional · <a href="index.html" style="color:var(--sky)">dugoutdigital.io</a></footer>
+</div>
+<div class="modal" id="modal" onclick="if(event.target===this)closeM()"><div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mt"><button class="x" onclick="closeM()">Close</button><div id="mb"></div></div></div>
+<script>
+const P = [{"name": "Carter Carrigan", "grad": 2028, "pos": "SS/RHP", "st": "FL", "ht": 76, "wt": 205, "bt": "L/L", "ev": 91.1, "sixty": 6.27, "velo": 77.9, "velo_kind": "fastball", "event": "Pepper National Invitational", "brand": "Pepper National", "date": "2026-10-11", "verified": true}, {"name": "Nolan Duquesne", "grad": 2028, "pos": "OF", "st": "AL", "ht": 66, "wt": 177, "bt": "L/L", "ev": 82.4, "sixty": 6.89, "velo": 77.8, "velo_kind": "position", "event": "TBC23 Winter Prospect Camp", "brand": "TBC23", "date": "2026-11-01", "verified": true}, {"name": "Grady Boateng", "grad": 2029, "pos": "2B", "st": "OH", "ht": 76, "wt": 179, "bt": "R/R", "ev": 84.7, "sixty": 7.12, "velo": 74.5, "velo_kind": "position", "event": "Scout Team Prospects Showcase", "brand": "Scout Team Prospects", "date": "2026-10-25", "verified": true}, {"name": "Jaxon Castellano", "grad": 2028, "pos": "SS/RHP", "st": "GA", "ht": 67, "wt": 182, "bt": "L/L", "ev": 87.6, "sixty": 6.49, "velo": 84.3, "velo_kind": "fastball", "event": "TBC23 Winter Prospect Camp", "brand": "TBC23", "date": "2026-10-18", "verified": true}, {"name": "Cole Ferrante", "grad": 2027, "pos": "C", "st": "AL", "ht": 72, "wt": 202, "bt": "R/R", "ev": 94.7, "sixty": 6.59, "velo": 84.5, "velo_kind": "position", "event": "Pepper National Invitational", "brand": "Pepper National", "date": "2026-10-18", "verified": true}, {"name": "Cole Castellano", "grad": 2031, "pos": "OF", "st": "PA", "ht": 70, "wt": 190, "bt": "L/L", "ev": 74.2, "sixty": 7.87, "velo": 69.7, "velo_kind": "position", "event": "Scout Team Prospects Showcase", "brand": "Scout Team Prospects", "date": "2026-10-11", "verified": true}, {"name": "Jace Mercado", "grad": 2027, "pos": "SS", "st": "TN", "ht": 75, "wt": 201, "bt": "R/R", "ev": 90.5, "sixty": 6.64, "velo": 77.1, "velo_kind": "position", "event": "Thunder Southeast Fall Classic", "brand": "Thunder Southeast", "date": "2026-10-25", "verified": true}, {"name": "Deacon Hollis", "grad": 2028, "pos": "OF", "st": "NC", "ht": 73, "wt": 180, "bt": "L/L", "ev": 90.0, "sixty": 6.59, "velo": 86.1, "velo_kind": "position", "event": "Pepper National Invitational", "brand": "Pepper National", "date": "2026-10-11", "verified": true}, {"name": "Beckett Boateng", "grad": 2028, "pos": "3B", "st": "NC", "ht": 70, "wt": 179, "bt": "R/R", "ev": 86.2, "sixty": 6.43, "velo": 84.0, "velo_kind": "position", "event": "Thunder Southeast Fall Classic", "brand": "Thunder Southeast", "date": "2026-11-01", "verified": true}, {"name": "Miles Carrigan", "grad": 2027, "pos": "RHP", "st": "FL", "ht": 71, "wt": 205, "bt": "R/R", "ev": 98.8, "sixty": 6.41, "velo": 88.8, "velo_kind": "fastball", "event": "Thunder Southeast Fall Classic", "brand": "Thunder Southeast", "date": "2026-10-11", "verified": true}, {"name": "Eli Oyelaran", "grad": 2028, "pos": "RHP", "st": "FL", "ht": 72, "wt": 204, "bt": "R/R", "ev": 94.0, "sixty": 6.86, "velo": 84.7, "velo_kind": "fastball", "event": "Scout Team Prospects Showcase", "brand": "Scout Team Prospects", "date": "2026-10-18", "verified": true}, {"name": "Kai Oyelaran", "grad": 2029, "pos": "RHP", "st": "TX", "ht": 75, "wt": 188, "bt": "R/R", "ev": 85.6, "sixty": 7.41, "velo": 78.7, "velo_kind": "fastball", "event": "Scout Team Prospects Showcase", "brand": "Scout Team Prospects", "date": "2026-10-25", "verified": true}, {"name": "Rowan Hollis", "grad": 2028, "pos": "RHP", "st": "VA", "ht": 73, "wt": 187, "bt": "L/L", "ev": 87.0, "sixty": 6.57, "velo": 80.6, "velo_kind": "fastball", "event": "Scout Team Prospects Showcase", "brand": "Scout Team Prospects", "date": "2026-10-11", "verified": true}, {"name": "Mateo Duquesne", "grad": 2028, "pos": "OF", "st": "NC", "ht": 73, "wt": 192, "bt": "R/R", "ev": 87.8, "sixty": 7.05, "velo": 77.1, "velo_kind": "position", "event": "Thunder Southeast Fall Classic", "brand": "Thunder Southeast", "date": "2026-10-11", "verified": true}, {"name": "Grady Kowalski", "grad": 2031, "pos": "2B", "st": "TN", "ht": 65, "wt": 161, "bt": "R/R", "ev": 65.0, "sixty": 8.02, "velo": 62.3, "velo_kind": "position", "event": "Thunder Southeast Fall Classic", "brand": "Thunder Southeast", "date": "2026-10-25", "verified": true}, {"name": "Brooks McAllister", "grad": 2030, "pos": "LHP", "st": "OH", "ht": 69, "wt": 178, "bt": "L/R", "ev": 79.1, "sixty": 7.23, "velo": 67.9, "velo_kind": "fastball", "event": "TBC23 Winter Prospect Camp", "brand": "TBC23", "date": "2026-10-25", "verified": true}, {"name": "Brooks Pruitt", "grad": 2029, "pos": "OF", "st": "OH", "ht": 68, "wt": 199, "bt": "R/R", "ev": 88.2, "sixty": 6.72, "velo": 69.8, "velo_kind": "position", "event": "Pepper National Invitational", "brand": "Pepper National", "date": "2026-10-25", "verified": true}, {"name": "Dawson Nakamura", "grad": 2027, "pos": "RHP", "st": "NC", "ht": 69, "wt": 161, "bt": "L/L", "ev": 94.8, "sixty": 6.58, "velo": 90.2, "velo_kind": "fastball", "event": "TBC23 Winter Prospect Camp", "brand": "TBC23", "date": "2026-10-18", "verified": true}, {"name": "Hudson Kowalski", "grad": 2027, "pos": "RHP", "st": "NJ", "ht": 74, "wt": 184, "bt": "R/R", "ev": 89.8, "sixty": 6.85, "velo": 84.9, "velo_kind": "fastball", "event": "TBC23 Winter Prospect Camp", "brand": "TBC23", "date": "2026-10-11", "verified": true}, {"name": "Levi Carrigan", "grad": 2029, "pos": "OF", "st": "CA", "ht": 73, "wt": 210, "bt": "L/R", "ev": 84.1, "sixty": 6.96, "velo": 75.1, "velo_kind": "position", "event": "Scout Team Prospects Showcase", "brand": "Scout Team Prospects", "date": "2026-10-11", "verified": true}, {"name": "Nolan Brannon", "grad": 2029, "pos": "3B", "st": "PA", "ht": 73, "wt": 191, "bt": "R/R", "ev": 78.5, "sixty": 7.45, "velo": 71.0, "velo_kind": "position", "event": "Thunder Southeast Fall Classic", "brand": "Thunder Southeast", "date": "2026-10-18", "verified": true}, {"name": "Tyce McAllister", "grad": 2030, "pos": "SS/RHP", "st": "NC", "ht": 65, "wt": 158, "bt": "R/R", "ev": 82.7, "sixty": 6.97, "velo": 65.1, "velo_kind": "fastball", "event": "Scout Team Prospects Showcase", "brand": "Scout Team Prospects", "date": "2026-11-01", "verified": true}, {"name": "Nolan Kowalski", "grad": 2029, "pos": "LHP", "st": "NC", "ht": 76, "wt": 212, "bt": "R/R", "ev": 80.8, "sixty": 6.92, "velo": 73.4, "velo_kind": "fastball", "event": "Pepper National Invitational", "brand": "Pepper National", "date": "2026-10-18", "verified": true}, {"name": "Deacon Ferrante", "grad": 2027, "pos": "OF", "st": "PA", "ht": 74, "wt": 214, "bt": "S/R", "ev": 97.9, "sixty": 6.64, "velo": 84.7, "velo_kind": "position", "event": "Scout Team Prospects Showcase", "brand": "Scout Team Prospects", "date": "2026-10-11", "verified": true}];
+const ft = h => `${Math.floor(h/12)}'${h%12}"`;
+const st = new Set(), evs = new Set(), poss = new Set(), grads = new Set();
+P.forEach(p => { st.add(p.st); evs.add(p.event); p.pos.split('/').forEach(x => poss.add(x)); grads.add(p.grad); });
+const sel = { pos: new Set(), grad: new Set() };
+function chips(id, vals, key) {
+  const el = document.getElementById(id);
+  el.innerHTML = [...vals].sort().map(v => `<button data-v="${v}">${v}</button>`).join('');
+  el.querySelectorAll('button').forEach(b => b.onclick = () => { const v = b.dataset.v; sel[key].has(isNaN(v) ? v : +v) ? sel[key].delete(isNaN(v) ? v : +v) : sel[key].add(isNaN(v) ? v : +v); b.classList.toggle('on'); draw(); });
+}
+chips('posChips', poss, 'pos'); chips('gradChips', grads, 'grad');
+[...st].sort().forEach(s => document.getElementById('st').insertAdjacentHTML('beforeend', `<option>${s}</option>`));
+[...evs].sort().forEach(s => document.getElementById('ev_').insertAdjacentHTML('beforeend', `<option>${s}</option>`));
+const $ = id => document.getElementById(id);
+function draw() {
+  const ht = +$('ht').value, ev = +$('ev').value, sx = +$('sx').value / 100, v = +$('v').value, s = $('st').value, e = $('ev_').value, sort = $('sort').value;
+  $('htLbl').textContent = ft(ht); $('evLbl').textContent = ev + ' mph'; $('sxLbl').textContent = sx.toFixed(2) + ' s'; $('vLbl').textContent = v + ' mph';
+  let r = P.filter(p => p.ht >= ht && p.ev >= ev && p.sixty <= sx && p.velo >= v && (!s || p.st === s) && (!e || p.event === e)
+    && (!sel.pos.size || p.pos.split('/').some(x => sel.pos.has(x))) && (!sel.grad.size || sel.grad.has(p.grad)));
+  r.sort((a, b) => sort === 'sixty' ? a.sixty - b.sixty : sort === 'grad' ? a.grad - b.grad : b[sort] - a[sort]);
+  $('count').textContent = r.length; $('empty').style.display = r.length ? 'none' : 'block';
+  $('grid').innerHTML = r.map((p, i) => `<div class="card" onclick="openM(${P.indexOf(p)})" role="button" tabindex="0">
+    <div class="nm">${p.name}</div><div class="sub">${p.pos} · ${p.grad} · ${p.st} · ${ft(p.ht)} ${p.wt} lb · ${p.bt}</div>
+    <div class="stats"><div><b>${p.ev}</b><span>max EV</span></div><div><b>${p.sixty.toFixed(2)}</b><span>60 yd</span></div><div><b>${p.velo}</b><span>${p.velo_kind === 'fastball' ? 'fastball' : 'arm'}</span></div></div>
+    <div class="ver"><i></i>Verified · ${p.brand}</div></div>`).join('');
+}
+function openM(i) { const p = P[i]; $('mb').innerHTML = `<div class="eyebrow">Verified at ${p.event} · ${p.date} · TrackMan + timed sixty</div><h2 id="mt">${p.name}</h2><div class="note">${p.pos} · Class of ${p.grad} · ${p.st} · ${ft(p.ht)} ${p.wt} lb · bats/throws ${p.bt}</div>
+  <div class="tbl"><div><b>${p.ev}</b><span>max exit velocity · mph</span></div><div><b>${p.sixty.toFixed(2)}</b><span>60-yard dash · s</span></div><div><b>${p.velo}</b><span>${p.velo_kind === 'fastball' ? 'fastball velocity · mph' : 'position velocity · mph'}</span></div><div><b>${(p.ev - 9.5).toFixed(1)}</b><span>EV50 · mph</span></div><div><b>${Math.round(40 + (p.ev - 70) * 1.1)}%</b><span>hard-hit · event</span></div><div><b>${Math.round(55 + (p.ev - 70))}%</b><span>launch 0–30°</span></div></div>
+  <div class="note">In the real portal this opens the player's full evaluation, his video, and only the fields his family chose to show. Sample profile; every number here is fictional.</div>`; $('modal').classList.add('open'); }
+function closeM() { $('modal').classList.remove('open'); }
+['ht', 'ev', 'sx', 'v', 'st', 'ev_', 'sort'].forEach(id => $(id).addEventListener('input', draw));
+$('reset').onclick = () => { $('ht').value = 62; $('ev').value = 60; $('sx').value = 850; $('v').value = 55; $('st').value = ''; $('ev_').value = ''; sel.pos.clear(); sel.grad.clear(); document.querySelectorAll('.chips button').forEach(b => b.classList.remove('on')); draw(); };
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeM(); });
+draw();
+</script>
+</body>
+</html>

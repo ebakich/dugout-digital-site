@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dugout Digital</title>
-<meta name="description" content="Data made simple. Dugout Digital turns baseball data from any camp, showcase or device into plain English and a training plan: custom evaluation, K-Zone, contact depth, loft and tilt, spray chart with video, leaderboards, MLB comps, drills and 5 Tool Email.">
+<meta name="description" content="Dugout Digital builds the player evaluations, recruiting emails and training apps that tournaments, showcases, college camps, travel organizations and facilities give their players. White label, in your brand. Data made simple.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3Crect width='150' height='150' rx='34' fill='%230E1A2B'/%3E%3Crect x='25' y='25' width='100' height='100' rx='18' transform='rotate(45 75 75)' fill='%23B9F0CF'/%3E%3Cg transform='translate(39,33) scale(0.6)'%3E%3Cpath fill-rule='evenodd' d='M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z' fill='%230E1A2B'/%3E%3Cpath d='M38 50H54A20 20 0 0 1 54 90H38Z' fill='%23FF6A45'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -126,6 +126,73 @@ svg.chart{width:100%;height:auto;display:block}
 .chips span{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:10px 16px;font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:-.01em}
 .chips span i{font-style:normal;font-family:var(--body);font-weight:400;color:var(--muted);font-size:13.5px;margin-left:8px}
 .lead{font-size:17px;color:var(--muted);max-width:60ch}
+/* v3 home */
+.hero3{padding-block:28px 56px;display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center}
+@media (max-width:960px){.hero3{grid-template-columns:1fr}}
+.hero3 h1{font-size:clamp(38px,5.6vw,66px);line-height:1.02}
+.hero3 h1 em{font-style:normal;color:var(--mint)}
+.hero3 .lede{color:var(--muted);font-size:18px;max-width:54ch}
+.ptypes{display:flex;flex-wrap:wrap;gap:8px}
+.ptypes a{text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:9px 14px;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:-.01em}
+.ptypes a:hover{border-color:var(--mint)}
+/* white-label card stack */
+.stack{position:relative;height:520px}
+@media (max-width:960px){.stack{height:470px}}
+.wl{position:absolute;left:0;right:0;top:0;background:#0f1c2c;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45);transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s}
+.wl .bh{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;font-family:var(--display);font-weight:700;letter-spacing:-.01em;font-size:16px}
+.wl .bh .lg{display:flex;align-items:center;gap:9px}
+.wl .bh .lg i{width:22px;height:22px;border-radius:6px;display:inline-block}
+.wl .bh small{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.wl img{width:100%;display:block}
+.wl.w1{z-index:3;transform:translateY(0) scale(1)}
+.wl.w2{z-index:2;transform:translateY(26px) scale(.96);opacity:.85}
+.wl.w3{z-index:1;transform:translateY(52px) scale(.92);opacity:.7}
+.stack:hover .w1{transform:translateY(-6px) scale(1)}
+.wlnote{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:14px;display:flex;gap:14px;flex-wrap:wrap}
+.wlnote span{display:flex;align-items:center;gap:6px}.wlnote i{width:10px;height:10px;border-radius:3px;display:inline-block}
+/* products */
+.prods{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.prod{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.prod .im{height:300px;overflow:hidden;border-bottom:1px solid var(--line);background:#0a0c10}
+.prod .im img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.prod .im.phone{display:flex;justify-content:center}.prod .im.phone img{width:auto;max-width:100%}
+.prod .tx{padding:18px 20px 20px;display:grid;gap:6px}
+.prod .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--c,var(--mint))}
+.prod h3{font-size:21px}
+.prod p{font-size:15px;color:var(--muted)}
+/* partner flow */
+.pflow{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.pstep{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:8px;align-content:start}
+.pstep .n{font-family:var(--display);font-weight:700;font-size:40px;color:var(--coral);line-height:1;letter-spacing:-.03em}
+.pstep h3{font-size:19px}.pstep p{font-size:15px;color:var(--muted)}
+.money{margin-top:16px;background:var(--mint);color:#0B1522;border-radius:16px;padding:20px 22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.money div{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.01em;line-height:1.2}
+.money div small{display:block;font-family:var(--body);font-weight:400;font-size:13.5px;margin-top:4px;opacity:.85}
+/* portal */
+.portal{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:center}
+@media (max-width:900px){.portal{grid-template-columns:1fr}}
+.portal .shot{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#0a0c10;box-shadow:0 30px 60px rgba(0,0,0,.4)}
+.portal .shot img{width:100%;display:block}
+.portal ul{margin:0;padding-left:18px;color:var(--muted);display:grid;gap:8px;font-size:15.5px}
+.portal ul b{color:var(--ink);font-weight:600}
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.trust div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:14.5px;color:var(--muted)}
+.trust b{display:block;font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink);letter-spacing:-.01em;margin-bottom:4px}
+/* case */
+.case{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.case .c{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.case .c img{width:100%;height:220px;object-fit:cover;object-position:top;display:block;border-bottom:1px solid var(--line)}
+.case .c div{padding:14px 16px;font-size:14px;color:var(--muted)}
+.case .c b{display:block;font-family:var(--display);font-size:16px;color:var(--ink);letter-spacing:-.01em;margin-bottom:3px}
+.fam{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
+@media (max-width:900px){.fam{grid-template-columns:1fr}}
+.fam .phones{display:flex;gap:12px;justify-content:center;align-items:flex-start}
+.fam .phones img{width:31%;border-radius:18px;border:1px solid var(--line)}
+.fam p{color:var(--muted);font-size:16px}
+.fam ol{color:var(--muted);padding-left:18px;display:grid;gap:6px;font-size:15.5px}.fam ol b{color:var(--ink);font-weight:600}
+.cta2{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:34px;display:grid;gap:14px;justify-items:start}
+.cta2 h2{font-size:clamp(28px,4vw,44px)}
+.cta2 p{color:var(--muted);max-width:60ch}
 /* sections */
 section{padding-block:76px;border-top:1px solid var(--line)}
 .head{display:grid;gap:12px;margin-bottom:34px;max-width:64ch}
@@ -204,122 +271,126 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
       <svg viewBox="0 0 150 150" aria-hidden="true"><rect x="25" y="25" width="100" height="100" rx="18" transform="rotate(45 75 75)" fill="#B9F0CF"/><g transform="translate(39,33) scale(0.6)"><path fill-rule="evenodd" d="M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z" fill="#0E1A2B"/><path d="M38 50H54A20 20 0 0 1 54 90H38Z" fill="#FF6A45"/></g></svg>
       Dugout Digital
     </a>
-    <div class="links"><a href="#hitters">Hitters</a><a href="#pitchers">Pitchers</a><a href="#evals">Evals</a><a href="#app">The App</a><a href="#nowwhat">Now What</a><a href="#who">Who it's for</a><a href="#contact">Contact</a></div>
+    <div class="links"><a href="#products">Products</a><a href="#partners">Partners</a><a href="#portal">Player Portal</a><a href="#case">In use</a><a href="#families">Families</a><a href="#contact">Book a pilot</a></div>
   </nav>
 
-  <header class="hero" id="top">
-    <div class="copy">
+  <header class="hero3" id="top">
+    <div class="copy" style="display:grid;gap:18px">
       <div class="eyebrow">Data made simple</div>
-      <h1>We translate the numbers.</h1>
-      <div class="sub"><b>Any data.</b> <u>Plain English.</u> <i>A plan.</i></div>
-      <p class="lede">Your hitter's or pitcher's numbers from any camp, showcase, lesson or device, turned into what they mean and exactly what to do next.</p>
-      <div class="cta">
-        <a class="btn b-electric" href="mailto:hello@dugoutdigital.io?subject=Translate%20my%20file">Send us a file</a>
-        <a class="btn b-ghost" href="#hitters">Hitters</a>
-      </div>
+      <h1>We build the player evaluations, recruiting emails and training apps that <em>your event gives its players.</em></h1>
+      <p class="lede">In your brand, from the data you already capture. Tournaments, showcases, college camps, travel organizations and facilities use Dugout Digital so every player leaves with something to keep, and every family knows exactly what the numbers mean.</p>
+      <div class="ptypes"><a href="#partners">Tournaments</a><a href="#partners">Showcases</a><a href="#partners">College camps</a><a href="#partners">Travel organizations</a><a href="#partners">Facilities</a></div>
+      <div class="cta"><a class="btn b-electric" href="#contact">Book a pilot</a><a class="btn b-ghost" href="#products">See the products</a></div>
     </div>
-    <div class="panel" aria-label="Four real balls that left the bat at about 91 miles per hour and what happened to each">
-      <div class="eyebrow">Four real balls · all 91 mph off the bat</div>
-      <svg class="chart" viewBox="0 0 760 372" role="img" aria-label="Side view of four ball flights from home plate. At minus 7 degrees the ball is a 14-foot ground out. At 22 degrees it is a 300-foot sacrifice fly. At 29 degrees it is a 374-foot home run. At 44 degrees it is a 252-foot fly out.">
-        <line class="ax" x1="40" y1="300" x2="740" y2="300"/>
-        <path class="fl f1" d="M60 300 C 80 280, 254 -141, 488 300" fill="none" stroke="#7FB5FF" stroke-width="3" stroke-linecap="round"/>
-        <path class="fl f2" d="M60 300 C 90 288, 341 146, 570 300" fill="none" stroke="#B9F0CF" stroke-width="3" stroke-linecap="round"/>
-        <path class="fl f3" d="M60 300 C 77 290, 435 30, 696 300" fill="none" stroke="#FF6A45" stroke-width="3.5" stroke-linecap="round"/>
-        <path class="fl f4" d="M60 294 L 84 300" fill="none" stroke="#9AA7B8" stroke-width="4" stroke-linecap="round"/>
-        <path d="M84 300 L 130 300" fill="none" stroke="#9AA7B8" stroke-width="2" stroke-dasharray="3 5"/>
-        <g stroke-width="1.5" stroke-dasharray="2 3"><line x1="488" y1="306" x2="488" y2="318" stroke="#7FB5FF"/><line x1="570" y1="306" x2="570" y2="340" stroke="#B9F0CF"/><line x1="696" y1="306" x2="696" y2="318" stroke="#FF6A45"/><line x1="84" y1="306" x2="84" y2="318" stroke="#9AA7B8"/></g>
-        <circle cx="696" cy="300" r="6" fill="#FF6A45"/><circle cx="570" cy="300" r="6" fill="#B9F0CF"/><circle cx="488" cy="300" r="6" fill="#7FB5FF"/><circle cx="84" cy="300" r="6" fill="#9AA7B8"/>
-        <g font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1">
-          <text x="84" y="334" fill="#9AA7B8" text-anchor="start">−7° · 14 FT · GROUND OUT</text>
-          <text x="480" y="334" fill="#7FB5FF" text-anchor="end">44° · 252 FT · FLY OUT</text>
-          <text x="570" y="356" fill="#B9F0CF" text-anchor="middle">22° · 300 FT · SAC FLY</text>
-          <text x="740" y="334" fill="#FF6A45" text-anchor="end" font-weight="700">29° · 374 FT · HOME RUN</text>
-        </g>
-        <g font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1" font-weight="700">
-          <text x="274" y="89" fill="#7FB5FF" text-anchor="middle">44°</text>
-          <text x="332" y="219" fill="#B9F0CF" text-anchor="middle">22°</text>
-          <text x="413" y="168" fill="#FF6A45" text-anchor="middle">29°</text>
-        </g>
-        <path d="M48 296 L72 296 L72 302 L60 308 L48 302 Z" fill="#F1EEE6"/>
-      </svg>
-      <div class="cap"><b>Same hitter. Same bat speed. Four different results.</b> The angle decided everything. We explain that to the family, then we train it.</div>
+    <div>
+      <div class="stack" aria-label="The same evaluation card in three partner brands">
+        <div class="wl w1" style="--b:#2F5BFF"><div class="bh" style="background:#2F5BFF;color:#fff"><span class="lg"><i style="background:#fff"></i>Thunder Southeast</span><small>Fall Classic · player evaluation</small></div><img src="img/eval_grid.jpg" alt="Evaluation card in Thunder Southeast branding"></div>
+        <div class="wl w2"><div class="bh" style="background:#FF6A45;color:#0B1522"><span class="lg"><i style="background:#0B1522"></i>Scout Team Prospects</span><small>Showcase · player evaluation</small></div><img src="img/eval_grid.jpg" alt="Evaluation card in Scout Team Prospects branding"></div>
+        <div class="wl w3"><div class="bh" style="background:#1F6B45;color:#fff"><span class="lg"><i style="background:#B9F0CF"></i>Pepper National</span><small>Invitational · player evaluation</small></div><img src="img/eval_grid.jpg" alt="Evaluation card in Pepper National branding"></div>
+      </div>
+      <div class="wlnote"><span><i style="background:#2F5BFF"></i>Your logo</span><span><i style="background:#FF6A45"></i>Your colors</span><span><i style="background:#B9F0CF"></i>Your event</span><span>Our engine</span></div>
     </div>
   </header>
 
-  <section id="hitters">
-    <div class="head reveal"><div class="eyebrow">Hitters</div><h2>Every swing measured. Every swing on video.</h2><p class="lead">Built for a college program, handed to campers.</p></div>
-    <div class="gal">
-<div class="gi reveal" style="--c:var(--coral)"><div class="im "><img src="img/kzone.jpg" alt="K-Zone drawn on the center-field video"></div><div class="tx"><div class="k">K-Zone</div><h3>Every pitch, graded on the video</h3><p>Green or red against his own damage zone.</p></div></div><div class="gi reveal" style="--c:var(--mint)"><div class="im "><img src="img/depth.jpg" alt="Contact depth drawn on the open-side video"></div><div class="tx"><div class="k">Contact depth</div><h3>Where the bat met the ball</h3><p>Inches from the plate, against his damage window.</p></div></div><div class="gi reveal" style="--c:var(--mint)"><div class="im "><img src="img/t130_ep.jpg" alt="At-bat card with every pitch"></div><div class="tx"><div class="k">Every pitch</div><h3>The whole at-bat, on video</h3><p>Type, velocity, location and result for every pitch.</p></div></div><div class="gi reveal" style="--c:var(--sky)"><div class="im phone"><img src="img/app_abs.jpg" alt="Game at-bats list"></div><div class="tx"><div class="k">Game at-bats</div><h3>His video library</h3><p>Every plate appearance, every angle, every number.</p></div></div><div class="gi reveal" style="--c:var(--coral)"><div class="im"><img src="img/comp_side.jpg" alt="Side by side at impact: a college hitter and Jackson Chourio"></div><div class="tx"><div class="k">Swing Lab</div><h3>Side by side with the big leaguer who swings like him</h3><p>Synced at impact, matched on bat path before body type.</p></div></div>
+  <section id="products">
+    <div class="head reveal"><div class="eyebrow">What you give your players</div><h2>Three products. All in your brand.</h2><p class="lead">The same system a Division I program uses every week, packaged so a partner can hand it to a 14-year-old and his parents.</p></div>
+    <div class="prods">
+      <div class="prod reveal" style="--c:var(--sky)"><div class="im"><img src="img/eval_grid.jpg" alt="Custom evaluation card"></div><div class="tx"><div class="k">01 · Custom evaluation</div><h3>Every number graded, then explained</h3><p>Exit velocity, launch, bat speed, sixty, arm, pitch velocity, spin and movement, each graded against the goal for his age and written in plain English. Hitters and pitchers. <a href="numbers.html">How we read the numbers →</a></p></div></div>
+      <div class="prod reveal" style="--c:var(--coral)"><div class="im"><img src="img/fte_kit.jpg" alt="5 Tool Email recruiting kit"></div><div class="tx"><div class="k">02 · Recruiting email</div><h3>5 Tool Email</h3><p>A coach-ready email built from his verified numbers: the right coach, a subject line that leads with his best tool, the body, the video, the contacts. The family sends it.</p></div></div>
+      <div class="prod reveal" style="--c:var(--mint)"><div class="im phone"><img src="img/app_home.jpg" alt="Player app home screen"></div><div class="tx"><div class="k">03 · Player app</div><h3>The Damage &amp; Chaos app</h3><p>His evaluation becomes a plan: one strength, one growth target, activation and drills on video, his at-bats, his progress, and the big leaguer who swings like him.</p></div></div>
     </div>
   </section>
 
-  <section id="pitchers">
-    <div class="head reveal"><div class="eyebrow">Pitchers</div><h2>Every pitch measured. Every pitch graded.</h2><p class="lead">Velocity, spin, movement, release and command on every pitch, from our sample pitcher and one college arm.</p></div>
-    <div class="gal">
-<div class="gi reveal" style="--c:var(--sky)"><div class="im "><img src="img/pitch_arsenal.jpg" alt="Four-seam fastball card with each metric graded"></div><div class="tx"><div class="k">The arsenal</div><h3>Every pitch type, graded</h3><p>Velo, strike rate, ride, run, spin, extension, release height. Per pitch, in plain words.</p></div></div><div class="gi reveal" style="--c:var(--mint)"><div class="im mov"><svg class="chart" viewBox="-110 0 740 420" role="img" aria-label="Pitch movement plot for one left-handed college arm: four-seam fastball with 15 inches of ride, sweeper with 17 inches of sweep, changeup with 17 inches of fade. Each dot is one pitch from a fall game.">
-        <g class="grid"><circle cx="260" cy="210" r="60" fill="none"/><circle cx="260" cy="210" r="120" fill="none"/><circle cx="260" cy="210" r="180" fill="none"/></g>
-        <g class="ax"><line x1="260" y1="20" x2="260" y2="400"/><line x1="60" y1="210" x2="460" y2="210"/></g>
-        <text x="260" y="14" text-anchor="middle">RIDE ↑</text><text x="260" y="414" text-anchor="middle">DROP ↓</text><text x="56" y="204" text-anchor="start">← GLOVE SIDE</text><text x="464" y="204" text-anchor="end">ARM SIDE →</text>
-        <text x="326" y="224">10 IN</text><text x="386" y="224">20 IN</text>
-        <circle cx="202" cy="120" r="6" fill="#FF6A45" opacity=".85"/><circle cx="216" cy="110" r="6" fill="#FF6A45" opacity=".85"/><circle cx="212" cy="120" r="6" fill="#FF6A45" opacity=".85"/><circle cx="201" cy="94" r="6" fill="#FF6A45" opacity=".85"/><circle cx="178" cy="113" r="6" fill="#FF6A45" opacity=".85"/><circle cx="352" cy="297" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="363" cy="280" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="205" cy="103" r="6" fill="#FF6A45" opacity=".85"/><circle cx="343" cy="286" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="188" cy="113" r="6" fill="#FF6A45" opacity=".85"/><circle cx="202" cy="117" r="6" fill="#FF6A45" opacity=".85"/><circle cx="372" cy="255" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="360" cy="246" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="364" cy="270" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="219" cy="122" r="6" fill="#FF6A45" opacity=".85"/><circle cx="147" cy="187" r="6" fill="#B9F0CF" opacity=".85"/><circle cx="209" cy="151" r="6" fill="#FF6A45" opacity=".85"/><circle cx="192" cy="106" r="6" fill="#FF6A45" opacity=".85"/><circle cx="194" cy="110" r="6" fill="#FF6A45" opacity=".85"/><circle cx="196" cy="115" r="6" fill="#FF6A45" opacity=".85"/><circle cx="379" cy="222" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="341" cy="287" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="217" cy="143" r="6" fill="#FF6A45" opacity=".85"/><circle cx="215" cy="122" r="6" fill="#FF6A45" opacity=".85"/><circle cx="183" cy="137" r="6" fill="#FF6A45" opacity=".85"/><circle cx="169" cy="146" r="6" fill="#FF6A45" opacity=".85"/><circle cx="173" cy="133" r="6" fill="#FF6A45" opacity=".85"/><circle cx="367" cy="254" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="204" cy="110" r="6" fill="#FF6A45" opacity=".85"/><circle cx="214" cy="115" r="6" fill="#FF6A45" opacity=".85"/><circle cx="252" cy="93" r="6" fill="#FF6A45" opacity=".85"/><circle cx="373" cy="257" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="335" cy="303" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="198" cy="96" r="6" fill="#B9F0CF" opacity=".85"/><circle cx="216" cy="104" r="6" fill="#FF6A45" opacity=".85"/><circle cx="195" cy="118" r="6" fill="#FF6A45" opacity=".85"/><circle cx="147" cy="208" r="6" fill="#B9F0CF" opacity=".85"/><circle cx="141" cy="197" r="6" fill="#B9F0CF" opacity=".85"/><circle cx="145" cy="210" r="6" fill="#B9F0CF" opacity=".85"/><circle cx="212" cy="128" r="6" fill="#FF6A45" opacity=".85"/><circle cx="241" cy="116" r="6" fill="#FF6A45" opacity=".85"/><circle cx="363" cy="266" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="248" cy="118" r="6" fill="#FF6A45" opacity=".85"/><circle cx="215" cy="109" r="6" fill="#FF6A45" opacity=".85"/><circle cx="235" cy="121" r="6" fill="#FF6A45" opacity=".85"/><circle cx="384" cy="248" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="375" cy="265" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="350" cy="262" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="364" cy="255" r="6" fill="#7FB5FF" opacity=".85"/><circle cx="207" cy="118" r="22" fill="none" stroke="#FF6A45" stroke-width="1.5" stroke-dasharray="3 3"/><circle cx="362" cy="266" r="22" fill="none" stroke="#7FB5FF" stroke-width="1.5" stroke-dasharray="3 3"/><circle cx="156" cy="180" r="22" fill="none" stroke="#B9F0CF" stroke-width="1.5" stroke-dasharray="3 3"/><text x="179" y="122" fill="#FF6A45" text-anchor="end" font-weight="700">FOUR-SEAM · 92 · 15 IN RIDE</text><text x="390" y="270" fill="#7FB5FF" text-anchor="start" font-weight="700">SWEEPER · 81 · 17 IN SWEEP</text><text x="128" y="184" fill="#B9F0CF" text-anchor="end" font-weight="700">CHANGEUP · 86 · 17 IN FADE</text>
-      </svg></div><div class="tx"><div class="k">Movement</div><h3>Ride, sweep and fade, from his own game</h3><p>One college left-hander, 49 pitches, every dot a real pitch.</p></div></div><div class="gi reveal" style="--c:var(--coral)"><div class="im "><img src="img/pitcher_kzone.jpg" alt="Center-field frame of a pitch arriving at the zone"></div><div class="tx"><div class="k">K-Zone</div><h3>Where it crossed, on the video</h3><p>The zone drawn at the plate on every pitch he throws.</p></div></div>
+  <section id="partners">
+    <div class="head reveal"><div class="eyebrow">How it works for a partner</div><h2>You already capture the data. We do the rest.</h2></div>
+    <div class="pflow">
+      <div class="pstep reveal"><div class="n">1</div><h3>Run your event</h3><p>TrackMan, Hawk-Eye, Rapsodo, portable radar, Blast, a stopwatch. Whatever you already use, with our one-page data standard so every number is trustworthy.</p></div>
+      <div class="pstep reveal"><div class="n">2</div><h3>Send us the file</h3><p>One export after the last pitch. We log the instrument, the setting and the date on every number.</p></div>
+      <div class="pstep reveal"><div class="n">3</div><h3>Cards go out in your brand</h3><p>Within 48 hours. Your logo, your colors, your event's name on every player's evaluation and on the event leaderboards.</p></div>
+      <div class="pstep reveal"><div class="n">4</div><h3>Your players keep going</h3><p>The recruiting email and the app are theirs to add. Every family that does is credited to you.</p></div>
+    </div>
+    <div class="money reveal">
+      <div>You set the price.<small>Sell the evaluation at the gate, at registration, or bundle it into the entry fee.</small></div>
+      <div>You keep the margin.<small>We charge you per player, at wholesale. The difference is yours.</small></div>
+      <div>We never contact your families.<small>No marketing to your players, ever. The relationship stays yours.</small></div>
+      <div>Your data stays yours.<small>Nobody outside your organization sees it. Not another event, not another college.</small></div>
     </div>
   </section>
 
-  <section id="evals">
-    <div class="head reveal"><div class="eyebrow">Evals</div><h2>Every number graded, then explained.</h2><p class="lead">Hitters and pitchers, graded against the goal for their age, written for the family to read. Shown on our two sample campers.</p></div>
-    <div class="gal">
-<div class="gi reveal" style="--c:var(--sky)"><div class="im "><img src="img/eval_grid.jpg" alt="Hitter evaluation grid graded against the class goal"></div><div class="tx"><div class="k">Hitter evaluation</div><h3>Every number, graded</h3><p>Field radar, cage sensor and combine. Tap any metric and it explains itself.</p></div></div><div class="gi reveal" style="--c:var(--mint)"><div class="im "><img src="img/eval_plan.jpg" alt="Hitter development plan paragraphs"></div><div class="tx"><div class="k">Hitter plan, in words</div><h3>Strengths and growth</h3><p>Written by a coach for the family to read.</p></div></div><div class="gi reveal" style="--c:var(--coral)"><div class="im "><img src="img/pitch_readiness.jpg" alt="Pitcher recruiting readiness block"></div><div class="tx"><div class="k">Pitcher evaluation</div><h3>Velocity, dominance, command, stuff</h3><p>One readiness number on the 20 to 80 scale, and the four scores behind it.</p></div></div><div class="gi reveal" style="--c:var(--sky)"><div class="im "><img src="img/pitch_plan.jpg" alt="Pitcher development plan paragraphs"></div><div class="tx"><div class="k">Pitcher plan, in words</div><h3>The next pitch to build</h3><p>What carries, what to add, and how to get there.</p></div></div>
+  <section id="portal">
+    <div class="head reveal"><div class="eyebrow">Player Portal</div><h2>Every verified number, searchable the way you search for a house.</h2></div>
+    <div class="portal">
+      <a class="shot reveal" href="portal.html" aria-label="Open the Player Portal prototype"><img src="img/portal.jpg" alt="Player Portal prototype: filters for position, grad year, state, height, exit velocity, sixty and velocity beside player cards"></a>
+      <div class="reveal" style="display:grid;gap:14px">
+        <ul>
+          <li><b>Every evaluation feeds the portal.</b> A player who gets a card at your event has his verified numbers in it the same day, if his family opts in.</li>
+          <li><b>College coaches filter like Zillow.</b> State, grad year, position, height, weight, exit velocity, sixty, fastball velocity, and every other number on the card.</li>
+          <li><b>Leaderboards, not rankings.</b> By event or by age group. Sorting by a number is the coach's choice, never ours.</li>
+          <li><b>Trust built in.</b> Every number carries the event, the instrument and the date. Players choose what is visible and can change it any time.</li>
+        </ul>
+        <div class="cta"><a class="btn b-electric" href="portal.html">Try the prototype</a></div>
+        <p class="note" style="color:var(--muted);font-size:13.5px">Prototype with fictional players. The real portal launches with partner events.</p>
+      </div>
     </div>
   </section>
 
-  <section id="app">
-    <div class="head reveal"><div class="eyebrow">The App</div><h2>Inside the Damage &amp; Chaos app.</h2><p class="lead">Where the numbers live all season.</p></div>
-    <div class="gal">
-<div class="gi reveal" style="--c:var(--mint)"><div class="im "><img src="img/t130_hunt.jpg" alt="Hunting damage heat map of the strike zone"></div><div class="tx"><div class="k">Hunting damage</div><h3>Where his barrels live</h3><p>The zone to hunt with less than two strikes.</p></div></div><div class="gi reveal" style="--c:var(--sky)"><div class="im "><img src="img/t130_damage.jpg" alt="Loft and tilt by pitch height with the drills that move it"></div><div class="tx"><div class="k">Loft + tilt</div><h3>His damage window by pitch height</h3><p>In the window or not, top to bottom of the zone. Then the drills.</p></div></div><div class="gi reveal" style="--c:var(--coral)"><div class="im "><img src="img/t130_spray1.jpg" alt="One hitter spray chart with every ball in play colored by result"></div><div class="tx"><div class="k">Spray chart</div><h3>Every ball. Tap a dot, the video plays.</h3><p>One hitter, 42 balls in play, filtered by game, result and pitcher hand.</p></div></div><div class="gi reveal" style="--c:var(--sky)"><div class="im phone"><img src="img/app_comp.jpg" alt="MLB comparison card in the app with the comp's exit velocity, sweet-spot and bat-speed numbers"></div><div class="tx"><div class="k">MLB comp</div><h3>Who swings like him</h3><p>The big leaguer with his bat path, his numbers beside yours, and his damage video on Savant.</p></div></div><div class="gi reveal" style="--c:var(--coral)"><div class="im "><img src="img/t130_leaders.jpg" alt="Leaderboards by category"></div><div class="tx"><div class="k">Leaderboards</div><h3>By event or by age group</h3><p>Swing decisions, quality contact, bat tracking. Never a ranking for sale.</p></div></div><div class="gi reveal" style="--c:var(--sky)"><div class="im phone"><img src="img/app_progress.jpg" alt="Progress chart"></div><div class="tx"><div class="k">Progress</div><h3>Him against him</h3><p>Every new capture is a point on his line.</p></div></div><div class="gi reveal" style="--c:var(--mint)"><div class="im phone"><img src="img/app_home.jpg" alt="Player app home screen"></div><div class="tx"><div class="k">His page</div><h3>Everything in one place</h3><p>W.I.N., at-bats, eval, plan, comp, routine, recruiting.</p></div></div>
+  <section id="trust">
+    <div class="head reveal"><div class="eyebrow">Why partners trust it</div><h2>Reliable, so your name can go on it.</h2></div>
+    <div class="trust">
+      <div class="reveal"><b>Verified at your event</b>Captured on a known instrument on a known day, or it does not get a card.</div>
+      <div class="reveal"><b>Reviewed by a coach</b>A college hitting coach reads every evaluation before it ships. Small samples are shown as small samples.</div>
+      <div class="reveal"><b>We never contact your players</b>No outreach, no marketing, no introductions. Not a recruiting service.</div>
+      <div class="reveal"><b>Your data stays yours</b>Never shared with another event or another college.</div>
+      <div class="reveal"><b>No rankings for sale</b>Measurements and the conditions they were measured in. Leaderboards families can see for themselves.</div>
     </div>
   </section>
 
-  <section id="nowwhat">
-    <div class="head reveal"><div class="eyebrow">Now What</div><h2>We explain the numbers, then we improve them.</h2><p class="lead">Data to development to recruiting. The read, the plan, the drills, and the email that gets him seen.</p></div>
-    <div class="nw reveal">
-      <div><div class="k" style="color:var(--sky)">The number · sample camper, 13</div><div class="big">43%<small>hard-hit</small></div><div class="bar"><i style="width:43%;background:var(--sky)"></i></div><div class="goal">Goal for his class · 80%</div><p>Peak exit velocity 87.9. Hard-hit rate 43 percent.</p></div>
-      <div><div class="k" style="color:var(--mint)">What it means</div><p><b>When he squares it up, it's loud. The opportunity is how often.</b> The bat speed is there. The body has not caught up to it yet.</p></div>
-      <div><div class="k" style="color:var(--coral)">What we do about it</div><ol><li>Activation every time he hits</li><li>Goblet lateral lunge <span>· 3 × 6</span></li><li>Med ball sit-up and throw <span>· 3 × 8</span></li><li>Walk-through swings <span>· 3 × 5</span></li><li>Uphill tee <span>· 3 × 10</span></li></ol><p>Every drill on video. The plan rebuilds with every new file.</p></div>
-    </div>
-    <div class="gal" style="margin-top:16px">
-<div class="gi reveal" style="--c:var(--mint)"><div class="im phone"><img src="img/app_win.jpg" alt="W.I.N. screen"></div><div class="tx"><div class="k">W.I.N.</div><h3>One strength, one growth target</h3><p>What is important now, in a read he can repeat.</p></div></div><div class="gi reveal" style="--c:var(--sky)"><div class="im phone"><img src="img/app_ipdp.jpg" alt="Individual player development plan with activation and drills"></div><div class="tx"><div class="k">Dev plan</div><h3>Activation and drills, on video</h3><p>Build the body, then build the swing. Every drill plays on tap.</p></div></div><div class="gi reveal" style="--c:var(--coral)"><div class="im"><img src="img/ipdp_onepager.jpg" alt="One-page individual player development plan: W.I.N., game scoreboard, three pillars, damage zone and the next two weeks"></div><div class="tx"><div class="k">iPDP</div><h3>One page. Everything.</h3><p>His W.I.N., his scoreboard, the three pillars, his damage zone and the next two weeks, on one page he can hold.</p></div></div><div class="gi reveal" style="--c:var(--mint)"><div class="im "><img src="img/fte_kit.jpg" alt="5 Tool Email kit"></div><div class="tx"><div class="k">5 Tool Email</div><h3>The recruiting email, built from his numbers</h3><p>Coach, subject, body, video, contacts. The family sends it.</p></div></div>
+  <section id="case">
+    <div class="head reveal"><div class="eyebrow">First partner · TBC23</div><h2>Built for Clemson Baseball. Delivered through TBC23 camps.</h2><p class="lead">The system was built for a college program first: every swing and every pitch of a Division I roster, measured, graded and turned into a plan each week. TBC23, the camp business run by that staff, is the first white-label partner, and its campers get the same products.</p></div>
+    <div class="case">
+      <div class="c reveal"><img src="img/t130_hunt.jpg" alt="Hunting damage heat map"><div><b>Where his barrels live</b>A hitter's own damage zone from his game swings.</div></div>
+      <div class="c reveal"><img src="img/kzone.jpg" alt="K-Zone on video"><div><b>Every pitch on video</b>The strike zone drawn on the center-field camera, every decision graded.</div></div>
+      <div class="c reveal"><img src="img/t130_spray1.jpg" alt="Spray chart"><div><b>Every ball, with the video</b>Tap a dot and the at-bat plays.</div></div>
+      <div class="c reveal"><img src="img/comp_side.jpg" alt="Side by side with a Major League hitter"><div><b>The big leaguer who swings like him</b>Side by side, synced at impact.</div></div>
+      <div class="c reveal"><img src="img/ipdp_onepager.jpg" alt="One-page development plan"><div><b>One page, everything</b>The individual plan each player holds.</div></div>
+      <div class="c reveal"><img src="img/t130_leaders.jpg" alt="Leaderboards"><div><b>Leaderboards</b>Swing decisions, quality contact, bat tracking.</div></div>
     </div>
   </section>
 
-  <section id="who">
-    <div class="head reveal"><div class="eyebrow">Who it's for</div><h2>Everyone holding a file.</h2></div>
-    <div class="chips reveal">
-      <span>Players<i>your numbers, your plan</i></span>
-      <span>Parents<i>finally, in plain English</i></span>
-      <span>Coaches<i>the read on every hitter</i></span>
-      <span>Teams &amp; travel orgs<i>the showcase CSV, translated</i></span>
-      <span>Tournaments &amp; showcases<i>evals at the gate, in your brand</i></span>
-      <span>Facilities<i>every session becomes a plan</i></span>
-      <span>College camps<i>the camp kit</i></span>
-      <span>Foundations<i>sponsored evaluations</i></span>
+  <section id="families">
+    <div class="fam">
+      <div class="reveal" style="display:grid;gap:14px">
+        <div class="eyebrow">For players and families</div>
+        <h2>If your player went to a partner event, this is what comes home.</h2>
+        <ol>
+          <li><b>His evaluation</b>, every number graded for his age, in words you can read at the kitchen table.</li>
+          <li><b>His recruiting email</b>, written from his verified numbers, ready for him to send.</li>
+          <li><b>His app</b>, with one strength, one thing to build, and the drills on video.</li>
+        </ol>
+        <p>We do not sell to families. Ask your tournament, camp, organization or facility if they offer Dugout Digital evaluations.</p>
+      </div>
+      <div class="phones reveal"><img src="img/app_win.jpg" alt="W.I.N. screen"><img src="img/app_ipdp.jpg" alt="Drills on video"><img src="img/app_abs.jpg" alt="Game at-bats"></div>
     </div>
-    <div class="head reveal" style="margin-top:44px;margin-bottom:16px"><div class="eyebrow">What we read</div></div>
-    <div class="chips reveal">
-      <span>TrackMan</span><span>Hawk-Eye</span><span>Rapsodo</span><span>Pocket Radar</span><span>Stalker</span><span>Blast</span><span>Diamond Kinetics</span><span>HitTrax</span><span>Motion capture</span><span>Force plates</span><span style="color:var(--muted);font-family:var(--body);font-weight:400">CSV · XLSX · JSON · a screenshot</span>
+  </section>
+
+  <section>
+    <div class="cta2 reveal">
+      <div class="eyebrow">Book a pilot</div>
+      <h2>One event. Your brand. We build the sample card before you decide anything.</h2>
+      <p>Send us the export from your last event and we return one player's evaluation in your colors. If it is not the best thing your families have ever received from you, we part as friends.</p>
+      <a class="btn b-electric" href="mailto:hello@dugoutdigital.io?subject=Pilot%20request">hello@dugoutdigital.io</a>
     </div>
   </section>
 
   <footer id="contact">
     <div class="eyebrow">Contact</div>
     <a class="contact" href="mailto:hello@dugoutdigital.io">hello@dugoutdigital.io</a>
-    <p style="color:var(--muted);max-width:52ch">Family-owned software company in Clemson, South Carolina. Built for a college program first. Tested by the players it is for. <a href="never.html">What we will never do →</a></p>
+    <p style="color:var(--muted);max-width:52ch">Family-owned software company in Clemson, South Carolina. Built for a college program first. <a href="never.html">What we will never do →</a></p>
     <p class="fine">Dugout Digital, LLC. Dugout Digital licenses evaluation software to camps, teams, events and programs and is never the merchant of record for a family. It is not a recruiting service: it makes no introductions and does no outreach on a player's behalf. Players opt in to the database and control what is visible. Camps described here are open to any and all entrants, limited only by number, age, grade level and gender. © 2026 Dugout Digital, LLC</p>
   </footer>
 </div>
 <script>
 (function(){
-  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!('IntersectionObserver' in window)){document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')});return}
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08});
   document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});

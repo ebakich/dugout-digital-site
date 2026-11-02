@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dugout Digital · How we read the numbers</title>
+<meta name="description" content="Data made simple. Dugout Digital turns baseball data from any camp, showcase or device into plain English and a training plan: custom evaluation, K-Zone, contact depth, loft and tilt, spray chart with video, leaderboards, MLB comps, drills and 5 Tool Email.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3Crect width='150' height='150' rx='34' fill='%230E1A2B'/%3E%3Crect x='25' y='25' width='100' height='100' rx='18' transform='rotate(45 75 75)' fill='%23B9F0CF'/%3E%3Cg transform='translate(39,33) scale(0.6)'%3E%3Cpath fill-rule='evenodd' d='M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z' fill='%230E1A2B'/%3E%3Cpath d='M38 50H54A20 20 0 0 1 54 90H38Z' fill='%23FF6A45'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#0B1522; --bg2:#0E1A2B; --panel:#13233A; --panel2:#182B45; --line:#22364F; --ink:#F1EEE6; --muted:#9AA7B8;
+  --electric:#2F5BFF; --sky:#7FB5FF; --mint:#B9F0CF; --coral:#FF6A45; --slate:#5B6470;
+  --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif; --body:"Inter","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+:root:not([data-theme="light"]){}
+:root[data-theme="dark"]{}
+*{box-sizing:border-box}
+html,body{margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:hidden}
+a{color:var(--sky)}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px}
+nav{display:flex;justify-content:space-between;align-items:center;padding-block:22px;gap:16px}
+.mark{display:flex;align-items:center;gap:13px;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:700;font-size:26px;letter-spacing:-.02em;white-space:nowrap}
+.mark svg{width:58px;height:58px;flex:none}
+nav .links{display:flex;gap:18px;font-size:15px;font-weight:500;flex-wrap:wrap;justify-content:flex-end;row-gap:6px}
+nav .links a{text-decoration:none;color:var(--muted);white-space:nowrap}
+nav .links a:hover{color:var(--ink)}
+@media (max-width:700px){nav .links a:not(:last-child):not(:first-child){display:none}}
+h1,h2,h3{font-family:var(--display);line-height:1.02;margin:0;letter-spacing:-.03em;text-wrap:balance}
+h1{font-size:clamp(46px,8vw,100px);font-weight:700}
+h2{font-size:clamp(30px,4.4vw,52px);font-weight:700}
+h3{font-size:20px;font-weight:700;letter-spacing:-.01em}
+p{margin:0}
+.eyebrow{font-family:var(--mono);text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--mint)}
+.btn{font-family:var(--display);font-weight:700;font-size:16px;padding:14px 22px;border-radius:10px;text-decoration:none;display:inline-block;transition:transform .15s,background .15s;border:2px solid transparent}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.b-electric{background:var(--electric);color:#fff}
+.b-ghost{border-color:var(--line);color:var(--ink)}
+.b-ghost:hover{border-color:var(--mint)}
+/* hero */
+.hero{padding-block:30px 70px;display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center}
+@media (max-width:960px){.hero{grid-template-columns:1fr}}
+.hero .copy{display:grid;gap:20px}
+.sub{font-family:var(--display);font-weight:500;font-size:clamp(20px,2.4vw,26px);letter-spacing:-.01em}
+.sub b{color:var(--sky);font-weight:700}.sub i{color:var(--coral);font-style:normal;font-weight:700}.sub u{color:var(--mint);text-decoration:none;font-weight:700}
+.lede{color:var(--muted);font-size:17.5px;max-width:54ch}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;gap:12px}
+.panel .cap{font-size:13.5px;color:var(--muted);line-height:1.5}
+.panel .cap b{color:var(--ink);font-weight:600}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+svg.chart{width:100%;height:auto;display:block}
+.chart text{font-family:var(--mono);font-size:11px;fill:var(--muted);letter-spacing:.06em}
+.chart .ax{stroke:var(--line);stroke-width:1}
+.chart .grid{stroke:var(--line);stroke-width:1;stroke-dasharray:2 4}
+.chart .barrel{fill:rgba(255,106,69,.12);stroke:var(--coral);stroke-width:1.5;stroke-dasharray:5 4}
+.chart .lbl{fill:var(--coral);font-weight:500}
+/* app showcase */
+.wide{display:grid;grid-template-columns:1.35fr .65fr;gap:22px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:16px}
+.wide.flip{grid-template-columns:.65fr 1.35fr}
+.wide.flip img{order:2}
+@media (max-width:860px){.wide,.wide.flip{grid-template-columns:1fr}.wide.flip img{order:0}}
+.wide img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);display:block}
+.wide h3{font-size:22px;margin-bottom:8px}
+.wide p{font-size:15.5px;color:var(--muted)}
+.wide .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);margin-bottom:8px}
+.phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:18px;align-items:start}
+.phone{display:grid;grid-template-rows:auto 1fr;gap:12px}
+.phone .scr{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#0a0c10;max-height:440px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.phone .scr img{width:100%;height:auto;display:block}
+.phone h3{font-size:17px}
+.phone p{font-size:14px;color:var(--muted)}
+.phone .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral)}
+.fte{border:1px solid var(--line);border-radius:22px;background:var(--panel);min-height:380px;padding:22px;display:grid;align-content:start;gap:10px}
+.fte .t{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.02em}
+.fte ol{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14px;color:var(--muted)}
+.fte ol b{color:var(--ink);font-weight:600}
+.shots3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.shot3{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.shot3 img{width:100%;height:auto;display:block;border-bottom:1px solid var(--line)}
+.shot3 div{padding:18px 20px;display:grid;gap:6px;align-content:start}
+.shot3 p{font-size:14.5px;color:var(--muted)}
+.shot3 .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral)}
+.roster{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:28px}
+.roster div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:14.5px;color:var(--muted)}
+.roster b{display:block;font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink);letter-spacing:-.01em;margin-bottom:4px}
+.prop{margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint)}
+/* now what */
+.nw{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel)}
+@media (max-width:900px){.nw{grid-template-columns:1fr}}
+.nw > div{padding:24px;display:grid;gap:12px;align-content:start;border-left:1px solid var(--line)}
+.nw > div:first-child{border-left:0}
+@media (max-width:900px){.nw > div{border-left:0;border-top:1px solid var(--line)}.nw > div:first-child{border-top:0}}
+.nw .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase}
+.nw .big{font-family:var(--display);font-weight:700;font-size:40px;letter-spacing:-.03em;line-height:1}
+.nw .big small{font-family:var(--mono);font-size:12px;letter-spacing:.12em;font-weight:500;color:var(--muted);margin-left:8px;text-transform:uppercase}
+.nw p{font-size:15px;color:var(--muted)}
+.nw p b{color:var(--ink);font-weight:600}
+.nw ol{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14.5px;color:var(--ink)}
+.nw ol span{color:var(--muted);font-size:13px}
+.nw .bar{height:8px;border-radius:4px;background:var(--line);position:relative;overflow:hidden}
+.nw .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.nw .goal{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.nwgrid{display:grid;gap:18px}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.gi{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:auto auto}
+.gi .im{height:260px;overflow:hidden;background:#0a0c10;border-bottom:1px solid var(--line)}
+.gi .im img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.gi .im.mov{display:flex;align-items:center;justify-content:center;background:var(--panel);padding:8px}
+.gi .im.mov svg.chart{width:auto;height:100%;max-width:100%}
+.gi .im .chart text{font-size:12px}
+.gi .im.phone{display:flex;justify-content:center;align-items:flex-start;background:#0a0c10}
+.gi .im.phone img{width:auto;max-width:100%;height:100%;object-fit:cover;object-position:top}
+.gi div.tx{padding:14px 18px 16px;display:grid;gap:3px}
+.gi h3{font-size:18px}
+.gi p{font-size:14px;color:var(--muted)}
+.gi .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--c,var(--mint))}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips span{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:10px 16px;font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:-.01em}
+.chips span i{font-style:normal;font-family:var(--body);font-weight:400;color:var(--muted);font-size:13.5px;margin-left:8px}
+.lead{font-size:17px;color:var(--muted);max-width:60ch}
+/* sections */
+section{padding-block:76px;border-top:1px solid var(--line)}
+.head{display:grid;gap:12px;margin-bottom:34px;max-width:64ch}
+.head p{color:var(--muted);font-size:17px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;display:grid;gap:10px;align-content:start;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;height:4px;width:100%;background:var(--c,var(--sky))}
+.card.mint{--c:var(--mint)}.card.coral{--c:var(--coral)}.card.sky{--c:var(--sky)}
+.card p{font-size:15.5px;color:var(--muted)}
+.card .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--c,var(--sky))}
+.card .to{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint);margin-top:6px}
+/* same-ev strip */
+.same{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.ball{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:8px}
+.ball .ev{font-family:var(--display);font-weight:700;font-size:40px;letter-spacing:-.03em;line-height:1}
+.ball .ev small{font-family:var(--mono);font-size:11px;letter-spacing:.14em;font-weight:500;color:var(--muted);margin-left:6px}
+.ball .la{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ball .bar{height:8px;border-radius:4px;background:var(--line);position:relative;overflow:hidden}
+.ball .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--c)}
+.ball .res{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.02em;color:var(--c)}
+.ball .d{font-size:14px;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:28px}
+.kpis div{background:var(--panel);padding:18px 20px}
+.kpis b{display:block;font-family:var(--display);font-weight:700;font-size:34px;letter-spacing:-.03em;line-height:1}
+.kpis span{display:block;font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+/* instruments table */
+.table{display:grid;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.row{display:grid;grid-template-columns:260px 1fr;gap:20px;padding:20px 24px;background:var(--panel);border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row .n{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.01em}
+.row .n small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint);margin-top:6px;font-weight:500}
+.row p{font-size:15.5px;color:var(--muted)}
+@media (max-width:700px){.row{grid-template-columns:1fr;gap:8px}}
+.formats{margin-top:14px;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--muted)}
+/* film */
+.film{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.shot{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.shot img{width:100%;height:220px;object-fit:cover;display:block}
+.shot div{padding:18px 20px;display:grid;gap:6px}
+.shot p{font-size:15px;color:var(--muted)}
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.step{padding:24px;border:1px solid var(--line);border-radius:16px;background:var(--panel);display:grid;gap:8px;align-content:start}
+.step .n{font-family:var(--display);font-weight:700;font-size:44px;line-height:1;letter-spacing:-.03em;color:var(--coral)}
+.step p{font-size:15.5px;color:var(--muted)}
+.never{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.no{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:grid;gap:6px}
+.no b{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.01em;color:var(--coral)}
+.no span{font-size:14.5px;color:var(--muted)}
+.two{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:start}
+@media (max-width:900px){.two{grid-template-columns:1fr}}
+.who p{color:var(--muted);font-size:16px}
+.soft{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:26px;font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.01em}
+.soft span{padding:8px 14px;border-radius:10px;color:#0B1522}
+footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-size:15px;border-top:1px solid var(--line)}
+.contact{font-family:var(--display);font-weight:700;font-size:clamp(26px,4vw,46px);color:var(--ink);letter-spacing:-.02em;text-decoration:none}
+.contact:hover{color:var(--mint)}
+.fine{font-size:12.5px;max-width:80ch;line-height:1.5}
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.dot{opacity:0;animation:pop .4s forwards}
+.fl{stroke-dasharray:900;stroke-dashoffset:900;animation:draw 1.6s cubic-bezier(.3,.7,.2,1) forwards}
+.f4{animation-delay:.3s}.f2{animation-delay:.9s}.f3{animation-delay:1.5s}.f1{animation-delay:2.1s}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.dot{opacity:1;animation:none}.fl{stroke-dashoffset:0;animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="mark" href="index.html" aria-label="Dugout Digital home">
+      <svg viewBox="0 0 150 150" aria-hidden="true"><rect x="25" y="25" width="100" height="100" rx="18" transform="rotate(45 75 75)" fill="#B9F0CF"/><g transform="translate(39,33) scale(0.6)"><path fill-rule="evenodd" d="M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z" fill="#0E1A2B"/><path d="M38 50H54A20 20 0 0 1 54 90H38Z" fill="#FF6A45"/></g></svg>
+      Dugout Digital
+    </a>
+    <div class="links"><a href="index.html">Home</a><a href="portal.html">Player Portal</a><a href="index.html#contact">Contact</a></div>
+  </nav>
+  <section style="border-top:0;padding-top:28px">
+    <div class="head reveal in"><div class="eyebrow">For coaches · how we read the numbers</div><h2>Hard is not enough. Hard at the right angle is the story.</h2><p class="lead">Four real balls from a college game, all 91 mph off the bat. Exit velocity alone calls them the same swing. Launch angle tells you which one went 374 feet. Every evaluation we write reads the numbers together like this.</p></div>
+    <div class="panel" aria-label="Four real balls that left the bat at about 91 miles per hour and what happened to each">
+      <div class="eyebrow">Four real balls · all 91 mph off the bat</div>
+      <svg class="chart" viewBox="0 0 760 372" role="img" aria-label="Side view of four ball flights from home plate. At minus 7 degrees the ball is a 14-foot ground out. At 22 degrees it is a 300-foot sacrifice fly. At 29 degrees it is a 374-foot home run. At 44 degrees it is a 252-foot fly out.">
+        <line class="ax" x1="40" y1="300" x2="740" y2="300"/>
+        <path class="fl f1" d="M60 300 C 80 280, 254 -141, 488 300" fill="none" stroke="#7FB5FF" stroke-width="3" stroke-linecap="round"/>
+        <path class="fl f2" d="M60 300 C 90 288, 341 146, 570 300" fill="none" stroke="#B9F0CF" stroke-width="3" stroke-linecap="round"/>
+        <path class="fl f3" d="M60 300 C 77 290, 435 30, 696 300" fill="none" stroke="#FF6A45" stroke-width="3.5" stroke-linecap="round"/>
+        <path class="fl f4" d="M60 294 L 84 300" fill="none" stroke="#9AA7B8" stroke-width="4" stroke-linecap="round"/>
+        <path d="M84 300 L 130 300" fill="none" stroke="#9AA7B8" stroke-width="2" stroke-dasharray="3 5"/>
+        <g stroke-width="1.5" stroke-dasharray="2 3"><line x1="488" y1="306" x2="488" y2="318" stroke="#7FB5FF"/><line x1="570" y1="306" x2="570" y2="340" stroke="#B9F0CF"/><line x1="696" y1="306" x2="696" y2="318" stroke="#FF6A45"/><line x1="84" y1="306" x2="84" y2="318" stroke="#9AA7B8"/></g>
+        <circle cx="696" cy="300" r="6" fill="#FF6A45"/><circle cx="570" cy="300" r="6" fill="#B9F0CF"/><circle cx="488" cy="300" r="6" fill="#7FB5FF"/><circle cx="84" cy="300" r="6" fill="#9AA7B8"/>
+        <g font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1">
+          <text x="84" y="334" fill="#9AA7B8" text-anchor="start">−7° · 14 FT · GROUND OUT</text>
+          <text x="480" y="334" fill="#7FB5FF" text-anchor="end">44° · 252 FT · FLY OUT</text>
+          <text x="570" y="356" fill="#B9F0CF" text-anchor="middle">22° · 300 FT · SAC FLY</text>
+          <text x="740" y="334" fill="#FF6A45" text-anchor="end" font-weight="700">29° · 374 FT · HOME RUN</text>
+        </g>
+        <g font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1" font-weight="700">
+          <text x="274" y="89" fill="#7FB5FF" text-anchor="middle">44°</text>
+          <text x="332" y="219" fill="#B9F0CF" text-anchor="middle">22°</text>
+          <text x="413" y="168" fill="#FF6A45" text-anchor="middle">29°</text>
+        </g>
+        <path d="M48 296 L72 296 L72 302 L60 308 L48 302 Z" fill="#F1EEE6"/>
+      </svg>
+      <div class="cap"><b>Same hitter. Same bat speed. Four different results.</b> The angle decided everything. We explain that to the family, then we train it.</div>
+    </div>
+  
+  </section>
+  <section>
+    <div class="head reveal in"><div class="eyebrow">Then we improve them</div><h2>The number, what it means, what we do about it.</h2></div>
+    <div class="nw reveal in">
+      <div><div class="k" style="color:var(--sky)">The number · sample camper, 13</div><div class="big">43%<small>hard-hit</small></div><div class="bar"><i style="width:43%;background:var(--sky)"></i></div><div class="goal">Goal for his class · 80%</div><p>Peak exit velocity 87.9. Hard-hit rate 43 percent.</p></div>
+      <div><div class="k" style="color:var(--mint)">What it means</div><p><b>When he squares it up, it's loud. The opportunity is how often.</b> The bat speed is there. The body has not caught up to it yet.</p></div>
+      <div><div class="k" style="color:var(--coral)">What we do about it</div><ol><li>Activation every time he hits</li><li>Goblet lateral lunge <span>· 3 × 6</span></li><li>Med ball sit-up and throw <span>· 3 × 8</span></li><li>Walk-through swings <span>· 3 × 5</span></li><li>Uphill tee <span>· 3 × 10</span></li></ol><p>Every drill on video. The plan rebuilds with every new file.</p></div>
+    </div>
+    <div class="gal" style="margin-top:16px">
+<div class="gi reveal" style="--c:var(--mint)"><div class="im phone"><img src="img/app_win.jpg" alt="W.I.N. screen"></div><div class="tx"><div class="k">W.I.N.</div><h3>One strength, one growth target</h3><p>What is important now, in a read he can repeat.</p></div></div><div class="gi reveal" style="--c:var(--sky)"><div class="im phone"><img src="img/app_ipdp.jpg" alt="Individual player development plan with activation and drills"></div><div class="tx"><div class="k">Dev plan</div><h3>Activation and drills, on video</h3><p>Build the body, then build the swing. Every drill plays on tap.</p></div></div><div class="gi reveal" style="--c:var(--coral)"><div class="im"><img src="img/ipdp_onepager.jpg" alt="One-page individual player development plan: W.I.N., game scoreboard, three pillars, damage zone and the next two weeks"></div><div class="tx"><div class="k">iPDP</div><h3>One page. Everything.</h3><p>His W.I.N., his scoreboard, the three pillars, his damage zone and the next two weeks, on one page he can hold.</p></div></div><div class="gi reveal" style="--c:var(--mint)"><div class="im "><img src="img/fte_kit.jpg" alt="5 Tool Email kit"></div><div class="tx"><div class="k">5 Tool Email</div><h3>The recruiting email, built from his numbers</h3><p>Coach, subject, body, video, contacts. The family sends it.</p></div></div>
+    </div>
+  </section>
+  <footer id="contact">
+    <div class="eyebrow">Contact</div>
+    <a class="contact" href="mailto:hello@dugoutdigital.io">hello@dugoutdigital.io</a>
+    <p style="color:var(--muted);max-width:52ch">Family-owned software company in Clemson, South Carolina. Built for a college program first. Tested by the players it is for. <a href="never.html">What we will never do →</a></p>
+    <p class="fine">Dugout Digital, LLC. Dugout Digital licenses evaluation software to camps, teams, events and programs and is never the merchant of record for a family. It is not a recruiting service: it makes no introductions and does no outreach on a player's behalf. Players opt in to the database and control what is visible. Camps described here are open to any and all entrants, limited only by number, age, grade level and gender. © 2026 Dugout Digital, LLC</p>
+  </footer>
+</div>
+</body>
+</html>
