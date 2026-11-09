@@ -8,6 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3Crect width='150' height='150' rx='34' fill='%230E1A2B'/%3E%3Crect x='25' y='25' width='100' height='100' rx='18' transform='rotate(45 75 75)' fill='%23B9F0CF'/%3E%3Cg transform='translate(39,33) scale(0.6)'%3E%3Cpath fill-rule='evenodd' d='M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z' fill='%230E1A2B'/%3E%3Cpath d='M38 50H54A20 20 0 0 1 54 90H38Z' fill='%23FF6A45'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="inquiry.css">
 <style>
 :root{
   --bg:#0B1522; --bg2:#0E1A2B; --panel:#13233A; --panel2:#182B45; --line:#22364F; --ink:#F1EEE6; --muted:#9AA7B8;
@@ -271,7 +272,7 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
       <svg viewBox="0 0 150 150" aria-hidden="true"><rect x="25" y="25" width="100" height="100" rx="18" transform="rotate(45 75 75)" fill="#B9F0CF"/><g transform="translate(39,33) scale(0.6)"><path fill-rule="evenodd" d="M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z" fill="#0E1A2B"/><path d="M38 50H54A20 20 0 0 1 54 90H38Z" fill="#FF6A45"/></g></svg>
       Dugout Digital
     </a>
-    <div class="links"><a href="#products">Products</a><a href="#partners">Partners</a><a href="#portal">Player Portal</a><a href="#case">In use</a><a href="#families">Families</a><a href="#contact">Book a pilot</a></div>
+    <div class="links"><a href="#products">Products</a><a href="#partners">Partners</a><a href="#portal">Player Portal</a><a href="#case">In use</a><a href="#families">Families</a><a href="#pilot" data-inquiry>Book a pilot</a></div>
   </nav>
 
   <header class="hero3" id="top">
@@ -280,7 +281,7 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
       <h1>We build the player evaluations, recruiting emails and training apps that <em>your event gives its players.</em></h1>
       <p class="lede">In your brand, from the data you already capture. Tournaments, showcases, college camps, travel organizations and facilities use Dugout Digital so every player leaves with an eval card to keep, and every family knows exactly what the numbers mean.</p>
       <div class="ptypes"><a href="#partners">Tournaments</a><a href="#partners">Showcases</a><a href="#partners">College camps</a><a href="#partners">Travel organizations</a><a href="#partners">Facilities</a></div>
-      <div class="cta"><a class="btn b-electric" href="#contact">Book a pilot</a><a class="btn b-ghost" href="#products">See the products</a></div>
+      <div class="cta"><a class="btn b-electric" href="#pilot" data-inquiry>Book a pilot</a><a class="btn b-ghost" href="#products">See the products</a></div>
     </div>
     <div>
       <div class="stack" aria-label="The same evaluation card in three partner brands">
@@ -374,18 +375,19 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
     </div>
   </section>
 
-  <section>
+  <section id="pilot">
     <div class="cta2 reveal">
       <div class="eyebrow">Book a pilot</div>
       <h2>One event. Your brand. We build the sample eval card before you decide anything.</h2>
       <p>Send us the export from your last event and we return one player's eval card in your colors. If it is not the best thing your families have ever received from you, we part as friends.</p>
-      <a class="btn b-electric" href="mailto:hello@dugoutdigital.io?subject=Pilot%20request">hello@dugoutdigital.io</a>
+      <a class="btn b-electric" href="#pilot" data-inquiry>Book a pilot</a>
     </div>
   </section>
 
   <footer id="contact">
     <div class="eyebrow">Contact</div>
-    <a class="contact" href="mailto:hello@dugoutdigital.io">hello@dugoutdigital.io</a>
+    <a class="contact" href="#pilot" data-inquiry>Book a pilot →</a>
+    <p style="color:var(--muted);max-width:52ch">Tell us about your event in about a minute. We reply by email within one business day.</p>
     <p style="color:var(--muted);max-width:52ch">Family-owned software company in Clemson, South Carolina. Built for a college program first. <a href="never.html">What we will never do →</a></p>
     <p class="fine">Dugout Digital, LLC. Dugout Digital licenses evaluation software to camps, teams, events and programs and is never the merchant of record for a family. It is not a recruiting service: it makes no introductions and does no outreach on a player's behalf. Players opt in to the database and control what is visible. Camps described here are open to any and all entrants, limited only by number, age, grade level and gender. © 2026 Dugout Digital, LLC</p>
   </footer>
@@ -397,5 +399,6 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
   document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
 })();
 </script>
+<script src="inquiry.js" defer></script>
 </body>
 </html>

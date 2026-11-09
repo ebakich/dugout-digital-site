@@ -1,0 +1,178 @@
+/* Dugout Digital ... "Book a pilot" inquiry flow. Self contained; every class is ddf- prefixed so the
+   page styles (index, numbers, never, portal) never reach inside. Tokens fall back to the site palette. */
+html.ddf-lock, html.ddf-lock body { overflow: hidden !important; }
+
+.ddf-root {
+  --ddf-bg: var(--bg, #0B1522);
+  --ddf-bg2: var(--bg2, #0E1A2B);
+  --ddf-panel: var(--panel, #13233A);
+  --ddf-panel2: var(--panel2, #182B45);
+  --ddf-line: var(--line, #22364F);
+  --ddf-ink: var(--ink, #F1EEE6);
+  --ddf-muted: var(--muted, #9AA7B8);
+  --ddf-electric: var(--electric, #2F5BFF);
+  --ddf-sky: var(--sky, #7FB5FF);
+  --ddf-mint: var(--mint, #B9F0CF);
+  --ddf-coral: var(--coral, #FF6A45);
+  --ddf-display: var(--display, "Space Grotesk", "Helvetica Neue", Arial, sans-serif);
+  --ddf-body: var(--body, "Inter", "Segoe UI", system-ui, sans-serif);
+  --ddf-mono: var(--mono, "IBM Plex Mono", ui-monospace, Menlo, monospace);
+  position: fixed; inset: 0; z-index: 2147483000;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ddf-body); font-size: 16px; line-height: 1.5; color: var(--ddf-ink);
+  -webkit-text-size-adjust: 100%; text-align: left;
+}
+.ddf-root[hidden] { display: none; }
+.ddf-root *, .ddf-root *::before, .ddf-root *::after { box-sizing: border-box; }
+.ddf-root p, .ddf-root h2, .ddf-root dl, .ddf-root dd { margin: 0; }
+.ddf-root button { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; }
+
+.ddf-scrim { position: absolute; inset: 0; background: rgba(5, 10, 18, .8); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); transition: opacity .25s ease; }
+
+.ddf-dialog {
+  position: relative; display: flex; flex-direction: column; overflow: hidden;
+  width: min(580px, calc(100vw - 48px)); height: min(760px, calc(100vh - 48px));
+  background: var(--ddf-bg2); border: 1px solid var(--ddf-line); border-radius: 22px;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, .55);
+  transition: transform .28s cubic-bezier(.2, .8, .2, 1), opacity .28s ease;
+}
+.ddf-opening .ddf-scrim { opacity: 0; }
+.ddf-opening .ddf-dialog { opacity: 0; transform: translateY(18px) scale(.985); }
+
+@media (max-width: 640px) {
+  .ddf-root { align-items: stretch; }
+  .ddf-dialog { width: 100%; height: 100%; height: 100dvh; max-height: none; border: 0; border-radius: 0; box-shadow: none;
+    padding-top: env(safe-area-inset-top); }
+  .ddf-opening .ddf-dialog { transform: translateY(28px); }
+}
+
+/* top bar */
+.ddf-top { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px; padding: 10px 10px 8px; }
+.ddf-icon {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-width: 48px; min-height: 48px; padding: 0 12px; border-radius: 12px;
+  background: transparent; border: 1px solid transparent; color: var(--ddf-ink); cursor: pointer;
+  font-family: var(--ddf-display); font-weight: 700; font-size: 16px; letter-spacing: -.01em;
+}
+.ddf-icon svg { width: 22px; height: 22px; flex: none; }
+.ddf-icon:hover { border-color: var(--ddf-line); }
+.ddf-back { padding-left: 6px; }
+.ddf-stepno { text-align: center; font-family: var(--ddf-mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--ddf-muted); }
+.ddf-progress { height: 4px; margin: 0 22px; border-radius: 4px; background: var(--ddf-line); overflow: hidden; }
+.ddf-progress i { display: block; height: 100%; width: 0; border-radius: 4px; background: var(--ddf-mint); transition: width .35s cubic-bezier(.2, .8, .2, 1); }
+.ddf-progress.ddf-progress-alt i { background: var(--ddf-sky); }
+
+/* body */
+.ddf-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 26px 26px 28px; }
+.ddf-step { transition: opacity .22s ease, transform .22s ease; }
+.ddf-step.ddf-enter { opacity: 0; transform: translateX(14px); }
+.ddf-eyebrow { font-family: var(--ddf-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ddf-mint); margin-bottom: 10px !important; }
+.ddf-root .ddf-h {
+  font-family: var(--ddf-display); font-weight: 700; font-size: clamp(28px, 6.4vw, 36px); line-height: 1.05;
+  letter-spacing: -.03em; color: var(--ddf-ink); text-wrap: balance; outline: none;
+}
+.ddf-sub { color: var(--ddf-muted); font-size: 16px; margin-top: 10px !important; }
+.ddf-p { color: var(--ddf-ink); font-size: 16.5px; margin-top: 14px !important; max-width: 52ch; }
+.ddf-muted { color: var(--ddf-muted); }
+
+/* options */
+.ddf-opts { display: grid; gap: 10px; margin-top: 22px; }
+.ddf-opt {
+  display: flex; align-items: center; gap: 14px; width: 100%; min-height: 60px; padding: 14px 16px 14px 18px;
+  text-align: left; cursor: pointer; border-radius: 14px;
+  background: var(--ddf-panel); border: 1px solid var(--ddf-line); color: var(--ddf-ink);
+  transition: border-color .15s, background .15s, transform .15s;
+}
+.ddf-opt:hover { border-color: var(--ddf-mint); }
+.ddf-opt:active { transform: scale(.99); }
+.ddf-opt-t { flex: 1; display: grid; gap: 2px; font-family: var(--ddf-display); font-weight: 700; font-size: 18px; letter-spacing: -.01em; line-height: 1.2; }
+.ddf-opt-t small { font-family: var(--ddf-body); font-weight: 400; font-size: 14px; letter-spacing: 0; color: var(--ddf-muted); }
+.ddf-go { width: 20px; height: 20px; flex: none; color: var(--ddf-muted); }
+.ddf-opt[aria-pressed="true"] { border-color: var(--ddf-electric); background: rgba(47, 91, 255, .18); box-shadow: inset 0 0 0 1px var(--ddf-electric); }
+.ddf-opt[aria-pressed="true"] .ddf-go { color: var(--ddf-mint); }
+.ddf-box {
+  width: 26px; height: 26px; flex: none; border-radius: 7px; border: 2px solid var(--ddf-line);
+  display: inline-flex; align-items: center; justify-content: center; color: transparent; background: var(--ddf-panel2);
+}
+.ddf-box svg { width: 18px; height: 18px; }
+.ddf-chip[aria-pressed="true"] .ddf-box { background: var(--ddf-mint); border-color: var(--ddf-mint); color: var(--ddf-bg); }
+
+/* fields */
+.ddf-form { margin-top: 20px; display: grid; gap: 16px; }
+.ddf-field { display: grid; gap: 7px; margin-top: 0; }
+.ddf-body > .ddf-step > .ddf-field { margin-top: 20px; }
+.ddf-field label { font-family: var(--ddf-display); font-weight: 700; font-size: 16px; letter-spacing: -.01em; color: var(--ddf-ink); }
+.ddf-opt-tag { font-family: var(--ddf-mono); font-weight: 500; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ddf-muted); margin-left: 6px; }
+.ddf-field input, .ddf-field textarea {
+  width: 100%; min-height: 54px; padding: 13px 15px; border-radius: 12px;
+  background: var(--ddf-panel); border: 1px solid var(--ddf-line); color: var(--ddf-ink);
+  font-family: var(--ddf-body); font-size: 17px; line-height: 1.4; -webkit-appearance: none; appearance: none;
+}
+.ddf-field textarea { min-height: 160px; resize: vertical; }
+.ddf-field input:focus, .ddf-field textarea:focus { outline: none; border-color: var(--ddf-sky); box-shadow: 0 0 0 3px rgba(127, 181, 255, .28); }
+.ddf-field input[aria-invalid="true"] { border-color: var(--ddf-coral); box-shadow: 0 0 0 1px var(--ddf-coral); }
+.ddf-err { color: #FF9B82; font-size: 14.5px; line-height: 1.4; }
+.ddf-err[hidden] { display: none; }
+.ddf-steperr { margin-top: 14px !important; }
+.ddf-count-n { font-family: var(--ddf-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ddf-muted); text-align: right; }
+.ddf-hidden-submit { position: absolute; width: 1px; height: 1px; padding: 0; border: 0; opacity: 0; pointer-events: none; }
+
+/* review + confirmation */
+.ddf-sum { margin-top: 20px !important; border: 1px solid var(--ddf-line); border-radius: 16px; overflow: hidden; background: var(--ddf-panel); }
+.ddf-sum-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 12px; padding: 12px 10px 12px 16px; border-top: 1px solid var(--ddf-line); }
+.ddf-sum-row:first-child { border-top: 0; }
+.ddf-sum dt { grid-column: 1; font-family: var(--ddf-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ddf-muted); }
+.ddf-sum dd { grid-column: 1; font-size: 16px; color: var(--ddf-ink); overflow-wrap: anywhere; white-space: pre-line; }
+.ddf-edit {
+  grid-column: 2; grid-row: 1 / span 2; min-height: 48px; min-width: 64px; padding: 0 14px; border-radius: 10px; cursor: pointer;
+  background: transparent; border: 1px solid var(--ddf-line); color: var(--ddf-sky);
+  font-family: var(--ddf-display) !important; font-weight: 700; font-size: 15px;
+}
+.ddf-edit:hover { border-color: var(--ddf-sky); }
+.ddf-fine { color: var(--ddf-muted); font-size: 13.5px; margin-top: 14px !important; }
+.ddf-note, .ddf-alert { margin-top: 18px !important; padding: 14px 16px; border-radius: 14px; font-size: 15.5px; line-height: 1.45; display: flex; align-items: center; gap: 12px; outline: none; }
+.ddf-note { background: var(--ddf-panel2); border: 1px solid var(--ddf-line); color: var(--ddf-ink); }
+.ddf-alert { background: rgba(255, 106, 69, .14); border: 1px solid var(--ddf-coral); color: var(--ddf-ink); }
+.ddf-ref { margin-top: 22px; padding: 18px 20px; border-radius: 16px; background: var(--ddf-mint); color: var(--ddf-bg); display: grid; gap: 4px; }
+.ddf-ref span { font-family: var(--ddf-mono); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; opacity: .8; }
+.ddf-ref b { font-family: var(--ddf-mono); font-weight: 500; font-size: clamp(24px, 6vw, 30px); letter-spacing: .06em; }
+.ddf-reply { margin-top: 18px !important; font-family: var(--ddf-display); font-weight: 700; font-size: 19px; letter-spacing: -.01em; }
+.ddf-share-msg { margin-top: 14px !important; color: var(--ddf-mint); font-size: 15px; min-height: 1px; overflow-wrap: anywhere; }
+
+/* footer actions */
+.ddf-foot { display: grid; gap: 10px; padding: 14px 22px calc(16px + env(safe-area-inset-bottom)); border-top: 1px solid var(--ddf-line); background: var(--ddf-bg2); }
+.ddf-foot[hidden] { display: none; }
+.ddf-primary, .ddf-secondary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; padding: 0 20px;
+  border-radius: 12px; cursor: pointer; font-family: var(--ddf-display) !important; font-weight: 700; font-size: 18px; letter-spacing: -.01em;
+  transition: transform .15s, background .15s, border-color .15s;
+}
+.ddf-primary { background: var(--ddf-electric); color: #fff !important; border: 2px solid var(--ddf-electric); }
+.ddf-primary:hover:not([disabled]) { transform: translateY(-1px); }
+.ddf-primary[disabled] { cursor: progress; opacity: .85; }
+.ddf-secondary { background: transparent; color: var(--ddf-ink); border: 2px solid var(--ddf-line); }
+.ddf-secondary:hover { border-color: var(--ddf-mint); }
+
+.ddf-root button:focus-visible, .ddf-root input:focus-visible, .ddf-root textarea:focus-visible { outline: 3px solid var(--ddf-coral); outline-offset: 2px; }
+.ddf-root .ddf-h:focus, .ddf-root .ddf-h:focus-visible { outline: none; }
+
+.ddf-spin { width: 20px; height: 20px; flex: none; border-radius: 50%; border: 3px solid rgba(255, 255, 255, .3); border-top-color: currentColor; animation: ddf-spin .8s linear infinite; }
+.ddf-note .ddf-spin { color: var(--ddf-mint); border-color: rgba(185, 240, 207, .25); border-top-color: var(--ddf-mint); }
+@keyframes ddf-spin { to { transform: rotate(360deg); } }
+
+.ddf-sr { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.ddf-hp { position: absolute !important; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+
+@media (max-width: 640px) {
+  .ddf-body { padding: 20px 18px 24px; }
+  .ddf-progress { margin: 0 18px; }
+  .ddf-foot { padding-left: 16px; padding-right: 16px; }
+  .ddf-opt-t { font-size: 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ddf-dialog, .ddf-scrim, .ddf-step, .ddf-progress i, .ddf-opt, .ddf-primary, .ddf-secondary { transition: none !important; }
+  .ddf-opening .ddf-dialog, .ddf-step.ddf-enter { transform: none !important; opacity: 1 !important; }
+  .ddf-opt:active, .ddf-primary:hover:not([disabled]) { transform: none !important; }
+  .ddf-spin { animation: none; border-top-color: currentColor; border-right-color: currentColor; }
+}

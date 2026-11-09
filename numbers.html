@@ -8,6 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3Crect width='150' height='150' rx='34' fill='%230E1A2B'/%3E%3Crect x='25' y='25' width='100' height='100' rx='18' transform='rotate(45 75 75)' fill='%23B9F0CF'/%3E%3Cg transform='translate(39,33) scale(0.6)'%3E%3Cpath fill-rule='evenodd' d='M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z' fill='%230E1A2B'/%3E%3Cpath d='M38 50H54A20 20 0 0 1 54 90H38Z' fill='%23FF6A45'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="inquiry.css">
 <style>
 :root{
   --bg:#0B1522; --bg2:#0E1A2B; --panel:#13233A; --panel2:#182B45; --line:#22364F; --ink:#F1EEE6; --muted:#9AA7B8;
@@ -204,7 +205,7 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
       <svg viewBox="0 0 150 150" aria-hidden="true"><rect x="25" y="25" width="100" height="100" rx="18" transform="rotate(45 75 75)" fill="#B9F0CF"/><g transform="translate(39,33) scale(0.6)"><path fill-rule="evenodd" d="M0 0H50A70 70 0 0 1 50 140H0ZM26 26H50A44 44 0 0 1 50 114H26Z" fill="#0E1A2B"/><path d="M38 50H54A20 20 0 0 1 54 90H38Z" fill="#FF6A45"/></g></svg>
       Dugout Digital
     </a>
-    <div class="links"><a href="index.html">Home</a><a href="portal.html">Player Portal</a><a href="index.html#contact">Contact</a></div>
+    <div class="links"><a href="index.html">Home</a><a href="portal.html">Player Portal</a><a href="index.html#pilot" data-inquiry>Book a pilot</a></div>
   </nav>
   <section style="border-top:0;padding-top:28px">
     <div class="head reveal in"><div class="eyebrow">For coaches · how we read the numbers</div><h2>Hard is not enough. Hard at the right angle is the story.</h2><p class="lead">Four real balls from a college game, all 91 mph off the bat. Exit velocity alone calls them the same swing. Launch angle tells you which one went 374 feet. Every evaluation we write reads the numbers together like this.</p></div>
@@ -249,10 +250,12 @@ footer{padding-block:52px 64px;display:grid;gap:14px;color:var(--muted);font-siz
   </section>
   <footer id="contact">
     <div class="eyebrow">Contact</div>
-    <a class="contact" href="mailto:hello@dugoutdigital.io">hello@dugoutdigital.io</a>
+    <a class="contact" href="index.html#pilot" data-inquiry>Book a pilot →</a>
+    <p style="color:var(--muted);max-width:52ch">Tell us about your event in about a minute. We reply by email within one business day.</p>
     <p style="color:var(--muted);max-width:52ch">Family-owned software company in Clemson, South Carolina. Built for a college program first. Tested by the players it is for. <a href="never.html">What we will never do →</a></p>
     <p class="fine">Dugout Digital, LLC. Dugout Digital licenses evaluation software to camps, teams, events and programs and is never the merchant of record for a family. It is not a recruiting service: it makes no introductions and does no outreach on a player's behalf. Players opt in to the database and control what is visible. Camps described here are open to any and all entrants, limited only by number, age, grade level and gender. © 2026 Dugout Digital, LLC</p>
   </footer>
 </div>
+<script src="inquiry.js" defer></script>
 </body>
 </html>
