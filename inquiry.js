@@ -89,7 +89,7 @@
   }
   function trim(s, n) { s = String(s == null ? '' : s).trim(); return n ? s.slice(0, n) : s; }
   function validEmail(s) { return s.length <= 254 && /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/.test(s); }
-  function phoneOk(s) { if (!s) return true; var d = s.replace(/\D/g, ''); return d.length >= 7 && d.length <= 20 && /^[0-9+().\s-]+$/.test(s); }
+  function phoneOk(s) { if (!s) return true; var d = s.replace(/\D/g, ''); return d.length >= 7 && d.length <= 20; }
   function firstName(n) { return trim(n).split(/\s+/)[0] || ''; }
   function productsText(arr) {
     if (!arr || !arr.length) return '';
@@ -273,7 +273,7 @@
       if (st === 'sending' || st === 'retrying') {
         return '<button type="button" class="ddf-primary" disabled aria-disabled="true"><span class="ddf-spin" aria-hidden="true"></span>Sending</button>';
       }
-      if (st === 'failed' || st === 'rate' || st === 'blocked') return primary('send', 'Tap to try again');
+      if (st === 'failed' || st === 'rate' || st === 'blocked') return primary('send', 'Try again');
       return primary('send', 'Send request');
     },
     done: function () { return primary('close', 'Done'); },
@@ -453,7 +453,7 @@
   }
 
   function share() {
-    var url = location.href.split('#')[0].split('?')[0];
+    var url = location.protocol === 'file:' ? location.href.split('#')[0].split('?')[0] : location.origin + '/';
     var msg = root.querySelector('#ddf-share-msg');
     function said(t) { if (msg) msg.textContent = t; }
     if (navigator.share) {
@@ -601,7 +601,7 @@
           return;
         }
         if (r.status === 429) {
-          fail('rate', 'Too many tries from this connection. Wait a minute, then tap to try again. Your answers are saved on this device.');
+          fail('rate', 'Too many requests from this connection. Please try again in an hour. Your answers are saved on this device.');
           return;
         }
         if (r.status === 403) {
@@ -843,7 +843,7 @@
           var stored = null;
           try { stored = JSON.parse(localStorage.getItem(STORE_KEY) || 'null'); } catch (e) {}
           log.push('end:' + (q('.ddf-alert') ? q('.ddf-alert').textContent : 'no alert') + '|button=' + footEl.textContent + '|stored=' + !!(stored && stored.pending));
-          html.setAttribute('data-ddf-walk', (q('.ddf-alert') && /Tap to try again/.test(footEl.textContent) && stored && stored.pending) ? 'pass' : 'fail');
+          html.setAttribute('data-ddf-walk', (q('.ddf-alert') && /Try again/.test(footEl.textContent) && stored && stored.pending) ? 'pass' : 'fail');
         } else {
           log.push('end:' + title() + '|' + (q('.ddf-ref') ? q('.ddf-ref').textContent : 'no ref'));
           html.setAttribute('data-ddf-walk', S.step === 'done' && q('.ddf-ref') ? 'pass' : 'fail');
