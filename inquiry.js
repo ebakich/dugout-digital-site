@@ -2,10 +2,10 @@
    Vanilla JS, no dependencies. Opens from any [data-inquiry] link and from #pilot in the URL.
    Posts JSON to {INQUIRY_API}/v1/dd/inquiry. The visitor never receives email from us;
    the confirmation screen carries the reference number.
-   Test hook: ?flowtest=1&step=<name> renders one step with sample answers and a mocked network
-   (steps: org products players timeline contact contacterr notes review sending failed done parent),
-   ?flowtest=1&walk=ok|fail drives the real buttons end to end and writes the result to
-   <html data-ddf-walk="...">. Test mode never calls the real API and never touches the real draft. */
+   Test hook, ONLY on file: and localhost: ?flowtest=1&step=<name> renders one step with sample answers and a
+   mocked network (steps: org products players timeline contact contacterr notes review sending failed done parent;
+   &net=400|429|noref|fail picks the mocked reply), ?flowtest=1&walk=ok|fail drives the real buttons end to end and
+   writes the result to <html data-ddf-walk="...">. Test mode never calls the real API and never touches the real draft. */
 (function () {
   'use strict';
 
@@ -20,7 +20,8 @@
 
   var qs = {};
   try { new URLSearchParams(location.search).forEach(function (v, k) { qs[k] = v; }); } catch (e) {}
-  var TEST = qs.flowtest === '1';
+  var LOCAL = location.protocol === 'file:' || /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+  var TEST = LOCAL && qs.flowtest === '1';   // never on the live site
   if (TEST) { STORE_KEY += '_test'; RETRY_WAIT = [60, 60]; }
 
   var ORG = [
@@ -57,6 +58,7 @@
   var S = blank();
   var root, dialog, bodyEl, footEl, countEl, backBtn, bar, live, hpInput;
   var opener = null, isOpen = false, advanceLock = false, saveTimer = 0;
+  var pushed = false;   // our history entry is on the stack (the phone's back gesture steps back inside the flow)
 
   function blank() {
     return {
@@ -197,16 +199,16 @@
 
   var VIEWS = {
     org: function () {
-      return head('Book a pilot', 'Which one are you?', 'Pick the one that fits best.') + oneOpts('org_type', ORG);
+      return head('Book a pilot', 'Which one are you?', 'Pick the one that fits best.') + oneOpts('org_type', ORG) + stepErr();
     },
     products: function () {
       return head('Book a pilot', 'What do you want to give your players?', 'Pick as many as you like.') + manyOpts() + stepErr();
     },
     players: function () {
-      return head('Book a pilot', 'How many players per event?', 'A rough number is fine.') + oneOpts('players', PLAYERS);
+      return head('Book a pilot', 'How many players per event?', 'A rough number is fine.') + oneOpts('players', PLAYERS) + stepErr();
     },
     timeline: function () {
-      return head('Book a pilot', 'When do you want to start?') + oneOpts('timeline', TIMELINE);
+      return head('Book a pilot', 'When do you want to start?') + oneOpts('timeline', TIMELINE) + stepErr();
     },
     contact: function () {
       return head('Book a pilot', 'Where should we reply?', 'We reply by email. Phone is optional.') +
@@ -223,12 +225,12 @@
       return head('Book a pilot', 'Anything we should know?', 'Your event dates, the instruments you use, how players register.') +
         '<div class="ddf-field"><label for="ddf-notes">Notes <span class="ddf-opt-tag">optional</span></label>' +
         '<textarea id="ddf-notes" maxlength="' + NOTES_MAX + '" rows="6" aria-describedby="ddf-notes-count">' + esc(S.a.notes) + '</textarea>' +
-        '<p class="ddf-count-n" id="ddf-notes-count">' + n + ' of ' + NOTES_MAX + '</p></div>';
+        '<p class="ddf-count-n" id="ddf-notes-count">' + n + ' of ' + NOTES_MAX + '</p></div>' + stepErr();
     },
     review: function () {
       var st = S.send.status, box = '';
       if (S.pending && st === 'idle') {
-        box = '<div class="ddf-note">Your answers were saved on this device. Tap SEND when you are ready.</div>';
+        box = '<div class="ddf-note">Your answers were saved on this device. Tap Send request when you are ready.</div>';
       }
       if (st === 'sending' || st === 'retrying') {
         box = '<div class="ddf-note ddf-note-busy" role="status"><span class="ddf-spin" aria-hidden="true"></span>' +
@@ -244,7 +246,7 @@
       var fn = firstName(S.c.name);
       return '<p class="ddf-eyebrow">Request received</p>' +
         '<h2 class="ddf-h" id="ddf-title" tabindex="-1">' + esc(fn ? 'Thank you, ' + fn + '.' : 'Thank you.') + '</h2>' +
-        '<div class="ddf-ref"><span>Your reference number</span><b>' + esc(S.done.ref) + '</b></div>' +
+        (S.done.ref ? '<div class="ddf-ref"><span>Your reference number</span><b>' + esc(S.done.ref) + '</b></div>' : '') +
         '<p class="ddf-reply">We\'ll reply by email within one business day.</p>' +
         summaryRows(false, true);
     },
@@ -257,7 +259,12 @@
     }
   };
 
+  /* A single-choice step advances on the tap; once answered (coming Back) it also shows Next. */
+  function answered(key) { return function () { return S.a[key] ? primary('next', 'Next') : ''; }; }
   var FOOTS = {
+    org: answered('org_type'),
+    players: answered('players'),
+    timeline: answered('timeline'),
     products: function () { return primary('next', 'Next'); },
     contact: function () { return primary('next', 'Next'); },
     notes: function () { return primary('next', S.a.notes.trim() ? 'Next' : 'Skip'); },
@@ -267,7 +274,7 @@
         return '<button type="button" class="ddf-primary" disabled aria-disabled="true"><span class="ddf-spin" aria-hidden="true"></span>Sending</button>';
       }
       if (st === 'failed' || st === 'rate' || st === 'blocked') return primary('send', 'Tap to try again');
-      return primary('send', 'SEND');
+      return primary('send', 'Send request');
     },
     done: function () { return primary('close', 'Done'); },
     parent: function () {
@@ -326,7 +333,6 @@
     var f = FOOTS[st] ? FOOTS[st]() : '';
     footEl.innerHTML = f;
     footEl.hidden = !f;
-    dialog.setAttribute('aria-busy', busy ? 'true' : 'false');
     bodyEl.scrollTop = 0;
     if (!reduced() && !TEST) {
       var stepEl = bodyEl.firstChild;
@@ -378,10 +384,8 @@
     if (val === 'all') {
       p = i >= 0 ? [] : ['all'];
     } else {
-      p = p.filter(function (v) { return v !== 'all'; });
+      p = p.filter(function (v) { return v !== 'all'; });   // ticking all four keeps all four ticked
       if (i >= 0) p.splice(p.indexOf(val), 1); else p.push(val);
-      var singles = PRODUCTS.filter(function (o) { return o.v !== 'all'; }).map(function (o) { return o.v; });
-      if (singles.every(function (v) { return p.indexOf(v) >= 0; })) p = ['all'];
     }
     S.a.products = p;
     S.stepErr = '';
@@ -406,6 +410,8 @@
 
   function next() {
     var st = S.step;
+    if (st === 'org' && S.a.org_type === 'parent') { S.editing = false; go('parent'); return; }
+    if ((st === 'org' && !S.a.org_type) || (st === 'players' && !S.a.players) || (st === 'timeline' && !S.a.timeline)) return;
     if (st === 'products') {
       if (!S.a.products.length) {
         S.stepErr = 'Pick at least one.';
@@ -481,6 +487,40 @@
 
   function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
 
+  /* A 400 names one field ("email: ..."). Never show that text: go to the step that holds the field and
+     say what to fix in plain words. -> true when handled. */
+  var FIELD_FIX = {
+    org_type: ['org', '', 'Pick the one that fits best.'],
+    products: ['products', '', 'Pick at least one.'],
+    players: ['players', '', 'Pick a rough number of players.'],
+    timeline: ['timeline', '', 'Pick when you want to start.'],
+    contact: ['contact', 'name', 'Check your name and email.'],
+    name: ['contact', 'name', 'Add your name so we know who to reply to.'],
+    email: ['contact', 'email', 'Check the email address.'],
+    phone: ['contact', 'phone', 'Check that phone number, or leave it blank.'],
+    company: ['contact', 'company', 'Shorten the organization name.'],
+    org_name: ['contact', 'company', 'Shorten the organization name.'],
+    notes: ['notes', '', 'Shorten your notes.']
+  };
+  function fieldFix(error) {
+    var fix = FIELD_FIX[String(error || '').split(':')[0].trim()];
+    if (!fix) return false;
+    S.send = { status: 'idle', msg: '' };
+    S.editing = true;
+    if (fix[1]) {
+      S.fieldErr = {};
+      S.fieldErr[fix[1]] = fix[2];
+      go(fix[0], '#ddf-f-' + fix[1]);
+    } else {
+      go(fix[0]);
+      S.stepErr = fix[2];
+      var e = root.querySelector('#ddf-steperr');
+      if (e) { e.textContent = fix[2]; e.hidden = false; }
+    }
+    announce(fix[2]);
+    return true;
+  }
+
   function realPost(body) {
     var ctrl = ('AbortController' in window) ? new AbortController() : null;
     var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, ATTEMPT_TIMEOUT) : 0;
@@ -502,8 +542,9 @@
     window.__ddfLastPayload = arguments[0];
     return wait(120).then(function () {
       if (net === 'fail') throw new TypeError('Failed to fetch');
-      if (net === '400') return { status: 400, json: { ok: false, error: 'email: check the address' } };
+      if (net === '400') return { status: 400, json: { ok: false, error: 'email: enter a valid email address' } };
       if (net === '429') return { status: 429, json: { ok: false, error: 'rate' } };
+      if (net === 'noref') return { status: 200, json: { ok: true } };
       return { status: 200, json: { ok: true, ref: 'DD-2611-7Q3K' } };
     });
   }
@@ -538,8 +579,8 @@
     function tryOnce() {
       return post(body).then(function (r) {
         var j = r.json || {};
-        if (r.status >= 200 && r.status < 300 && j.ok && j.ref) {
-          S.done = { ref: String(j.ref) };
+        if (r.status >= 200 && r.status < 300 && j.ok === true) {   // stored, with or without a reference
+          S.done = { ref: typeof j.ref === 'string' ? j.ref.slice(0, 40) : '' };
           S.pending = false;
           S.editing = false;
           S.send = { status: 'idle', msg: '' };
@@ -548,12 +589,15 @@
           if (isOpen) {
             S.doneSeen = true;
             render();
-            announce('Sent. Your reference number is ' + S.done.ref + '.');
+            announce(S.done.ref ? 'Sent. Your reference number is ' + S.done.ref + '.' : 'Sent.');
           }
           return;
         }
         if (r.status === 400) {
-          fail('error', (j.error ? String(j.error) : 'Something in the form needs a look.') + ' Tap Edit to fix it, then SEND again.');
+          var err = j.error ? String(j.error) : '';
+          if (/^started_at/.test(err)) { fail('error', 'That was quick. Wait a moment, then tap Send request.'); return; }
+          if (isOpen && fieldFix(err)) { save(); return; }
+          fail('error', 'Something in the form needs a look. Tap Edit to fix it, then tap Send request.');
           return;
         }
         if (r.status === 429) {
@@ -633,7 +677,13 @@
       });
   }
 
+  /* Enter in a contact field moves to the next field; only the last one (phone) goes on to the next step. */
+  var ENTER_NEXT = { 'ddf-f-name': 'ddf-f-company', 'ddf-f-company': 'ddf-f-email', 'ddf-f-email': 'ddf-f-phone' };
   function onKey(e) {
+    if (e.key === 'Enter' && !e.isComposing && e.target && ENTER_NEXT[e.target.id]) {
+      var nx = root.querySelector('#' + ENTER_NEXT[e.target.id]);
+      if (nx) { e.preventDefault(); nx.focus(); return; }
+    }
     if (e.key === 'Escape') {
       if (S.send.status === 'sending' || S.send.status === 'retrying') return;
       e.preventDefault();
@@ -666,6 +716,21 @@
     }
   }
 
+  /* History: opening adds one entry, so the phone's back gesture steps back inside the flow instead of
+     leaving the site (the first step or the confirmation closes it). Closing from a button pops that entry. */
+  function pushEntry() {
+    try { history.pushState({ ddf: 1 }, ''); pushed = true; } catch (e) { pushed = false; }
+  }
+  function onPop() {
+    if (!pushed) return;
+    pushed = false;            // the browser just took our entry off the stack
+    if (!isOpen) return;
+    if (S.send.status === 'sending' || S.send.status === 'retrying') { pushEntry(); return; }
+    if (S.step === 'org' || S.step === 'done') { close(true); return; }
+    back();
+    pushEntry();
+  }
+
   function open(fromEl) {
     build();
     if (isOpen) return;
@@ -674,6 +739,10 @@
     if (!S.started_at && !TEST) load();
     if (!S.started_at) S.started_at = Date.now();
     opener = fromEl || document.activeElement;
+    if (location.hash === HASH) {
+      try { history.replaceState(history.state, '', location.pathname + location.search); } catch (e) {}
+    }
+    pushEntry();
     isOpen = true;
     root.hidden = false;
     document.documentElement.classList.add('ddf-lock');
@@ -687,7 +756,7 @@
     render();
   }
 
-  function close() {
+  function close(fromPop) {
     if (!isOpen) return;
     isOpen = false;
     save();
@@ -695,9 +764,7 @@
     document.documentElement.classList.remove('ddf-lock');
     setInert(false);
     if (S.done && S.doneSeen) S = blank();
-    if (location.hash === HASH) {
-      try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
-    }
+    if (fromPop !== true && pushed) { pushed = false; try { history.back(); } catch (e) {} }
     if (opener && typeof opener.focus === 'function' && document.contains(opener)) opener.focus();
     opener = null;
   }
@@ -711,6 +778,7 @@
       open(a);
     });
     window.addEventListener('hashchange', function () { if (location.hash === HASH) open(); });
+    window.addEventListener('popstate', onPop);
     if (location.hash === HASH) open();
     if (TEST) runTest();
   }
@@ -719,7 +787,7 @@
   function sample() {
     S.a = { org_type: 'tournament', products: ['eval_card', 'five_tool_email', 'player_app'], players: '150_400', timeline: '1_3_months',
       notes: 'Fall Classic, 14U to 17U, TrackMan on two fields, registration through our own site.' };
-    S.c = { name: 'Jordan Ellis', company: 'Thunder Southeast', email: 'jordan@thundersoutheast.com', phone: '' };
+    S.c = { name: 'Jordan Ellis', company: 'Example Showcase Series', email: 'jordan@example.com', phone: '' };
     S.started_at = Date.now() - 95000;
   }
 
@@ -763,7 +831,7 @@
       .then(step(function () {
         log.push('5err:' + (q('#ddf-f-name-err').textContent) + '|' + q('#ddf-f-email-err').textContent + '|focus=' + document.activeElement.id);
         setVal('#ddf-f-name', 'Casey Moore'); setVal('#ddf-f-company', 'Scout Team Prospects');
-        setVal('#ddf-f-email', 'casey@scoutteam.com'); click('[data-act="next"]');
+        setVal('#ddf-f-email', 'casey@example.org'); click('[data-act="next"]');
       }))
       .then(step(function () { log.push('6:' + title() + ':' + footEl.textContent); setVal('#ddf-notes', 'Two showcases a month.'); click('[data-act="next"]'); }))
       .then(step(function () { log.push('7:' + title() + ':rows=' + root.querySelectorAll('.ddf-sum-row').length); click('[data-act="send"]'); }))
